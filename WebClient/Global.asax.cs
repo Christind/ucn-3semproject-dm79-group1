@@ -20,5 +20,24 @@ namespace WebClient
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
+
+        void Application_Error(object sender, EventArgs e)
+        {
+            // Code that runs when an unhandled error occurs
+
+            Exception newException = HttpContext.Current.Server.GetLastError();
+            if (newException != null)
+            {
+                Exception ex = newException.GetBaseException();
+                if (ex.GetType() == typeof(HttpException))
+                {
+                    HttpException httpException = (HttpException)ex;
+                    if (httpException.GetHttpCode() == 404)
+                    {
+                        Response.Redirect("~/PageNotFound");
+                    }
+                }
+            }
+        }
     }
 }
