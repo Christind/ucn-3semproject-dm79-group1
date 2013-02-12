@@ -3,9 +3,6 @@ ucn-3semproject-dm79-group1
 
 Final 3. semester project at UCN (comp. science)
 
-###Packages:
-    Default MVC refrence library
-
 ###Repository:
     Project database communication
 
