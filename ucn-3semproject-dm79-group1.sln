@@ -9,6 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "WebClient\WebClient.csproj", "{16ABED23-1595-48F7-A298-B688E5112DD6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{AAD3F888-DD46-4B36-BDA6-54DDFCDBFB8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{5E271F29-A1AF-4488-B14A-F826DBC5D491}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JavaScripts", "JavaScripts", "{DE01F755-F237-4AE8-9849-DFC63E4C4D60}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StyleSheets", "StyleSheets", "{F60606CB-BB6E-41C9-A4F4-2B4026A3AFED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,5 +42,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5E271F29-A1AF-4488-B14A-F826DBC5D491} = {AAD3F888-DD46-4B36-BDA6-54DDFCDBFB8A}
+		{DE01F755-F237-4AE8-9849-DFC63E4C4D60} = {AAD3F888-DD46-4B36-BDA6-54DDFCDBFB8A}
+		{F60606CB-BB6E-41C9-A4F4-2B4026A3AFED} = {AAD3F888-DD46-4B36-BDA6-54DDFCDBFB8A}
 	EndGlobalSection
 EndGlobal
