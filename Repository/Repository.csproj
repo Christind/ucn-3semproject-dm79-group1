@@ -4,8 +4,8 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DBCA0584-BA4A-4936-8988-83843A3C8CDA}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{662F800F-A237-4771-BF8F-73D2871AAFBE}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Repository</RootNamespace>
     <AssemblyName>Repository</AssemblyName>
@@ -13,7 +13,6 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,11 +30,65 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="Resources\" />
+    <Compile Include="Models\Archive.cs" />
+    <Compile Include="Models\ArchiveStation.cs" />
+    <Compile Include="Models\Battery.cs" />
+    <Compile Include="Models\BatteryCharging.cs" />
+    <Compile Include="Models\BatteryCollection.cs" />
+    <Compile Include="Models\BatteryStorage.cs" />
+    <Compile Include="Models\Bookmark.cs" />
+    <Compile Include="Models\BPDbContext.cs" />
+    <Compile Include="Models\Car.cs" />
+    <Compile Include="Models\CarModel.cs" />
+    <Compile Include="Models\ClientApplication.cs" />
+    <Compile Include="Models\MaintenanceType.cs" />
+    <Compile Include="Models\Manufacturer.cs" />
+    <Compile Include="Models\Mapping\ArchiveMap.cs" />
+    <Compile Include="Models\Mapping\ArchiveStationMap.cs" />
+    <Compile Include="Models\Mapping\BatteryChargingMap.cs" />
+    <Compile Include="Models\Mapping\BatteryCollectionMap.cs" />
+    <Compile Include="Models\Mapping\BatteryMap.cs" />
+    <Compile Include="Models\Mapping\BatteryStorageMap.cs" />
+    <Compile Include="Models\Mapping\BookmarkMap.cs" />
+    <Compile Include="Models\Mapping\CarMap.cs" />
+    <Compile Include="Models\Mapping\CarModelMap.cs" />
+    <Compile Include="Models\Mapping\ClientApplicationMap.cs" />
+    <Compile Include="Models\Mapping\MaintenanceTypeMap.cs" />
+    <Compile Include="Models\Mapping\ManufacturerMap.cs" />
+    <Compile Include="Models\Mapping\ReservationMap.cs" />
+    <Compile Include="Models\Mapping\StationMaintenanceMap.cs" />
+    <Compile Include="Models\Mapping\StationMap.cs" />
+    <Compile Include="Models\Mapping\StationTypeMap.cs" />
+    <Compile Include="Models\Mapping\UserCarMap.cs" />
+    <Compile Include="Models\Mapping\UserMap.cs" />
+    <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\Station.cs" />
+    <Compile Include="Models\StationMaintenance.cs" />
+    <Compile Include="Models\StationType.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserCar.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\empty_file.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
