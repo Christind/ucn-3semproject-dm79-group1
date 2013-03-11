@@ -30,21 +30,25 @@ namespace Repository.Resources
 
         public void Update(User user)
         {
-            User rUser = GetUserById(user.ID);
-            if (rUser == null)
+            if(user == null)
                 return;
 
-            rUser.Email = user.Email;
-            rUser.IsActive = user.IsActive;
-            rUser.UserName = user.UserName;
+            User dbUser = GetUserById(user.ID);
+            if (dbUser == null)
+                return;
+
+            dbUser.Email = user.Email;
+            dbUser.IsActive = user.IsActive;
+            dbUser.UserName = user.UserName;
             db.SaveChanges();
         }
 
-        public void Delete(User user)
+        public void Disable(int id)
         {
-            if (GetUserById(user.ID) == null)
+            User dbUser = GetUserById(id);
+            if (dbUser == null)
                 return;
-            db.Users.Remove(user);
+            dbUser.IsActive = false;
             db.SaveChanges();
         }
     }
