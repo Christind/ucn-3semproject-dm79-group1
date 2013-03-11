@@ -8,10 +8,21 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{AAD3F888-DD46-4B36-BDA6-54DDFCDBFB8A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{5E271F29-A1AF-4488-B14A-F826DBC5D491}"
+	ProjectSection(SolutionItems) = preProject
+		Data\Images\glyphicons-halflings-white.png = Data\Images\glyphicons-halflings-white.png
+		Data\Images\glyphicons-halflings.png = Data\Images\glyphicons-halflings.png
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JavaScripts", "JavaScripts", "{DE01F755-F237-4AE8-9849-DFC63E4C4D60}"
+	ProjectSection(SolutionItems) = preProject
+		Data\JavaScripts\bootstrap.min.js = Data\JavaScripts\bootstrap.min.js
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StyleSheets", "StyleSheets", "{F60606CB-BB6E-41C9-A4F4-2B4026A3AFED}"
+	ProjectSection(SolutionItems) = preProject
+		Data\StyleSheets\bootstrap-responsive.min.css = Data\StyleSheets\bootstrap-responsive.min.css
+		Data\StyleSheets\bootstrap.min.css = Data\StyleSheets\bootstrap.min.css
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{F15432B1-EC7F-4322-963E-BC52BC87A6A0}"
 EndProject
