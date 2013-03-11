@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-
 namespace Repository.Models
 {
-    public partial class ArchiveStation
+    public class ArchiveStation
     {
         public int ID { get; set; }
         public int ArchiveId { get; set; }

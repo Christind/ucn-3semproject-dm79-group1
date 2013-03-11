@@ -5,7 +5,7 @@ namespace Repository.Resources
 {
     public class UserRepository
     {
-        private BPDbContext db;
+        private readonly BPDbContext db;
 
         public UserRepository()
         {
@@ -30,7 +30,7 @@ namespace Repository.Resources
 
         public void Update(User user)
         {
-            if(user == null)
+            if (user == null)
                 return;
 
             User dbUser = GetUserById(user.ID);

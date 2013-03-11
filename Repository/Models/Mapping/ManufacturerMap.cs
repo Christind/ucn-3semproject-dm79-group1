@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Repository.Models.Mapping
@@ -8,21 +7,21 @@ namespace Repository.Models.Mapping
         public ManufacturerMap()
         {
             // Primary Key
-            this.HasKey(t => t.ID);
+            HasKey(t => t.ID);
 
             // Properties
-            this.Property(t => t.Name)
+            Property(t => t.Name)
                 .IsRequired()
                 .HasMaxLength(128);
 
-            this.Property(t => t.Website)
+            Property(t => t.Website)
                 .HasMaxLength(128);
 
             // Table & Column Mappings
-            this.ToTable("Manufacturers");
-            this.Property(t => t.ID).HasColumnName("ID");
-            this.Property(t => t.Name).HasColumnName("Name");
-            this.Property(t => t.Website).HasColumnName("Website");
+            ToTable("Manufacturers");
+            Property(t => t.ID).HasColumnName("ID");
+            Property(t => t.Name).HasColumnName("Name");
+            Property(t => t.Website).HasColumnName("Website");
         }
     }
 }

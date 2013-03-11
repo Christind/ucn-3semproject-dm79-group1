@@ -1,10 +1,9 @@
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using Repository.Models.Mapping;
 
 namespace Repository.Models
 {
-    public partial class BPDbContext : DbContext
+    public class BPDbContext : DbContext
     {
         static BPDbContext()
         {

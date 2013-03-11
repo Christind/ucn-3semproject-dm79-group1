@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-
 namespace Repository.Models
 {
-    public partial class UserCar
+    public class UserCar
     {
         public int ID { get; set; }
         public int UserId { get; set; }

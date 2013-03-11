@@ -5,7 +5,7 @@ namespace Repository.Resources
 {
     public class UserCarRepository
     {
-        private BPDbContext db;
+        private readonly BPDbContext db;
 
         public UserCarRepository()
         {
@@ -29,7 +29,7 @@ namespace Repository.Resources
 
         public void Insert(UserCar userCar)
         {
-            if(userCar == null)
+            if (userCar == null)
                 return;
 
             db.UserCars.Add(userCar);
@@ -38,11 +38,11 @@ namespace Repository.Resources
 
         public void Update(UserCar userCar)
         {
-            if(userCar == null)
+            if (userCar == null)
                 return;
 
             UserCar dbUserCar = GetUserCarById(userCar.ID);
-            if(dbUserCar == null)
+            if (dbUserCar == null)
                 return;
 
             dbUserCar.CarId = userCar.CarId;
@@ -51,7 +51,7 @@ namespace Repository.Resources
 
         public void Delete(UserCar userCar)
         {
-            if(userCar == null)
+            if (userCar == null)
                 return;
 
             db.UserCars.Remove(userCar);
