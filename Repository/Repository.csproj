@@ -85,6 +85,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\CarRepository.cs" />
     <Compile Include="Resources\UserCarRepository.cs" />
+    <Compile Include="Resources\MaintenanceTypeRepository.cs" />
+    <Compile Include="Resources\StationMaintenanceRepository.cs" />
+    <Compile Include="Resources\StationRepository.cs" />
+    <Compile Include="Resources\StationTypeRepository.cs" />
     <Compile Include="Resources\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
