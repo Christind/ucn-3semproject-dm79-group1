@@ -83,6 +83,8 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserCar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\ArchiveRepository.cs" />
+    <Compile Include="Resources\ArchiveStationRepository.cs" />
     <Compile Include="Resources\BatteryChargingRepository.cs" />
     <Compile Include="Resources\BatteryCollectionRepository.cs" />
     <Compile Include="Resources\BatteryRepository.cs" />
