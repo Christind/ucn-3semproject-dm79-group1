@@ -56,6 +56,7 @@
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\CarModel.cs" />
     <Compile Include="Models\ClientApplication.cs" />
+    <Compile Include="Models\Edge.cs" />
     <Compile Include="Models\MaintenanceType.cs" />
     <Compile Include="Models\Manufacturer.cs" />
     <Compile Include="Models\Mapping\ArchiveMap.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Models\Mapping\CarMap.cs" />
     <Compile Include="Models\Mapping\CarModelMap.cs" />
     <Compile Include="Models\Mapping\ClientApplicationMap.cs" />
+    <Compile Include="Models\Mapping\EdgeMap.cs" />
     <Compile Include="Models\Mapping\MaintenanceTypeMap.cs" />
     <Compile Include="Models\Mapping\ManufacturerMap.cs" />
     <Compile Include="Models\Mapping\ReservationMap.cs" />
