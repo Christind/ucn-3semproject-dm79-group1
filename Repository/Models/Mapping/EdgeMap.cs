@@ -12,11 +12,11 @@ namespace Repository.Models.Mapping
         public EdgeMap()
         {
             // Primary Key
-            HasKey(t => t.Id);
+            HasKey(t => t.ID);
 
             // Table & Column Mappings
             ToTable("Edges");
-            Property(t => t.Id).HasColumnName("ID");
+            Property(t => t.ID).HasColumnName("ID");
             Property(t => t.StartStation.ID).HasColumnName("StartStation");
             Property(t => t.EndStation.ID).HasColumnName("EndStation");
             Property(t => t.Distance).HasColumnName("Distance");

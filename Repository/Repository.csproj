@@ -93,6 +93,7 @@
     <Compile Include="Resources\BatteryRepository.cs" />
     <Compile Include="Resources\BatteryStorageRepository.cs" />
     <Compile Include="Resources\ClientApplicationRepository.cs" />
+    <Compile Include="Resources\EdgeRepository.cs" />
     <Compile Include="Resources\ManufacturerRepository.cs" />
     <Compile Include="Resources\UserCarRepository.cs" />
     <Compile Include="Resources\MaintenanceTypeRepository.cs" />

@@ -8,7 +8,7 @@ namespace Repository.Models
 {
     public class Edge
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public Station StartStation { get; set; }
         public Station EndStation { get; set; }
         public decimal Distance { get; set; }
