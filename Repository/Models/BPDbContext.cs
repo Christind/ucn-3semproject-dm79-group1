@@ -32,6 +32,7 @@ namespace Repository.Models
         public DbSet<StationType> StationTypes { get; set; }
         public DbSet<UserCar> UserCars { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Edge> Edges { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -53,6 +54,7 @@ namespace Repository.Models
             modelBuilder.Configurations.Add(new StationTypeMap());
             modelBuilder.Configurations.Add(new UserCarMap());
             modelBuilder.Configurations.Add(new UserMap());
+            modelBuilder.Configurations.Add(new EdgeMap());
         }
     }
 }
