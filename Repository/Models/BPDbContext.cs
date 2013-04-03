@@ -1,4 +1,5 @@
 using System.Data.Entity;
+using Logging;
 using Repository.Models.Mapping;
 
 namespace Repository.Models
@@ -24,6 +25,8 @@ namespace Repository.Models
         public DbSet<CarModel> CarModels { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<ClientApplication> ClientApplications { get; set; }
+        public DbSet<Edge> Edges { get; set; }
+        public DbSet<Log> Logs { get; set; }
         public DbSet<MaintenanceType> MaintenanceTypes { get; set; }
         public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
@@ -32,7 +35,6 @@ namespace Repository.Models
         public DbSet<StationType> StationTypes { get; set; }
         public DbSet<UserCar> UserCars { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Edge> Edges { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -46,6 +48,8 @@ namespace Repository.Models
             modelBuilder.Configurations.Add(new CarModelMap());
             modelBuilder.Configurations.Add(new CarMap());
             modelBuilder.Configurations.Add(new ClientApplicationMap());
+            modelBuilder.Configurations.Add(new EdgeMap());
+            modelBuilder.Configurations.Add(new LogMap());
             modelBuilder.Configurations.Add(new MaintenanceTypeMap());
             modelBuilder.Configurations.Add(new ManufacturerMap());
             modelBuilder.Configurations.Add(new ReservationMap());
@@ -54,7 +58,6 @@ namespace Repository.Models
             modelBuilder.Configurations.Add(new StationTypeMap());
             modelBuilder.Configurations.Add(new UserCarMap());
             modelBuilder.Configurations.Add(new UserMap());
-            modelBuilder.Configurations.Add(new EdgeMap());
         }
     }
 }

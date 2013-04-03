@@ -10,6 +10,13 @@ namespace Logging
 {
     public class Log
     {
+        public int ID { get; set; }
+        public string Exception { get; set; } // find a way to convert the Exception to a string?
+        public string PageName { get; set; }
+        public int LogType { get; set; }
+        public bool IsActive { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+
         /// <summary>
         ///  Logtypes:
         ///     1 = exception
