@@ -1,5 +1,4 @@
 using System.Data.Entity;
-using Logging;
 using Repository.Models.Mapping;
 
 namespace Repository.Models

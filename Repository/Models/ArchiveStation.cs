@@ -1,13 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Repository.Models
 {
+    [DataContract( IsReference = true)]
+    [KnownType(typeof(Archive))]
     public partial class ArchiveStation
     {
+        [DataMember]
         public int ID { get; set; }
+        [DataMember]
         public int ArchiveId { get; set; }
+        [DataMember]
         public decimal StationLat { get; set; }
+        [DataMember]
         public decimal StationLong { get; set; }
         public virtual Archive Archive { get; set; }
     }

@@ -1,22 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
+using System.Data.SqlClient;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web;
+using Repository.Models;
+using Repository.Resources;
 
 namespace Logging
 {
-    public class Log
+    public class HandleLogging
     {
-        public int ID { get; set; }
-        public string Exception { get; set; } // find a way to convert the Exception to a string?
-        public string PageName { get; set; }
-        public int LogType { get; set; }
-        public bool IsActive { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-
         /// <summary>
         ///  Logtypes:
         ///     1 = exception
@@ -28,6 +21,7 @@ namespace Logging
         /// <param name="logType"></param>
         public static void LogMessage(Exception ex, string pageName, int logType)
         {
+            var logRep = new LogRepository();
             string getRemoteIp = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
             if (String.IsNullOrEmpty(getRemoteIp))
                 getRemoteIp = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
@@ -55,7 +49,25 @@ namespace Logging
                 strGetAllHeaders.Append("<br/>");
             }
 
-            //TODO: Add log message to json/xml file
+            if (ex is SqlException)
+            {
+                //TODO: Add log message to json/xml file
+            }
+            else
+            {
+                var logEntity = new Log
+                                    {
+                                        ClientInformation =
+                                            getRemoteIp + "<br/>" + strGetAllSessions.ToString() + "<br/>" +
+                                            strGetAllSessions.ToString(),
+                                        CreatedDate = DateTime.Now,
+                                        Exception = ex.ToString(),
+                                        ExceptionLocation = pageName,
+                                        IsActive = true,
+                                        LogType = logType
+                                    };
+                logRep.Insert(logEntity);
+            }
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿using System.Linq;
 using Repository.Models;
-using Logging;
 
 namespace Repository.Resources
 {
-    class LogRepository
+    public class LogRepository
     {
         private BPDbContext db;
 
@@ -38,7 +37,8 @@ namespace Repository.Resources
 
             rLog.Exception = log.Exception;
             rLog.LogType = log.LogType;
-            rLog.PageName = log.PageName;
+            rLog.ExceptionLocation = log.ExceptionLocation;
+            rLog.ClientInformation = log.ClientInformation;
             db.SaveChanges();
         }
 

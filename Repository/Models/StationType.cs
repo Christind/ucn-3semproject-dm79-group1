@@ -1,8 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Repository.Models
 {
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(Station))]
+
     public partial class StationType
     {
         public StationType()
@@ -10,10 +14,15 @@ namespace Repository.Models
             this.Stations = new List<Station>();
         }
 
+        [DataMember]
         public int ID { get; set; }
+        [DataMember]
         public string Title { get; set; }
+        [DataMember]
         public string Description { get; set; }
-        public System.DateTime CreatedDate { get; set; }
+        [DataMember]
+        public DateTime CreatedDate { get; set; }
+
         public virtual ICollection<Station> Stations { get; set; }
     }
 }

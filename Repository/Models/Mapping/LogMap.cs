@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
-using Logging;
+﻿using System.Data.Entity.ModelConfiguration;
 
 namespace Repository.Models.Mapping
 {
@@ -16,7 +14,8 @@ namespace Repository.Models.Mapping
             this.ToTable("Logs");
             this.Property(t => t.ID).HasColumnName("ID");
             this.Property(t => t.Exception).HasColumnName("Exception");
-            this.Property(t => t.PageName).HasColumnName("ExceptionLocation");
+            this.Property(t => t.ExceptionLocation).HasColumnName("ExceptionLocation");
+            this.Property(t => t.ClientInformation).HasColumnName("ClientInformation");
             this.Property(t => t.LogType).HasColumnName("LogType");
             this.Property(t => t.IsActive).HasColumnName("IsActive");
             this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
