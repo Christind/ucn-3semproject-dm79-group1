@@ -51,6 +51,7 @@
     <Compile Include="Models\CarModel.cs" />
     <Compile Include="Models\ClientApplication.cs" />
     <Compile Include="Models\Edge.cs" />
+    <Compile Include="Models\Log.cs" />
     <Compile Include="Models\MaintenanceType.cs" />
     <Compile Include="Models\Manufacturer.cs" />
     <Compile Include="Models\Mapping\ArchiveMap.cs" />
@@ -102,12 +103,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Logging\Logging.csproj">
-      <Project>{C5D5251C-C808-4665-BB15-B709DDDFC27E}</Project>
-      <Name>Logging</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
