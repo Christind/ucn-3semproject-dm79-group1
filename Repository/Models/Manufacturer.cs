@@ -1,12 +1,13 @@
+using System;
 using System.Collections.Generic;
 
 namespace Repository.Models
 {
-    public class Manufacturer
+    public partial class Manufacturer
     {
         public Manufacturer()
         {
-            Cars = new List<Car>();
+            this.Cars = new List<Car>();
         }
 
         public int ID { get; set; }

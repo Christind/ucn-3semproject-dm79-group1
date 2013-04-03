@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Repository.Models.Mapping
@@ -7,23 +8,24 @@ namespace Repository.Models.Mapping
         public CarMap()
         {
             // Primary Key
-            HasKey(t => t.ID);
+            this.HasKey(t => t.ID);
 
             // Properties
             // Table & Column Mappings
-            ToTable("Cars");
-            Property(t => t.ID).HasColumnName("ID");
-            Property(t => t.ManufacturerId).HasColumnName("ManufacturerId");
-            Property(t => t.ModelId).HasColumnName("ModelId");
-            Property(t => t.CreatedDate).HasColumnName("CreatedDate");
+            this.ToTable("Cars");
+            this.Property(t => t.ID).HasColumnName("ID");
+            this.Property(t => t.ManufacturerId).HasColumnName("ManufacturerId");
+            this.Property(t => t.ModelId).HasColumnName("ModelId");
+            this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
 
             // Relationships
-            HasRequired(t => t.CarModel)
+            this.HasRequired(t => t.CarModel)
                 .WithMany(t => t.Cars)
                 .HasForeignKey(d => d.ModelId);
-            HasRequired(t => t.Manufacturer)
+            this.HasRequired(t => t.Manufacturer)
                 .WithMany(t => t.Cars)
                 .HasForeignKey(d => d.ManufacturerId);
+
         }
     }
 }

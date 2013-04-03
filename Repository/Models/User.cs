@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace Repository.Models
 {
-    public class User
+    public partial class User
     {
         public User()
         {
-            Archives = new List<Archive>();
-            Bookmarks = new List<Bookmark>();
-            Reservations = new List<Reservation>();
-            UserCars = new List<UserCar>();
+            this.Archives = new List<Archive>();
+            this.Bookmarks = new List<Bookmark>();
+            this.Reservations = new List<Reservation>();
+            this.UserCars = new List<UserCar>();
         }
 
         public int ID { get; set; }
@@ -19,10 +19,10 @@ namespace Repository.Models
         public string Salt { get; set; }
         public string Email { get; set; }
         public string APIKey { get; set; }
-        public decimal? LocLat { get; set; }
-        public decimal? LocLong { get; set; }
+        public Nullable<decimal> LocLat { get; set; }
+        public Nullable<decimal> LocLong { get; set; }
         public bool IsActive { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public System.DateTime CreatedDate { get; set; }
         public virtual ICollection<Archive> Archives { get; set; }
         public virtual ICollection<Bookmark> Bookmarks { get; set; }
         public virtual ICollection<Reservation> Reservations { get; set; }

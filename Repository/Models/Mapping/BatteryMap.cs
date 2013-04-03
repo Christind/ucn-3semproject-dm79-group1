@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Repository.Models.Mapping
@@ -7,21 +8,21 @@ namespace Repository.Models.Mapping
         public BatteryMap()
         {
             // Primary Key
-            HasKey(t => t.ID);
+            this.HasKey(t => t.ID);
 
             // Properties
-            Property(t => t.Serial)
+            this.Property(t => t.Serial)
                 .IsRequired()
                 .HasMaxLength(128);
 
             // Table & Column Mappings
-            ToTable("Batteries");
-            Property(t => t.ID).HasColumnName("ID");
-            Property(t => t.Serial).HasColumnName("Serial");
-            Property(t => t.ManufacturingDate).HasColumnName("ManufacturingDate");
-            Property(t => t.OutOfCommisionDate).HasColumnName("OutOfCommisionDate");
-            Property(t => t.IsActive).HasColumnName("IsActive");
-            Property(t => t.CreatedDate).HasColumnName("CreatedDate");
+            this.ToTable("Batteries");
+            this.Property(t => t.ID).HasColumnName("ID");
+            this.Property(t => t.Serial).HasColumnName("Serial");
+            this.Property(t => t.ManufacturingDate).HasColumnName("ManufacturingDate");
+            this.Property(t => t.OutOfCommisionDate).HasColumnName("OutOfCommisionDate");
+            this.Property(t => t.IsActive).HasColumnName("IsActive");
+            this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
         }
     }
 }

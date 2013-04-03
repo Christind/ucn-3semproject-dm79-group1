@@ -1,12 +1,13 @@
+using System;
 using System.Collections.Generic;
 
 namespace Repository.Models
 {
-    public class BatteryStorage
+    public partial class BatteryStorage
     {
         public BatteryStorage()
         {
-            BatteryCollections = new List<BatteryCollection>();
+            this.BatteryCollections = new List<BatteryCollection>();
         }
 
         public int ID { get; set; }

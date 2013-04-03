@@ -1,6 +1,9 @@
+using System;
+using System.Collections.Generic;
+
 namespace Repository.Models
 {
-    public class BatteryCollection
+    public partial class BatteryCollection
     {
         public int ID { get; set; }
         public int BatteryStorageId { get; set; }

@@ -1,8 +1,9 @@
 using System;
+using System.Collections.Generic;
 
 namespace Repository.Models
 {
-    public class Bookmark
+    public partial class Bookmark
     {
         public int ID { get; set; }
         public int UserId { get; set; }
@@ -13,7 +14,7 @@ namespace Repository.Models
         public decimal StartLong { get; set; }
         public decimal EndLong { get; set; }
         public bool IsActive { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public System.DateTime CreatedDate { get; set; }
         public virtual User User { get; set; }
     }
 }

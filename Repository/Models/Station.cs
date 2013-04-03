@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 namespace Repository.Models
 {
-    public class Station
+    public partial class Station
     {
         public Station()
         {
-            BatteryStorages = new List<BatteryStorage>();
-            Reservations = new List<Reservation>();
+            this.BatteryStorages = new List<BatteryStorage>();
+            this.Reservations = new List<Reservation>();
+            this.StationMaintenances = new List<StationMaintenance>();
         }
 
         public int ID { get; set; }
@@ -19,9 +20,10 @@ namespace Repository.Models
         public decimal StationLong { get; set; }
         public bool IsOperational { get; set; }
         public bool IsActive { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public System.DateTime CreatedDate { get; set; }
         public virtual ICollection<BatteryStorage> BatteryStorages { get; set; }
         public virtual ICollection<Reservation> Reservations { get; set; }
+        public virtual ICollection<StationMaintenance> StationMaintenances { get; set; }
         public virtual StationType StationType { get; set; }
     }
 }
