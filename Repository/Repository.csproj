@@ -70,6 +70,7 @@
     <Compile Include="Models\Mapping\CarModelMap.cs" />
     <Compile Include="Models\Mapping\ClientApplicationMap.cs" />
     <Compile Include="Models\Mapping\EdgeMap.cs" />
+    <Compile Include="Models\Mapping\LogMap.cs" />
     <Compile Include="Models\Mapping\MaintenanceTypeMap.cs" />
     <Compile Include="Models\Mapping\ManufacturerMap.cs" />
     <Compile Include="Models\Mapping\ReservationMap.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Resources\BatteryStorageRepository.cs" />
     <Compile Include="Resources\ClientApplicationRepository.cs" />
     <Compile Include="Resources\EdgeRepository.cs" />
+    <Compile Include="Resources\LogRepository.cs" />
     <Compile Include="Resources\ManufacturerRepository.cs" />
     <Compile Include="Resources\UserCarRepository.cs" />
     <Compile Include="Resources\MaintenanceTypeRepository.cs" />
@@ -106,6 +108,12 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logging\Logging.csproj">
+      <Project>{C5D5251C-C808-4665-BB15-B709DDDFC27E}</Project>
+      <Name>Logging</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
