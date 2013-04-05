@@ -22,6 +22,11 @@ namespace Repository.Resources
             return db.Reservations.FirstOrDefault(x => x.ID == id);
         }
 
+        public IQueryable<Reservation> GetReservationsByUserId(int userId)
+        {
+            return db.Reservations.Where(x => x.UserId == userId);
+        }
+
         public void Insert(Reservation reservation)
         {
             db.Reservations.Add(reservation);

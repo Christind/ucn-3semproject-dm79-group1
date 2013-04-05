@@ -4,9 +4,7 @@ using System.Runtime.Serialization;
 
 namespace Repository.Models
 {
-    [DataContract]
-    [KnownType(typeof(Manufacturer))]
-    [KnownType(typeof(UserCar))]
+    [DataContract(IsReference = true)]
     public partial class Car
     {
         public Car()
@@ -24,7 +22,7 @@ namespace Repository.Models
         public DateTime CreatedDate { get; set; }
         [DataMember]
         public virtual CarModel CarModel { get; set; }
-        public virtual ICollection<UserCar> UserCars { get; set; }
+        public virtual List<UserCar> UserCars { get; set; }
         [DataMember]
         public virtual Manufacturer Manufacturer { get; set; }
     }

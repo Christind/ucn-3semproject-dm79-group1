@@ -22,6 +22,11 @@ namespace Repository.Resources
             return db.Bookmarks.FirstOrDefault(x => x.ID == id);
         }
 
+        public IQueryable<Bookmark> GetBookmarksByUserId(int userId)
+        {
+            return db.Bookmarks.Where(x => x.UserId == userId);
+        }
+
         public void Insert(Bookmark bookmark)
         {
             db.Bookmarks.Add(bookmark);

@@ -5,8 +5,6 @@ using System.Runtime.Serialization;
 namespace Repository.Models
 {
     [DataContract(IsReference = true)]
-    [KnownType(typeof(ArchiveStation))]
-    [KnownType(typeof(User))]
     public partial class Archive
     {
         public Archive()
@@ -29,7 +27,7 @@ namespace Repository.Models
         [DataMember]
         public DateTime CreatedDate { get; set; }
         [DataMember]
-        public virtual ICollection<ArchiveStation> ArchiveStations { get; set; }
+        public virtual List<ArchiveStation> ArchiveStations { get; set; }
         [DataMember]
         public virtual User User { get; set; }
     }

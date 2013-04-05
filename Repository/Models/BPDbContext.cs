@@ -12,6 +12,7 @@ namespace Repository.Models
 
         public BPDbContext() : base("Name=BPDbContext")
         {
+            Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Archive> Archives { get; set; }

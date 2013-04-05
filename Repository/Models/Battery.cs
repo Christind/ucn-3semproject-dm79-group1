@@ -5,8 +5,6 @@ using System.Runtime.Serialization;
 namespace Repository.Models
 {
     [DataContract(IsReference = true)]
-    [KnownType(typeof(BatteryCharging))]
-    [KnownType(typeof(BatteryCollection))]
     public partial class Battery
     {
         public Battery()
@@ -28,7 +26,8 @@ namespace Repository.Models
         [DataMember]
         public DateTime CreatedDate { get; set; }
         [DataMember]
-        public virtual ICollection<BatteryCharging> BatteryChargings { get; set; }
-        public virtual ICollection<BatteryCollection> BatteryCollections { get; set; }
+        public virtual List<BatteryCharging> BatteryChargings { get; set; }
+        [DataMember]
+        public virtual List<BatteryCollection> BatteryCollections { get; set; }
     }
 }

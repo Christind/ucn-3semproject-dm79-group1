@@ -10,6 +10,6 @@ namespace Repository.Models
         public string Description { get; set; }
         public string AppKey { get; set; }
         public string CryptoKey { get; set; }
-        public System.DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

@@ -3,8 +3,11 @@ using System.Collections.Specialized;
 using System.Data.SqlClient;
 using System.Text;
 using System.Web;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Repository.Models;
 using Repository.Resources;
+using Utils.Helpers;
 
 namespace Logging
 {
@@ -52,6 +55,22 @@ namespace Logging
             if (ex is SqlException)
             {
                 //TODO: Add log message to json/xml file
+                //Create the Json file and save it with WriteToFile();
+                var jobject =
+                    new JObject(
+                        new JProperty("Exception",
+                            new JObject(
+                                new JProperty("CreatedDate", DateTime.Now),
+                                new JProperty("ClientInformation", getRemoteIp + "<br/>" + strGetAllSessions.ToString() + "<br/>" +
+                                            strGetAllSessions.ToString()),
+                                new JProperty("LogType", logType),
+                                new JProperty("Exception", ex.ToString()),
+                                new JProperty("ExceptionLocation", pageName),
+                                new JProperty("IsActive", true)
+                                       )
+                                     )
+                               );
+
             }
             else
             {

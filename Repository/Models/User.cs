@@ -4,11 +4,7 @@ using System.Runtime.Serialization;
 
 namespace Repository.Models
 {
-    [DataContract]
-    [KnownType(typeof(Archive))]
-    [KnownType(typeof(Bookmark))]
-    [KnownType(typeof(Reservation))]
-    [KnownType(typeof(UserCar))]
+    [DataContract(IsReference = true)]
     public partial class User
     {
         public User()
@@ -39,10 +35,13 @@ namespace Repository.Models
         public bool IsActive { get; set; }
         [DataMember]
         public DateTime CreatedDate { get; set; }
-
-        public virtual ICollection<Archive> Archives { get; set; }
-        public virtual ICollection<Bookmark> Bookmarks { get; set; }
-        public virtual ICollection<Reservation> Reservations { get; set; }
-        public virtual ICollection<UserCar> UserCars { get; set; }
+        [DataMember]
+        public virtual List<Archive> Archives { get; set; }
+        [DataMember]
+        public virtual List<Bookmark> Bookmarks { get; set; }
+        [DataMember]
+        public virtual List<Reservation> Reservations { get; set; }
+        [DataMember]
+        public virtual List<UserCar> UserCars { get; set; }
     }
 }

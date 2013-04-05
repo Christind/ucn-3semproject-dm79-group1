@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebClient.RouteServiceReference;
 
 namespace WebClient.Controllers
 {
@@ -13,6 +14,8 @@ namespace WebClient.Controllers
 
         public ActionResult Index()
         {
+            IRouteService routeService = new RouteServiceClient();
+            var user = routeService.GetUserById(1);
             return View();
         }
 

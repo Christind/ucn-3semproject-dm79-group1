@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 namespace Repository.Models
 {
     [DataContract(IsReference = true)]
-    [KnownType(typeof(Battery))]
     public partial class BatteryCharging
     {
         [DataMember]

@@ -81,6 +81,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserCar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\BookmarkRepository.cs" />
     <Compile Include="Resources\CarRepository.cs" />
     <Compile Include="Resources\ArchiveRepository.cs" />
     <Compile Include="Resources\ArchiveStationRepository.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Resources\EdgeRepository.cs" />
     <Compile Include="Resources\LogRepository.cs" />
     <Compile Include="Resources\ManufacturerRepository.cs" />
+    <Compile Include="Resources\ReservationRepository.cs" />
     <Compile Include="Resources\UserCarRepository.cs" />
     <Compile Include="Resources\MaintenanceTypeRepository.cs" />
     <Compile Include="Resources\StationMaintenanceRepository.cs" />

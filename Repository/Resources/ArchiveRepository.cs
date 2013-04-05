@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Repository.Models;
 
 namespace Repository.Resources
@@ -20,6 +21,11 @@ namespace Repository.Resources
         public Archive GetArchiveById(int id)
         {
             return db.Archives.FirstOrDefault(x => x.ID == id);
+        }
+
+        public IQueryable<Archive> GetArchivesByUserId(int userId)
+        {
+            return db.Archives.Where(x => x.UserId == userId);
         }
 
         public void Insert(Archive archive)

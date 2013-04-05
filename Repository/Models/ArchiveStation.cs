@@ -4,8 +4,7 @@ using System.Runtime.Serialization;
 
 namespace Repository.Models
 {
-    [DataContract( IsReference = true)]
-    [KnownType(typeof(Archive))]
+    [DataContract(IsReference = true)]
     public partial class ArchiveStation
     {
         [DataMember]
@@ -16,6 +15,7 @@ namespace Repository.Models
         public decimal StationLat { get; set; }
         [DataMember]
         public decimal StationLong { get; set; }
+        [DataMember]
         public virtual Archive Archive { get; set; }
     }
 }

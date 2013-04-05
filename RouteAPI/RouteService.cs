@@ -20,7 +20,7 @@ namespace RouteAPI
         public User GetUserById(int id)
         {
             var userRep = new UserRepository();
-            User user = userRep.GetUserById(id);
+            User user = userRep.GetUserById(id, true);
             return user;
         }
 

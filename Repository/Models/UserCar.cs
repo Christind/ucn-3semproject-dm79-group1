@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Repository.Models
 {
-    [DataContract]
-    [KnownType(typeof(Car))]
-    [KnownType(typeof(User))]
+    [DataContract(IsReference = true)]
     public partial class UserCar
     {
         [DataMember]
@@ -17,6 +13,7 @@ namespace Repository.Models
         public int CarId { get; set; }
         [DataMember]
         public virtual Car Car { get; set; }
+        [DataMember]
         public virtual User User { get; set; }
     }
 }

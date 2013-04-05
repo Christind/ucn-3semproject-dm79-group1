@@ -43,6 +43,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -109,6 +111,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\RouteServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -118,6 +125,13 @@
     <Content Include="Controllers\empty_file.txt" />
     <Content Include="Global.asax" />
     <Content Include="Models\empty_file.txt" />
+    <Content Include="Properties\DataSources\Repository.Models.User.datasource" />
+    <Content Include="Service References\RouteServiceReference\configuration91.svcinfo" />
+    <Content Include="Service References\RouteServiceReference\configuration.svcinfo" />
+    <Content Include="Service References\RouteServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\example.htm" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -127,6 +141,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
+    <Content Include="Service References\RouteServiceReference\WebClient.RouteServiceReference.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -136,6 +153,33 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{662F800F-A237-4771-BF8F-73D2871AAFBE}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\RouteServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RouteServiceReference\Repository.Models.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\RouteServiceReference\RouteAPI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\RouteServiceReference\service.wsdl" />
+    <None Include="Service References\RouteServiceReference\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\RouteServiceReference\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

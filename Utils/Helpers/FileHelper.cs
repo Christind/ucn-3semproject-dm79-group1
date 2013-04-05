@@ -96,6 +96,20 @@ namespace Utils.Helpers
             }
         }
 
+        public static void WriteToFile(string data, string fullPath)
+        {
+            //var myFile = new FileStream(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+
+            
+
+            //IOutputStream outputstream = writestream.GetOutputStreamAt(0);
+            //DataWriter datawriter = new DataWriter(outputstream);
+            //datawriter.WriteString(data);
+
+            //await datawriter.StoreAsync();
+            //outputstream.FlushAsync().Start();
+        }
+
         public static string MapPathReverse(string fullServerPath)
         {
             return @"~\" + fullServerPath.Replace(HttpContext.Current.Request.PhysicalApplicationPath, String.Empty);

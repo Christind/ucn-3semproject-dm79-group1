@@ -5,8 +5,6 @@ using System.Runtime.Serialization;
 namespace Repository.Models
 {
     [DataContract(IsReference = true)]
-    [KnownType(typeof(Station))]
-
     public partial class StationType
     {
         public StationType()
@@ -22,7 +20,6 @@ namespace Repository.Models
         public string Description { get; set; }
         [DataMember]
         public DateTime CreatedDate { get; set; }
-
-        public virtual ICollection<Station> Stations { get; set; }
+        public virtual List<Station> Stations { get; set; }
     }
 }

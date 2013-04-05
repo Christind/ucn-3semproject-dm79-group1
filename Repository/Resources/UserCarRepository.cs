@@ -22,9 +22,9 @@ namespace Repository.Resources
             return db.UserCars.FirstOrDefault(x => x.ID == id);
         }
 
-        public IQueryable<UserCar> GetUserCarsByUser(User user)
+        public IQueryable<UserCar> GetUserCarsByUserId(int userId)
         {
-            return db.UserCars.Where(x => x.UserId == user.ID);
+            return db.UserCars.Where(x => x.UserId == userId);
         }
 
         public void Insert(UserCar userCar)

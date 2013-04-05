@@ -17,9 +17,19 @@ namespace Repository.Resources
             return db.Users;
         }
 
-        public User GetUserById(int id)
+        public User GetUserById(int id, bool getAssociations = false)
         {
-            return db.Users.FirstOrDefault(x => x.ID == id);
+            User user = db.Users.FirstOrDefault(x => x.ID == id);
+            if (user == null)
+                return null;
+            if (getAssociations)
+            {
+                user.Archives = new ArchiveRepository().GetArchivesByUserId(id).ToList();
+                user.Bookmarks = new BookmarkRepository().GetBookmarksByUserId(id).ToList();
+                user.Reservations = new ReservationRepository().GetReservationsByUserId(id).ToList();
+                user.UserCars = new UserCarRepository().GetUserCarsByUserId(id).ToList();
+            }
+            return user;
         }
 
         public void Insert(User user)

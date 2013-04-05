@@ -5,9 +5,6 @@ using System.Runtime.Serialization;
 namespace Repository.Models
 {
     [DataContract(IsReference = true)]
-    [KnownType(typeof(BatteryStorage))]
-    [KnownType(typeof(Reservation))]
-    [KnownType(typeof(StationMaintenance))]
     public partial class Station
     {
         public Station()
@@ -35,9 +32,13 @@ namespace Repository.Models
         public bool IsActive { get; set; }
         [DataMember]
         public DateTime CreatedDate { get; set; }
-        public virtual ICollection<BatteryStorage> BatteryStorages { get; set; }
-        public virtual ICollection<Reservation> Reservations { get; set; }
-        public virtual ICollection<StationMaintenance> StationMaintenances { get; set; }
+        [DataMember]
+        public virtual List<BatteryStorage> BatteryStorages { get; set; }
+        [DataMember]
+        public virtual List<Reservation> Reservations { get; set; }
+        [DataMember]
+        public virtual List<StationMaintenance> StationMaintenances { get; set; }
+        [DataMember]
         public virtual StationType StationType { get; set; }
     }
 }

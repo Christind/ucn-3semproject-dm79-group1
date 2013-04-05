@@ -4,8 +4,7 @@ using System.Runtime.Serialization;
 
 namespace Repository.Models
 {
-    [DataContract]
-    [KnownType(typeof(Car))]
+    [DataContract(IsReference = true)]
     public partial class CarModel
     {
         public CarModel()
@@ -23,6 +22,6 @@ namespace Repository.Models
         public decimal Range { get; set; }
         [DataMember]
         public string Website { get; set; }
-        public virtual ICollection<Car> Cars { get; set; }
+        public virtual List<Car> Cars { get; set; }
     }
 }
