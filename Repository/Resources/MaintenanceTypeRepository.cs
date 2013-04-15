@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Repository.Models;
 
 namespace Repository.Resources
@@ -44,12 +40,14 @@ namespace Repository.Resources
             db.SaveChanges();
         }
 
-        public void Delete(MaintenanceType maintenanceType)
+        public void Disable(int value)
         {
-            if (GetMaintenanceTypeById(maintenanceType.ID) == null)
+            MaintenanceType rMaintenanceType = GetMaintenanceTypeById(value);
+
+            if (rMaintenanceType == null)
                 return;
 
-            db.MaintenanceTypes.Remove(maintenanceType);
+            rMaintenanceType.IsActive = false;
             db.SaveChanges();
         }
     }

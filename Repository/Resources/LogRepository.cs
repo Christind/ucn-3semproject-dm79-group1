@@ -41,16 +41,5 @@ namespace Repository.Resources
             rLog.ClientInformation = log.ClientInformation;
             db.SaveChanges();
         }
-
-        public void Disable(int value)
-        {
-            Log rLog = GetLogById(value);
-
-            if (rLog == null)
-                return;
-
-            rLog.IsActive = false;
-            db.SaveChanges();
-        }
     }
 }

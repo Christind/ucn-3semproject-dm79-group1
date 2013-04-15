@@ -17,6 +17,7 @@ namespace Repository.Models.Mapping
             this.Property(t => t.EndStation).HasColumnName("EndStation");
             this.Property(t => t.Distance).HasColumnName("Distance");
             this.Property(t => t.Time).HasColumnName("Time");
+            this.Property(t => t.IsActive).HasColumnName("IsActive");
         }
     }
 }

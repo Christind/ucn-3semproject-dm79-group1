@@ -20,6 +20,9 @@ namespace Repository.Models
         public string Description { get; set; }
         [DataMember]
         public DateTime CreatedDate { get; set; }
+        [DataMember]
         public virtual List<Station> Stations { get; set; }
+        [DataMember]
+        public bool IsActive { get; set; }
     }
 }

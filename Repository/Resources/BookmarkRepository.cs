@@ -45,11 +45,14 @@ namespace Repository.Resources
             db.SaveChanges();
         }
 
-        public void Delete(Bookmark bookmark)
+        public void Disable(int value)
         {
-            if (GetBookmarkById(bookmark.ID) == null)
+            Bookmark rBookmark = GetBookmarkById(value);
+
+            if(rBookmark == null)
                 return;
-            db.Bookmarks.Remove(bookmark);
+
+            rBookmark.IsActive = false;
             db.SaveChanges();
         }
     }

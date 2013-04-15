@@ -30,5 +30,7 @@ namespace Repository.Models
         public virtual List<ArchiveStation> ArchiveStations { get; set; }
         [DataMember]
         public virtual User User { get; set; }
+        [DataMember]
+        public bool IsActive { get; set; }
     }
 }

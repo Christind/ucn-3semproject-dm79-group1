@@ -17,7 +17,6 @@ namespace Repository.Models.Mapping
             this.Property(t => t.ExceptionLocation).HasColumnName("ExceptionLocation");
             this.Property(t => t.ClientInformation).HasColumnName("ClientInformation");
             this.Property(t => t.LogType).HasColumnName("LogType");
-            this.Property(t => t.IsActive).HasColumnName("IsActive");
             this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
         }
     }

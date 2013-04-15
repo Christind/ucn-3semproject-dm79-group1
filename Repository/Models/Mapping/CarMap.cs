@@ -16,6 +16,7 @@ namespace Repository.Models.Mapping
             this.Property(t => t.ManufacturerId).HasColumnName("ManufacturerId");
             this.Property(t => t.ModelId).HasColumnName("ModelId");
             this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
+            this.Property(t => t.IsActive).HasColumnName("IsActive");
 
             // Relationships
             this.HasRequired(t => t.CarModel)

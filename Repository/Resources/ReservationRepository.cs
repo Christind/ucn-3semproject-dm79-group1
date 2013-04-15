@@ -44,11 +44,14 @@ namespace Repository.Resources
             db.SaveChanges();
         }
 
-        public void Delete(Reservation reservation)
+        public void Disable(int value)
         {
-            if (GetReservationById(reservation.ID) == null)
+            Reservation rReservation = GetReservationById(value);
+
+            if (rReservation == null)
                 return;
-            db.Reservations.Remove(reservation);
+
+            rReservation.IsActive = false;
             db.SaveChanges();
         }
     }

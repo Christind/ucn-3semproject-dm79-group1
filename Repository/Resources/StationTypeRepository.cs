@@ -40,12 +40,14 @@ namespace Repository.Resources
             db.SaveChanges();
         }
 
-        public void Delete(StationType stationType)
+        public void Disable(int value)
         {
-            if (GetStationTypeById(stationType.ID) == null)
+            StationType rStationType = GetStationTypeById(value);
+
+            if (rStationType == null)
                 return;
 
-            db.StationTypes.Remove(stationType);
+            rStationType.IsActive = false;
             db.SaveChanges();
         }
     }

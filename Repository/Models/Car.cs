@@ -25,5 +25,7 @@ namespace Repository.Models
         public virtual List<UserCar> UserCars { get; set; }
         [DataMember]
         public virtual Manufacturer Manufacturer { get; set; }
+        [DataMember]
+        public bool IsActive { get; set; }
     }
 }

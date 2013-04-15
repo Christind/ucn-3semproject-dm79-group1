@@ -15,6 +15,7 @@ namespace Repository.Models.Mapping
             this.Property(t => t.ID).HasColumnName("ID");
             this.Property(t => t.UserId).HasColumnName("UserId");
             this.Property(t => t.CarId).HasColumnName("CarId");
+            this.Property(t => t.IsActive).HasColumnName("IsActive");
 
             // Relationships
             this.HasRequired(t => t.Car)

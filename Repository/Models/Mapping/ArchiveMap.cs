@@ -19,6 +19,7 @@ namespace Repository.Models.Mapping
             this.Property(t => t.StartLong).HasColumnName("StartLong");
             this.Property(t => t.EndLong).HasColumnName("EndLong");
             this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
+            this.Property(t => t.IsActive).HasColumnName("IsActive");
 
             // Relationships
             this.HasRequired(t => t.User)

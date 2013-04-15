@@ -38,12 +38,14 @@ namespace Repository.Resources
             db.SaveChanges();
         }
 
-        public void Delete(ArchiveStation archiveStation)
+        public void Disable(int value)
         {
-            if (GetArchiveStationById(archiveStation.ID) == null)
+            ArchiveStation rArchiveStation = GetArchiveStationById(value);
+
+            if (rArchiveStation == null)
                 return;
 
-            db.ArchiveStations.Remove(archiveStation);
+            rArchiveStation.IsActive = false;
             db.SaveChanges();
         }
     }

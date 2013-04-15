@@ -37,11 +37,14 @@ namespace Repository.Resources
             db.SaveChanges();
         }
 
-        public void Delete(BatteryCollection batteryCollection)
+        public void Disable(int value)
         {
-            if (GetBatteryCollectionById(batteryCollection.ID) == null)
+            BatteryCollection rBatteryCollection = GetBatteryCollectionById(value);
+
+            if (rBatteryCollection == null)
                 return;
-            db.BatteryCollections.Remove(batteryCollection);
+
+            rBatteryCollection.IsActive = false;
             db.SaveChanges();
         }
     }

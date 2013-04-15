@@ -40,11 +40,14 @@ namespace Repository.Resources
             db.SaveChanges();
         }
 
-        public void Delete(BatteryStorage batteryStorage)
+        public void Disable(int value)
         {
-            if (GetBatteryStorageById(batteryStorage.ID) == null)
+            BatteryStorage rBatteryStorage = GetBatteryStorageById(value);
+
+            if (rBatteryStorage == null)
                 return;
-            db.BatteryStorages.Remove(batteryStorage);
+
+            rBatteryStorage.IsActive = false;
             db.SaveChanges();
         }
     }

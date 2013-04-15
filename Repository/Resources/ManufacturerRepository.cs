@@ -39,12 +39,14 @@ namespace Repository.Resources
             rManufacturer.Website = manufacturer.Website;
         }
 
-        public void Delete(Manufacturer manufacturer)
+        public void Disable(int value)
         {
-            if (GetManufacturerById(manufacturer.ID) == null)
+            Manufacturer rManufacturer = GetManufacturerById(value);
+
+            if (rManufacturer == null)
                 return;
 
-            db.Manufacturers.Remove(manufacturer);
+            rManufacturer.IsActive = false;
             db.SaveChanges();
         }
     }

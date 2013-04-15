@@ -17,8 +17,6 @@ namespace Repository.Models
         [DataMember]
         public int LogType { get; set; }
         [DataMember]
-        public bool IsActive { get; set; }
-        [DataMember]
         public DateTime CreatedDate { get; set; }
     }
 }

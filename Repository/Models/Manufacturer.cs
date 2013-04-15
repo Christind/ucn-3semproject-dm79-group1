@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -20,5 +19,7 @@ namespace Repository.Models
         public string Website { get; set; }
         [DataMember]
         public virtual List<Car> Cars { get; set; }
+        [DataMember]
+        public bool IsActive { get; set; }
     }
 }

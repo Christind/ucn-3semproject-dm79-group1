@@ -53,12 +53,14 @@ namespace Repository.Resources
             db.SaveChanges();
         }
 
-        public void Disable(Car car)
+        public void Disable(int value)
         {
-            if (car == null)
+            Car dbCar = GetCarById(value);
+
+            if (dbCar == null)
                 return;
 
-            db.Cars.Remove(car);
+            dbCar.IsActive = false;
             db.SaveChanges();
         }
     }

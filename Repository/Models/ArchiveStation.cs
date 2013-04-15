@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Repository.Models
@@ -17,5 +15,7 @@ namespace Repository.Models
         public decimal StationLong { get; set; }
         [DataMember]
         public virtual Archive Archive { get; set; }
+        [DataMember]
+        public bool IsActive { get; set; }
     }
 }

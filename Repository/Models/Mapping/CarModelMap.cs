@@ -24,6 +24,7 @@ namespace Repository.Models.Mapping
             this.Property(t => t.Year).HasColumnName("Year");
             this.Property(t => t.Range).HasColumnName("Range");
             this.Property(t => t.Website).HasColumnName("Website");
+            this.Property(t => t.IsActive).HasColumnName("IsActive");
         }
     }
 }

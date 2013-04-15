@@ -42,12 +42,14 @@ namespace Repository.Resources
             db.SaveChanges();
         }
 
-        public void Delete(ClientApplication clientApplication)
+        public void Disable(int value)
         {
-            if (GetClientAppById(clientApplication.ID) == null)
+            ClientApplication rClientApplication = GetClientAppById(value);
+
+            if (rClientApplication == null)
                 return;
 
-            db.ClientApplications.Remove(clientApplication);
+            rClientApplication.IsActive = false;
             db.SaveChanges();
         }
     }

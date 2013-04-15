@@ -38,11 +38,14 @@ namespace Repository.Resources
             db.SaveChanges();
         }
 
-        public void Delete(Edge edge)
+        public void Disable(int value)
         {
-            if (GetEdgeById(edge.ID) == null)
+            Edge rEdge = GetEdgeById(value);
+
+            if (rEdge == null)
                 return;
-            db.Edges.Remove(edge);
+
+            rEdge.IsActive = false;
             db.SaveChanges();
         }
     }

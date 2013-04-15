@@ -18,6 +18,7 @@ namespace Repository.Models.Mapping
             this.Property(t => t.ExpiredDate).HasColumnName("ExpiredDate");
             this.Property(t => t.CompletedDate).HasColumnName("CompletedDate");
             this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
+            this.Property(t => t.IsActive).HasColumnName("IsActive");
 
             // Relationships
             this.HasRequired(t => t.Station)

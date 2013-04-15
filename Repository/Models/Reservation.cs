@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Repository.Models
@@ -23,5 +22,7 @@ namespace Repository.Models
         public virtual Station Station { get; set; }
         [DataMember]
         public virtual User User { get; set; }
+        [DataMember]
+        public bool IsActive { get; set; }
     }
 }

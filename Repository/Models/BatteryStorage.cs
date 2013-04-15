@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -26,5 +25,7 @@ namespace Repository.Models
         public virtual List<BatteryCollection> BatteryCollections { get; set; }
         [DataMember]
         public virtual Station Station { get; set; }
+        [DataMember]
+        public bool IsActive { get; set; }
     }
 }

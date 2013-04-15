@@ -16,6 +16,7 @@ namespace Repository.Models.Mapping
             this.Property(t => t.ArchiveId).HasColumnName("ArchiveId");
             this.Property(t => t.StationLat).HasColumnName("StationLat");
             this.Property(t => t.StationLong).HasColumnName("StationLong");
+            this.Property(t => t.IsActive).HasColumnName("IsActive");
 
             // Relationships
             this.HasRequired(t => t.Archive)

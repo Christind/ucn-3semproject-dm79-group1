@@ -39,11 +39,14 @@ namespace Repository.Resources
             db.SaveChanges();
         }
 
-        public void Delete(Battery battery)
+        public void Disable(int value)
         {
-            if (GetBatteryById(battery.ID) == null)
+            Battery rBattery = GetBatteryById(value);
+
+            if(rBattery == null)
                 return;
-            db.Batteries.Remove(battery);
+
+            rBattery.IsActive = false;
             db.SaveChanges();
         }
     }

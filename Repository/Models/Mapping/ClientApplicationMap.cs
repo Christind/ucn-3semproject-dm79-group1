@@ -34,6 +34,7 @@ namespace Repository.Models.Mapping
             this.Property(t => t.AppKey).HasColumnName("AppKey");
             this.Property(t => t.CryptoKey).HasColumnName("CryptoKey");
             this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
+            this.Property(t => t.IsActive).HasColumnName("IsActive");
         }
     }
 }

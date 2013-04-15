@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Repository.Models;
 
 namespace Repository.Resources
@@ -34,11 +33,14 @@ namespace Repository.Resources
             db.SaveChanges();
         }
 
-        public void Delete(Archive archive)
+        public void Disable(int value)
         {
-            if (GetArchiveById(archive.ID) == null)
+            Archive rArchive = GetArchiveById(value);
+
+            if (rArchive == null)
                 return;
-            db.Archives.Remove(archive);
+
+            rArchive.IsActive = false;
             db.SaveChanges();
         }
     }

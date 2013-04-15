@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Repository.Models
@@ -17,5 +15,7 @@ namespace Repository.Models
         public virtual Battery Battery { get; set; }
         [DataMember]
         public virtual BatteryStorage BatteryStorage { get; set; }
+        [DataMember]
+        public bool IsActive { get; set; }
     }
 }
