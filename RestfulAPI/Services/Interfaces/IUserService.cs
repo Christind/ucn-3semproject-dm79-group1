@@ -12,5 +12,11 @@ namespace RestfulAPI.Services.Interfaces
 
         [OperationContract]
         User GetUserById(string id);
+
+        [OperationContract]
+        bool EditUserData(string id, string editData);
+
+        [OperationContract]
+        bool AuthenticateUser(string userName, string password);
     }
 }

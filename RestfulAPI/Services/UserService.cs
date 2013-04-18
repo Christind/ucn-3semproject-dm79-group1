@@ -44,5 +44,15 @@ namespace RestfulAPI.Services
                 throw;
             }
         }
+
+        public bool EditUserData(string id, string editData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AuthenticateUser(string userName, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

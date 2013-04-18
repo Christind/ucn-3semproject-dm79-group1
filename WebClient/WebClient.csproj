@@ -111,7 +111,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\RouteServiceReference\Reference.cs">
+    <Compile Include="Service References\BetterPlaceAPIRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -126,9 +126,10 @@
     <Content Include="Global.asax" />
     <Content Include="Models\empty_file.txt" />
     <Content Include="Properties\DataSources\Repository.Models.User.datasource" />
-    <Content Include="Service References\RouteServiceReference\configuration91.svcinfo" />
-    <Content Include="Service References\RouteServiceReference\configuration.svcinfo" />
-    <Content Include="Service References\RouteServiceReference\Reference.svcmap">
+    <Content Include="Properties\DataSources\Repository.Models.Station.datasource" />
+    <Content Include="Service References\BetterPlaceAPIRef\configuration91.svcinfo" />
+    <Content Include="Service References\BetterPlaceAPIRef\configuration.svcinfo" />
+    <Content Include="Service References\BetterPlaceAPIRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
@@ -141,9 +142,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Service References\RouteServiceReference\WebClient.RouteServiceReference.CompositeType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -164,20 +162,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\RouteServiceReference\" />
+    <WCFMetadataStorage Include="Service References\BetterPlaceAPIRef\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\RouteServiceReference\Repository.Models.xsd">
+    <None Include="Service References\BetterPlaceAPIRef\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\RouteServiceReference\RouteAPI.xsd">
+    <None Include="Service References\BetterPlaceAPIRef\Repository.Models.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Service References\RouteServiceReference\service.wsdl" />
-    <None Include="Service References\RouteServiceReference\service.xsd">
+    <Content Include="Service References\BetterPlaceAPIRef\service.wsdl" />
+    <None Include="Service References\BetterPlaceAPIRef\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\RouteServiceReference\service1.xsd">
+    <None Include="Service References\BetterPlaceAPIRef\service1.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

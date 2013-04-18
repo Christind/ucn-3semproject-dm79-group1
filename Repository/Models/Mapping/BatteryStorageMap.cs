@@ -20,10 +20,7 @@ namespace Repository.Models.Mapping
             this.Property(t => t.IsActive).HasColumnName("IsActive");
 
             // Relationships
-            this.HasRequired(t => t.Station)
-                .WithMany(t => t.BatteryStorages)
-                .HasForeignKey(d => d.StationId);
-
+            this.HasRequired(t => t.Station);
         }
     }
 }

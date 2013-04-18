@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Repository.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Repository.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
   <xs:complexType name="User">
     <xs:sequence>
       <xs:element minOccurs="0" name="APIKey" nillable="true" type="xs:string" />
@@ -35,6 +41,7 @@
       <xs:element minOccurs="0" name="EndLat" type="xs:decimal" />
       <xs:element minOccurs="0" name="EndLong" type="xs:decimal" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
       <xs:element minOccurs="0" name="StartLat" type="xs:decimal" />
       <xs:element minOccurs="0" name="StartLong" type="xs:decimal" />
       <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
@@ -55,6 +62,7 @@
       <xs:element minOccurs="0" name="Archive" nillable="true" type="tns:Archive" />
       <xs:element minOccurs="0" name="ArchiveId" type="xs:int" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
       <xs:element minOccurs="0" name="StationLat" type="xs:decimal" />
       <xs:element minOccurs="0" name="StationLong" type="xs:decimal" />
     </xs:sequence>
@@ -98,6 +106,7 @@
       <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="ExpiredDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
       <xs:element minOccurs="0" name="Station" nillable="true" type="tns:Station" />
       <xs:element minOccurs="0" name="StationId" type="xs:int" />
       <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
@@ -109,7 +118,7 @@
   <xs:element name="Reservation" nillable="true" type="tns:Reservation" />
   <xs:complexType name="Station">
     <xs:sequence>
-      <xs:element minOccurs="0" name="BatteryStorages" nillable="true" type="tns:ArrayOfBatteryStorage" />
+      <xs:element minOccurs="0" name="BatteryStorages" nillable="true" type="tns:BatteryStorage" />
       <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
@@ -127,18 +136,13 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Station" nillable="true" type="tns:Station" />
-  <xs:complexType name="ArrayOfBatteryStorage">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="BatteryStorage" nillable="true" type="tns:BatteryStorage" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfBatteryStorage" nillable="true" type="tns:ArrayOfBatteryStorage" />
   <xs:complexType name="BatteryStorage">
     <xs:sequence>
       <xs:element minOccurs="0" name="Available" type="xs:int" />
       <xs:element minOccurs="0" name="BatteryCollections" nillable="true" type="tns:ArrayOfBatteryCollection" />
       <xs:element minOccurs="0" name="Charging" type="xs:int" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
       <xs:element minOccurs="0" name="Reserved" type="xs:int" />
       <xs:element minOccurs="0" name="Station" nillable="true" type="tns:Station" />
       <xs:element minOccurs="0" name="StationId" type="xs:int" />
@@ -160,6 +164,7 @@
       <xs:element minOccurs="0" name="BatteryStorage" nillable="true" type="tns:BatteryStorage" />
       <xs:element minOccurs="0" name="BatteryStorageId" type="xs:int" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
@@ -175,6 +180,7 @@
       <xs:element minOccurs="0" name="ManufacturingDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="OutOfCommisionDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Serial" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
@@ -194,6 +200,7 @@
       <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="EstimatedTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
@@ -225,6 +232,8 @@
       <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" name="StationMaintenances" nillable="true" type="tns:ArrayOfStationMaintenance" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
@@ -236,12 +245,20 @@
       <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Stations" nillable="true" type="tns:ArrayOfStation" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="StationType" nillable="true" type="tns:StationType" />
+  <xs:complexType name="ArrayOfStation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Station" nillable="true" type="tns:Station" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStation" nillable="true" type="tns:ArrayOfStation" />
   <xs:complexType name="ArrayOfUserCar">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="UserCar" nillable="true" type="tns:UserCar" />
@@ -253,6 +270,7 @@
       <xs:element minOccurs="0" name="Car" nillable="true" type="tns:Car" />
       <xs:element minOccurs="0" name="CarId" type="xs:int" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
       <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
       <xs:element minOccurs="0" name="UserId" type="xs:int" />
     </xs:sequence>
@@ -265,6 +283,7 @@
       <xs:element minOccurs="0" name="CarModel" nillable="true" type="tns:CarModel" />
       <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
       <xs:element minOccurs="0" name="Manufacturer" nillable="true" type="tns:Manufacturer" />
       <xs:element minOccurs="0" name="ManufacturerId" type="xs:int" />
       <xs:element minOccurs="0" name="ModelId" type="xs:int" />
@@ -275,7 +294,9 @@
   <xs:element name="Car" nillable="true" type="tns:Car" />
   <xs:complexType name="CarModel">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Cars" nillable="true" type="tns:ArrayOfCar" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Range" type="xs:decimal" />
       <xs:element minOccurs="0" name="Website" nillable="true" type="xs:string" />
@@ -285,10 +306,17 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="CarModel" nillable="true" type="tns:CarModel" />
+  <xs:complexType name="ArrayOfCar">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Car" nillable="true" type="tns:Car" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCar" nillable="true" type="tns:ArrayOfCar" />
   <xs:complexType name="Manufacturer">
     <xs:sequence>
       <xs:element minOccurs="0" name="Cars" nillable="true" type="tns:ArrayOfCar" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Website" nillable="true" type="xs:string" />
     </xs:sequence>
@@ -296,10 +324,4 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Manufacturer" nillable="true" type="tns:Manufacturer" />
-  <xs:complexType name="ArrayOfCar">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Car" nillable="true" type="tns:Car" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfCar" nillable="true" type="tns:ArrayOfCar" />
 </xs:schema>

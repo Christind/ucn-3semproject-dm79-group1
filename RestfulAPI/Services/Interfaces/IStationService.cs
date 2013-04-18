@@ -2,15 +2,15 @@
 using System.ServiceModel;
 using Repository.Models;
 
-namespace RouteAPI.Services.Interfaces
+namespace RestfulAPI.Services.Interfaces
 {
     [ServiceContract]
-    public interface IUserService
+    public interface IStationService
     {
         [OperationContract]
-        List<User> GetAllUsers();
+        List<Station> GetAllStations();
 
         [OperationContract]
-        User GetUserById(int id);
+        Station GetStationById(int id);
     }
 }

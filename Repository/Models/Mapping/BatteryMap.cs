@@ -20,6 +20,7 @@ namespace Repository.Models.Mapping
             this.Property(t => t.Serial).HasColumnName("Serial");
             this.Property(t => t.ManufacturingDate).HasColumnName("ManufacturingDate");
             this.Property(t => t.OutOfCommisionDate).HasColumnName("OutOfCommisionDate");
+            this.Property(t => t.Status).HasColumnName("Status");
             this.Property(t => t.IsActive).HasColumnName("IsActive");
             this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
             this.Property(t => t.IsActive).HasColumnName("IsActive");

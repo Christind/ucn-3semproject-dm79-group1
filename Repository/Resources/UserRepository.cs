@@ -61,5 +61,10 @@ namespace Repository.Resources
             dbUser.IsActive = false;
             db.SaveChanges();
         }
+
+        public User GetUserByUserName(string userName)
+        {
+            return db.Users.FirstOrDefault(x => x.UserName.Equals(userName));
+        }
     }
 }

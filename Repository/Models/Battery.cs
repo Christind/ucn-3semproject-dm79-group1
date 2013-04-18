@@ -21,6 +21,13 @@ namespace Repository.Models
         public DateTime ManufacturingDate { get; set; }
         [DataMember]
         public DateTime OutOfCommisionDate { get; set; }
+        /// <summary>
+        /// 1 = Available
+        /// 2 = Charging
+        /// 3 = Reserved
+        /// </summary>
+        [DataMember]
+        public int Status { get; set; }
         [DataMember]
         public bool IsActive { get; set; }
         [DataMember]

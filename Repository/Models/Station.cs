@@ -9,7 +9,6 @@ namespace Repository.Models
     {
         public Station()
         {
-            this.BatteryStorages = new List<BatteryStorage>();
             this.Reservations = new List<Reservation>();
             this.StationMaintenances = new List<StationMaintenance>();
         }
@@ -33,7 +32,7 @@ namespace Repository.Models
         [DataMember]
         public DateTime CreatedDate { get; set; }
         [DataMember]
-        public virtual List<BatteryStorage> BatteryStorages { get; set; }
+        public virtual BatteryStorage BatteryStorages { get; set; }
         [DataMember]
         public virtual List<Reservation> Reservations { get; set; }
         [DataMember]

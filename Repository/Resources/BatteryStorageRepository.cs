@@ -3,7 +3,7 @@ using Repository.Models;
 
 namespace Repository.Resources
 {
-    class BatteryStorageRepository
+    public class BatteryStorageRepository
     {
         private BPDbContext db;
 
@@ -49,6 +49,22 @@ namespace Repository.Resources
 
             rBatteryStorage.IsActive = false;
             db.SaveChanges();
+        }
+
+        public void UpdateStorageStatus(BatteryStorage batteryStorage)
+        {
+            if(batteryStorage == null)
+                return;
+
+            int available = batteryStorage.BatteryCollections.Count(x => x.Battery.Status == 1);
+            int charging = batteryStorage.BatteryCollections.Count(x => x.Battery.Status == 2);
+            int reserved = batteryStorage.BatteryCollections.Count(x => x.Battery.Status == 3);
+
+            batteryStorage.Available = available;
+            batteryStorage.Charging = charging;
+            batteryStorage.Reserved = reserved;
+
+            Update(batteryStorage);
         }
     }
 }

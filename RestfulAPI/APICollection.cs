@@ -8,7 +8,7 @@ using RestfulAPI.Services.Interfaces;
 namespace RestfulAPI
 {
     [ServiceContract]
-    public interface IAPICollection : IUserService
+    public interface IAPICollection : IUserService, IStationService
     {}
 
     public class APICollection : IAPICollection
@@ -23,6 +23,26 @@ namespace RestfulAPI
         public User GetUserById(string id)
         {
             return new UserService().GetUserById(id);
+        }
+
+        public bool EditUserData(string id, string editData)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool AuthenticateUser(string userName, string password)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<Station> GetAllStations()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Station GetStationById(int id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
