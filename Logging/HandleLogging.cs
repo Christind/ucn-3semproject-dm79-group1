@@ -82,7 +82,6 @@ namespace Logging
                                         CreatedDate = DateTime.Now,
                                         Exception = ex.ToString(),
                                         ExceptionLocation = pageName,
-                                        IsActive = true,
                                         LogType = logType
                                     };
                 logRep.Insert(logEntity);
