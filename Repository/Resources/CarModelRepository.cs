@@ -42,11 +42,14 @@ namespace Repository.Resources
             db.SaveChanges();
         }
 
-        public void Delete(CarModel carModel)
+        public void Disable(int value)
         {
-            if (GetCarModelById(carModel.ID) == null)
+            CarModel rCarModel = GetCarModelById(value);
+
+            if (rCarModel == null)
                 return;
-            db.CarModels.Remove(carModel);
+
+            rCarModel.IsActive = false;
             db.SaveChanges();
         }
     }

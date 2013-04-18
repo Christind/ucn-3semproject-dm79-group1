@@ -83,6 +83,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\BookmarkRepository.cs" />
     <Compile Include="Resources\CarRepository.cs" />
+    <Compile Include="Resources\CarModelRepository.cs" />
     <Compile Include="Resources\ArchiveRepository.cs" />
     <Compile Include="Resources\ArchiveStationRepository.cs" />
     <Compile Include="Resources\BatteryChargingRepository.cs" />
