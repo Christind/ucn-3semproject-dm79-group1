@@ -40,13 +40,13 @@ namespace RestfulAPI
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all")]
         public List<Station> GetAllStations()
         {
-            throw new System.NotImplementedException();
+            return new StationService().GetAllStations();
         }
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/{id}")]
-        public Station GetStationById(int id)
+        public Station GetStationById(string id)
         {
-            throw new System.NotImplementedException();
+            return new StationService().GetStationById(id);
         }
     }
 }

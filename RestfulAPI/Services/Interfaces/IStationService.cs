@@ -11,6 +11,6 @@ namespace RestfulAPI.Services.Interfaces
         List<Station> GetAllStations();
 
         [OperationContract]
-        Station GetStationById(int id);
+        Station GetStationById(string id);
     }
 }

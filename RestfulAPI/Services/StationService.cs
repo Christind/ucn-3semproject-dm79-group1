@@ -1,62 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel;
 using Repository.Models;
 using Repository.Resources;
 using RestfulAPI.Services.Interfaces;
 
 namespace RestfulAPI.Services
 {
-    [ServiceBehavior(AddressFilterMode = AddressFilterMode.Any)]
     public class StationService : IStationService
     {
-        private StationRepository stationRepo;
-        private BatteryStorageRepository batteryStorageRepo;
+        private StationRepository _stationRepository;
+
         public StationService()
         {
-            stationRepo = new StationRepository();
-            batteryStorageRepo = new BatteryStorageRepository();
+            _stationRepository = new StationRepository();
         }
 
         public List<Station> GetAllStations()
         {
-            return stationRepo.GetAllStations().ToList();
+            return _stationRepository.GetAllStations().ToList();
         }
 
-        public Station GetStationById(int id)
+        public Station GetStationById(string id)
         {
-            return stationRepo.GetStationById(id);
+            return _stationRepository.GetStationById(Convert.ToInt32(id));
         }
 
-        public bool ReserveBattery(int stationId, int userId)
+        public bool ReserveBattery(string stationId, string userId)
         {
             var userRepo = new UserRepository();
             var reservationRepo = new ReservationRepository();
             var batteryRepo = new BatteryRepository();
-            var station = stationRepo.GetStationById(stationId);
-            var user = userRepo.GetUserById(userId);
+            var station = _stationRepository.GetStationById(Convert.ToInt32(stationId));
+            var user = userRepo.GetUserById(Convert.ToInt32(userId));
+
             if (user == null || station == null)
                 return false;
 
-            bool isBatteryAvail = station.BatteryStorages.Available > 0;
-            if(isBatteryAvail)
+            var isBatteryAvailable = station.BatteryStorages.Available > 0;
+            if (isBatteryAvailable)
             {
-                var batteryCollection = station.BatteryStorages.BatteryCollections.FirstOrDefault(x => x.Battery.Status == 1);
-                if(batteryCollection != null)
+                var batteryCollection =
+                    station.BatteryStorages.BatteryCollections.FirstOrDefault(x => x.Battery.Status == 1);
+                if (batteryCollection != null)
                 {
                     var battery = batteryCollection.Battery;
                     battery.Status = 3;
 
                     var reservation = new Reservation
-                                                  {
-                                                      Station = station,
-                                                      User = user,
-                                                      UserId = user.ID,
-                                                      StationId = station.ID,
-                                                      CreatedDate = DateTime.Now,
-                                                      ExpiredDate = DateTime.Now.AddDays(1)
-                                                  };
+                        {
+                            Station = station,
+                            User = user,
+                            UserId = user.ID,
+                            StationId = station.ID,
+                            CreatedDate = DateTime.Now,
+                            ExpiredDate = DateTime.Now.AddDays(1)
+                        };
 
                     reservationRepo.Insert(reservation);
                     batteryRepo.Update(battery);
