@@ -25,21 +25,25 @@ namespace RestfulAPI
             return new UserService().GetUserById(id);
         }
 
+        [WebInvoke(Method = "SET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "set/{id}/{editData}")]
         public bool EditUserData(string id, string editData)
         {
             throw new System.NotImplementedException();
         }
 
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "auth/{userName}/{password}")]
         public bool AuthenticateUser(string userName, string password)
         {
             throw new System.NotImplementedException();
         }
 
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all")]
         public List<Station> GetAllStations()
         {
             throw new System.NotImplementedException();
         }
 
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/{id}")]
         public Station GetStationById(int id)
         {
             throw new System.NotImplementedException();
