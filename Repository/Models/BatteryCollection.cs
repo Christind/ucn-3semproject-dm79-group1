@@ -2,7 +2,7 @@ using System.Runtime.Serialization;
 
 namespace Repository.Models
 {
-    [DataContract(IsReference = true)]
+    [DataContract(IsReference = false)]
     public partial class BatteryCollection
     {
         [DataMember]
