@@ -6,10 +6,11 @@ namespace Repository.Resources
     public class StationRepository
     {
         private BPDbContext db;
-
+        private BatteryStorageRepository _batteryStorageRepo;
         public StationRepository()
         {
             db = new BPDbContext();
+            _batteryStorageRepo = new BatteryStorageRepository();
         }
 
         public IQueryable<Station> GetAllStations()
@@ -17,9 +18,16 @@ namespace Repository.Resources
             return db.Stations;
         }
 
-        public Station GetStationById(int value)
+        public Station GetStationById(int value, bool getAssociations = false)
         {
-            return db.Stations.FirstOrDefault(x => x.ID == value);
+            Station station = db.Stations.FirstOrDefault(x => x.ID == value);
+            if (station == null)
+                return null;
+
+            if (getAssociations)
+                station.BatteryStorages = _batteryStorageRepo.GetBatteryStorageByStationId(station.ID, true);
+            
+            return station;
         }
 
         public void Insert(Station station)

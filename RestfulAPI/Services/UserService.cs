@@ -5,6 +5,7 @@ using Logging;
 using Repository.Models;
 using Repository.Resources;
 using RestfulAPI.Services.Interfaces;
+using Newtonsoft.Json;
 
 namespace RestfulAPI.Services
 {
@@ -45,14 +46,29 @@ namespace RestfulAPI.Services
             }
         }
 
-        public bool EditUserData(string id, string editData)
+        public bool EditUserData(User editData)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (editData == null)
+                    return false;
+
+                _userRepository.Update(editData);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public bool AuthenticateUser(string userName, string password)
         {
-            throw new NotImplementedException();
+            var user = _userRepository.GetUserByUserName(userName);
+            if (user == null)
+                return false;
+
+            return user.Password.Equals(password);
         }
     }
 }

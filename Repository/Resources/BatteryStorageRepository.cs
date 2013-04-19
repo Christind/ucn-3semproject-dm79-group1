@@ -6,10 +6,11 @@ namespace Repository.Resources
     public class BatteryStorageRepository
     {
         private BPDbContext db;
-
+        private BatteryCollectionRepository _batteryCollectionRepo;
         public BatteryStorageRepository()
         {
             db = new BPDbContext();
+            _batteryCollectionRepo = new BatteryCollectionRepository();
         }
 
         public IQueryable<BatteryStorage> GetAllBatteryStorages()
@@ -20,6 +21,20 @@ namespace Repository.Resources
         public BatteryStorage GetBatteryStorageById(int id)
         {
             return db.BatteryStorages.FirstOrDefault(x => x.ID == id);
+        }
+
+        public BatteryStorage GetBatteryStorageByStationId(int stationId, bool getAssociations = false)
+        {
+            var batteryStorage = db.BatteryStorages.FirstOrDefault(x => x.StationId.Equals(stationId));
+            if (batteryStorage == null)
+                return null;
+
+            if(getAssociations)
+            {
+                batteryStorage.BatteryCollections = _batteryCollectionRepo.GetBatteryCollectionByStorage(batteryStorage).ToList();
+            }
+
+            return batteryStorage;
         }
 
         public void Insert(BatteryStorage batteryStorage)

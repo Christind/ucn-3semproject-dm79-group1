@@ -25,16 +25,16 @@ namespace RestfulAPI
             return new UserService().GetUserById(id);
         }
 
-        [WebInvoke(Method = "SET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "set/{id}/{editData}")]
-        public bool EditUserData(string id, string editData)
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edit", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public bool EditUserData(User editData)
         {
-            throw new System.NotImplementedException();
+            return new UserService().EditUserData(editData);
         }
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "auth/{userName}/{password}")]
         public bool AuthenticateUser(string userName, string password)
         {
-            throw new System.NotImplementedException();
+            return new UserService().AuthenticateUser(userName, password);
         }
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all")]
@@ -47,6 +47,12 @@ namespace RestfulAPI
         public Station GetStationById(string id)
         {
             return new StationService().GetStationById(id);
+        }
+
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "reservebattery", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public bool ReserveBattery(string stationId, string userId)
+        {
+            return new StationService().ReserveBattery(stationId, userId);
         }
     }
 }

@@ -12,5 +12,8 @@ namespace RestfulAPI.Services.Interfaces
 
         [OperationContract]
         Station GetStationById(string id);
+
+        [OperationContract]
+        bool ReserveBattery(string stationId, string userId);
     }
 }

@@ -20,11 +20,11 @@ namespace Repository.Models
         [DataMember]
         public DateTime ManufacturingDate { get; set; }
         [DataMember]
-        public DateTime OutOfCommisionDate { get; set; }
+        public DateTime? OutOfCommisionDate { get; set; }
         /// <summary>
         /// 1 = Available
-        /// 2 = Charging
-        /// 3 = Reserved
+        /// 2 = Reserved
+        /// 3 = Charging
         /// </summary>
         [DataMember]
         public int Status { get; set; }

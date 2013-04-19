@@ -31,7 +31,7 @@ namespace RestfulAPI.Services
             var userRepo = new UserRepository();
             var reservationRepo = new ReservationRepository();
             var batteryRepo = new BatteryRepository();
-            var station = _stationRepository.GetStationById(Convert.ToInt32(stationId));
+            var station = _stationRepository.GetStationById(Convert.ToInt32(stationId), true);
             var user = userRepo.GetUserById(Convert.ToInt32(userId));
 
             if (user == null || station == null)
@@ -54,7 +54,8 @@ namespace RestfulAPI.Services
                             UserId = user.ID,
                             StationId = station.ID,
                             CreatedDate = DateTime.Now,
-                            ExpiredDate = DateTime.Now.AddDays(1)
+                            ExpiredDate = DateTime.Now.AddDays(1),
+                            IsActive = true
                         };
 
                     reservationRepo.Insert(reservation);
