@@ -103,5 +103,95 @@ namespace RestfulAPI
         }
 
         #endregion
+
+        #region MaintenanceType Services
+        
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all")]
+        public List<MaintenanceType> GetAllMaintenanceTypes()
+        {
+            return new MaintenanceTypeService().GetAllMaintenanceTypes();
+        }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/{id}")]
+        public MaintenanceType GetMaintenanceTypesById(string id)
+        {
+            return new MaintenanceTypeService().GetMaintenanceTypeById(id);
+        }
+
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edit", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public bool EditMaintenanceType(MaintenanceType maintenanceType)
+        {
+            return new MaintenanceTypeService().EditMaintenanceType(maintenanceType);
+        }
+
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "insert", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public bool InsertMaintenanceType(MaintenanceType maintenanceType)
+        {
+            return new MaintenanceTypeService().InsertMaintenanceType(maintenanceType);
+        }
+
+        #endregion
+
+        #region StationMaintenance Services
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all")]
+        public List<StationMaintenance> GetAllStationMaintenances()
+        {
+            return new StationMaintenanceService().GetAllStationMaintenances();
+        }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/{id}")]
+        public StationMaintenance GetStationMaintenanceById(string id)
+        {
+            return new StationMaintenanceService().GetStationMaintenanceById(id);
+        }
+
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edit", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public bool EditStationMaintenance(StationMaintenance stationMaintenance)
+        {
+            return new StationMaintenanceService().EditStationMaintenance(stationMaintenance);
+        }
+
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "insert", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public bool InsertStationMaintenance(StationMaintenance stationMaintenance)
+        {
+            return new StationMaintenanceService().InsertStationMaintenance(stationMaintenance);
+        }
+
+        #endregion
+
+        #region Battery Services
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all")]
+        public List<Battery> GetAllBatteries()
+        {
+            return new BatteryService().GetAllBatteries();
+        }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/{id}")]
+        public Battery GetBatteryById(string id)
+        {
+            return new BatteryService().GetBatteryById(id);
+        }
+
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edit", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public bool EditBattery(Battery battery)
+        {
+            return new BatteryService().EditBattery(battery);
+        }
+
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "insert", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public bool InsertBattery(Battery battery)
+        {
+            return new BatteryService().InsertBattery(battery);
+        }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/{status}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public List<Battery> GetBatteriesByStatus(int status)
+        {
+            return new BatteryService().GetBatteriesByStatus(status);
+        }
+
+        #endregion
     }
 }
