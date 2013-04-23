@@ -27,7 +27,7 @@ namespace RestfulAPI.Services
             catch (Exception ex)
             {
                 if (WebOperationContext.Current != null)
-                    HandleLogging.LogMessage(ex, "WCF - GetAllUsers", 1, WebOperationContext.Current.IncomingRequest);
+                    HandleLogging.LogMessage(ex, "WCF - GetAllUsers", 1, WebOperationContext.Current);
                 return null;
             }
         }
@@ -40,9 +40,8 @@ namespace RestfulAPI.Services
             }
             catch (Exception ex)
             {
-                //HandleLogging.LogMessage(ex, "WCF - GetUserById", 1);
-                //return null;
-                throw;
+                HandleLogging.LogMessage(ex, "WCF - GetUserById", 1, WebOperationContext.Current);
+                return null;
             }
         }
 
@@ -58,17 +57,26 @@ namespace RestfulAPI.Services
             }
             catch (Exception ex)
             {
+                HandleLogging.LogMessage(ex, "WCF - EditUserData", 1, WebOperationContext.Current);
                 return false;
             }
         }
 
         public bool AuthenticateUser(string userName, string password)
         {
-            var user = _userRepository.GetUserByUserName(userName);
-            if (user == null)
-                return false;
+            try
+            {
+                var user = _userRepository.GetUserByUserName(userName);
+                if (user == null)
+                    return false;
 
-            return user.Password.Equals(password);
+                return user.Password.Equals(password);
+            }
+            catch (Exception ex)
+            {
+                HandleLogging.LogMessage(ex, "WCF - AuthenticateUser", 1, WebOperationContext.Current);
+                return false;
+            }
         }
     }
 }

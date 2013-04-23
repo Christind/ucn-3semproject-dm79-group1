@@ -20,10 +20,10 @@ namespace Logging
         /// <param name="pageName"></param>
         /// <param name="logType"></param>
         /// <param name="context"> </param>
-        public static void LogMessage(Exception ex, string pageName, int logType, IncomingWebRequestContext context = null)
+        public static void LogMessage(Exception ex, string pageName, int logType, WebOperationContext context = null)
         {
             var logRep = new LogRepository();
-            string clientInformation = context != null ? GetClientInformation(context) : "Not a webrequest";          
+            string clientInformation = context != null ? GetClientInformation(context.IncomingRequest) : "Not a webrequest";          
 
             if (ex is SqlException)
             {
