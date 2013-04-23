@@ -53,10 +53,16 @@
     <Compile Include="APICollection.cs" />
     <Compile Include="OAuthBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BatteryService.cs" />
     <Compile Include="Services\BookmarkService.cs" />
+    <Compile Include="Services\Interfaces\IBatteryService.cs" />
     <Compile Include="Services\Interfaces\IBookmarkService.cs" />
+    <Compile Include="Services\Interfaces\IMaintenanceTypeService.cs" />
+    <Compile Include="Services\Interfaces\IStationMaintenanceService.cs" />
     <Compile Include="Services\Interfaces\IStationService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
+    <Compile Include="Services\MaintenanceTypeService.cs" />
+    <Compile Include="Services\StationMaintenanceService.cs" />
     <Compile Include="Services\StationService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>

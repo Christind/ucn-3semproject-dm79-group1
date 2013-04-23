@@ -15,7 +15,7 @@ namespace Repository.Resources
             _maintenanceTypeRepo = new MaintenanceTypeRepository();
         }
 
-        public IQueryable<StationMaintenance> GetAllStationMaintenance()
+        public IQueryable<StationMaintenance> GetAllStationMaintenances()
         {
             return db.StationMaintenances;
         }
