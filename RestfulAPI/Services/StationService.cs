@@ -49,8 +49,6 @@ namespace RestfulAPI.Services
 
                     var reservation = new Reservation
                         {
-                            Station = station,
-                            User = user,
                             UserId = user.ID,
                             StationId = station.ID,
                             CreatedDate = DateTime.Now,

@@ -22,6 +22,7 @@ namespace Repository.Resources
             User user = db.Users.FirstOrDefault(x => x.ID == id);
             if (user == null)
                 return null;
+
             if (getAssociations)
             {
                 user.Archives = new ArchiveRepository().GetArchivesByUserId(id).ToList();
@@ -29,6 +30,7 @@ namespace Repository.Resources
                 user.Reservations = new ReservationRepository().GetReservationsByUserId(id).ToList();
                 user.UserCars = new UserCarRepository().GetUserCarsByUserId(id).ToList();
             }
+
             return user;
         }
 

@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Specialized;
 using System.Data.SqlClient;
+using System.ServiceModel.Web;
 using System.Text;
-using System.Web;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Repository.Models;
 using Repository.Resources;
-using Utils.Helpers;
 
 namespace Logging
 {
@@ -22,35 +19,11 @@ namespace Logging
         /// <param name="ex"></param>
         /// <param name="pageName"></param>
         /// <param name="logType"></param>
-        public static void LogMessage(Exception ex, string pageName, int logType)
+        /// <param name="context"> </param>
+        public static void LogMessage(Exception ex, string pageName, int logType, IncomingWebRequestContext context = null)
         {
             var logRep = new LogRepository();
-            string getRemoteIp = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-            if (String.IsNullOrEmpty(getRemoteIp))
-                getRemoteIp = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-
-            StringBuilder strGetAllSessions = new StringBuilder();
-            foreach (string key in HttpContext.Current.Session.Keys)
-            {
-                if (key != "LastError" || key != "LastErrorPageName")
-                {
-                    strGetAllSessions.Append("Session(");
-                    strGetAllSessions.Append(key);
-                    strGetAllSessions.Append(") - ");
-                    strGetAllSessions.Append(HttpContext.Current.Session[key]);
-                    strGetAllSessions.Append("<br/>");
-                }
-            }
-
-            StringBuilder strGetAllHeaders = new StringBuilder();
-            NameValueCollection strAllHeaders = HttpContext.Current.Request.Headers;
-            for (int i = 0; i < strAllHeaders.Count; i++)
-            {
-                strGetAllHeaders.Append(strAllHeaders.GetKey(i));
-                strGetAllHeaders.Append(" = ");
-                strGetAllHeaders.Append(strAllHeaders.Get(i));
-                strGetAllHeaders.Append("<br/>");
-            }
+            string clientInformation = context != null ? GetClientInformation(context) : "Not a webrequest";          
 
             if (ex is SqlException)
             {
@@ -61,8 +34,7 @@ namespace Logging
                         new JProperty("Exception",
                             new JObject(
                                 new JProperty("CreatedDate", DateTime.Now),
-                                new JProperty("ClientInformation", getRemoteIp + "<br/>" + strGetAllSessions.ToString() + "<br/>" +
-                                            strGetAllSessions.ToString()),
+                                new JProperty("ClientInformation", clientInformation),
                                 new JProperty("LogType", logType),
                                 new JProperty("Exception", ex.ToString()),
                                 new JProperty("ExceptionLocation", pageName),
@@ -76,9 +48,7 @@ namespace Logging
             {
                 var logEntity = new Log
                                     {
-                                        ClientInformation =
-                                            getRemoteIp + "<br/>" + strGetAllSessions.ToString() + "<br/>" +
-                                            strGetAllSessions.ToString(),
+                                        ClientInformation = clientInformation,
                                         CreatedDate = DateTime.Now,
                                         Exception = ex.ToString(),
                                         ExceptionLocation = pageName,
@@ -86,6 +56,22 @@ namespace Logging
                                     };
                 logRep.Insert(logEntity);
             }
+        }
+
+        private static string GetClientInformation(IncomingWebRequestContext context)
+        {
+            var headerInfo = new StringBuilder();
+            foreach (string key in context.Headers.Keys)
+            {
+                    headerInfo.Append("Session(");
+                    headerInfo.Append(key);
+                    headerInfo.Append(") - ");
+                    headerInfo.Append("<br/>");
+            }
+
+            return "UserAgent: " + context.UserAgent + "<br/>" +
+                   "Content-Type: " + context.ContentType + "<br/>" +
+                   "Header: " + headerInfo + "<br/>";
         }
     }
 }

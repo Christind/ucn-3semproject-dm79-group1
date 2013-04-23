@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Web;
 using Logging;
 using Repository.Models;
 using Repository.Resources;
 using RestfulAPI.Services.Interfaces;
-using Newtonsoft.Json;
 
 namespace RestfulAPI.Services
 {
@@ -26,9 +26,9 @@ namespace RestfulAPI.Services
             }
             catch (Exception ex)
             {
-                //HandleLogging.LogMessage(ex, "WCF - GetAllUsers", 1);
-                //return null;
-                throw;
+                if (WebOperationContext.Current != null)
+                    HandleLogging.LogMessage(ex, "WCF - GetAllUsers", 1, WebOperationContext.Current.IncomingRequest);
+                return null;
             }
         }
 

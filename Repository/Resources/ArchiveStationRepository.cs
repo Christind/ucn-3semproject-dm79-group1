@@ -3,7 +3,7 @@ using Repository.Models;
 
 namespace Repository.Resources
 {
-    class ArchiveStationRepository
+    public class ArchiveStationRepository
     {
         private BPDbContext db;
 

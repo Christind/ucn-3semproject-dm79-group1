@@ -25,8 +25,13 @@ namespace Repository.Resources
                 return null;
 
             if (getAssociations)
+            {
                 station.BatteryStorages = _batteryStorageRepo.GetBatteryStorageByStationId(station.ID, true);
-            
+                //station.StationType = _stationTypeRepo.GetStationTypeById(station.TypeId);
+                //station.Reservations = _reservationRepo.GetReservationsByStationId(station.ID).ToList();
+                //station.StationMaintenances = _maintenanceRepo.GetStationMaintenancesByStationId(station.ID).ToList();
+            }
+
             return station;
         }
 

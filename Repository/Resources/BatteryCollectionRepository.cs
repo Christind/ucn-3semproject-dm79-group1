@@ -3,7 +3,7 @@ using Repository.Models;
 
 namespace Repository.Resources
 {
-    class BatteryCollectionRepository
+    public class BatteryCollectionRepository
     {
         private BPDbContext db;
         private BatteryRepository _batteryRepo;
@@ -27,7 +27,9 @@ namespace Repository.Resources
         {
             var batteryCollection = db.BatteryCollections.Where(x => x.BatteryStorageId.Equals(batteryStorage.ID));
             foreach (var collection in batteryCollection)
+            {
                 collection.Battery = _batteryRepo.GetBatteryById(collection.BatteryId);
+            }
 
             return batteryCollection;
         }

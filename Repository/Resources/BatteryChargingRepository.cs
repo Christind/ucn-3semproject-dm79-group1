@@ -3,7 +3,7 @@ using Repository.Models;
 
 namespace Repository.Resources
 {
-    class BatteryChargingRepository
+    public class BatteryChargingRepository
     {
         private BPDbContext db;
 

@@ -27,6 +27,11 @@ namespace Repository.Resources
             return db.Reservations.Where(x => x.UserId == userId);
         }
 
+        public IQueryable<Reservation> GetReservationsByStationId(int stationId)
+        {
+            return db.Reservations.Where(x => x.StationId == stationId);
+        }
+
         public void Insert(Reservation reservation)
         {
             db.Reservations.Add(reservation);
