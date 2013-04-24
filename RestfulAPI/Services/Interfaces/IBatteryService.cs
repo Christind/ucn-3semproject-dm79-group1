@@ -5,7 +5,7 @@ using Repository.Models;
 namespace RestfulAPI.Services.Interfaces
 {
     [ServiceContract]
-    interface IBatteryService
+    public interface IBatteryService
     {
         [OperationContract]
         List<Battery> GetAllBatteries();

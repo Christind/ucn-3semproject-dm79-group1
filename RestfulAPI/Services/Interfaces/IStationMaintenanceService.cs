@@ -5,7 +5,7 @@ using Repository.Models;
 namespace RestfulAPI.Services.Interfaces
 {
     [ServiceContract]
-    interface IStationMaintenanceService
+    public interface IStationMaintenanceService
     {
         [OperationContract]
         List<StationMaintenance> GetAllStationMaintenances();

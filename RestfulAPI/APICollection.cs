@@ -8,7 +8,7 @@ using RestfulAPI.Services.Interfaces;
 namespace RestfulAPI
 {
     [ServiceContract]
-    public interface IAPICollection : IUserService, IStationService, IBookmarkService
+    public interface IAPICollection : IUserService, IStationService, IBookmarkService, IStationMaintenanceService, IMaintenanceTypeService, IBatteryService
     {}
 
     public class APICollection : IAPICollection
@@ -113,7 +113,7 @@ namespace RestfulAPI
         }
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/{id}")]
-        public MaintenanceType GetMaintenanceTypesById(string id)
+        public MaintenanceType GetMaintenanceTypeById(string id)
         {
             return new MaintenanceTypeService().GetMaintenanceTypeById(id);
         }

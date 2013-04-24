@@ -5,7 +5,7 @@ using Repository.Models;
 namespace RestfulAPI.Services.Interfaces
 {
     [ServiceContract]
-    internal interface IMaintenanceTypeService
+    public interface IMaintenanceTypeService
     {
         [OperationContract]
         List<MaintenanceType> GetAllMaintenanceTypes();
