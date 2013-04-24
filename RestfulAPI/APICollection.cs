@@ -8,7 +8,7 @@ using RestfulAPI.Services.Interfaces;
 namespace RestfulAPI
 {
     [ServiceContract]
-    public interface IAPICollection : IUserService, IStationService, IBookmarkService, IStationMaintenanceService, IMaintenanceTypeService, IBatteryService
+    public interface IAPICollection : IUserService, IStationService, IBookmarkService, IStationMaintenanceService, IMaintenanceTypeService, IBatteryService, IArchiveService
     {}
 
     public class APICollection : IAPICollection
@@ -190,6 +190,34 @@ namespace RestfulAPI
         public bool InsertBattery(Battery battery)
         {
             return new BatteryService().InsertBattery(battery);
+        }
+
+        #endregion
+
+        #region Archive Services
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all")]
+        public List<Archive> GetAllArchives()
+        {
+            return new ArchiveService().GetAllArchives();
+        }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/{id}")]
+        public Archive GetArchiveById(string id)
+        {
+            return new ArchiveService().GetArchiveById(id);
+        }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all/user/{id}")]
+        public List<Archive> GetArchivesByUserId(string id)
+        {
+            return new ArchiveService().GetArchivesByUserId(id);
+        }
+
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "insert", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public bool InsertArchive(Archive archive)
+        {
+            return new ArchiveService().InsertArchive(archive);
         }
 
         #endregion
