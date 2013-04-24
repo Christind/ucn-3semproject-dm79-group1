@@ -9,7 +9,7 @@ namespace RestfulAPI.Services
 {
     public class BatteryService : IBatteryService
     {
-        private BatteryRepository _batteryRepository;
+        private readonly BatteryRepository _batteryRepository;
 
         public BatteryService()
         {
@@ -24,6 +24,12 @@ namespace RestfulAPI.Services
         public Battery GetBatteryById(string id)
         {
             return _batteryRepository.GetBatteryById(Convert.ToInt32(id));
+        }
+
+        public List<Battery> GetBatteriesByStatus(string status)
+        {
+            var batteryList = _batteryRepository.GetAllBatteries().ToList();
+            return batteryList.Where(battery => battery.Status == (Convert.ToInt32(status))).ToList();
         }
 
         public bool EditBattery(Battery battery)
@@ -56,20 +62,6 @@ namespace RestfulAPI.Services
             {
                 return false;
             }
-        }
-
-        public List<Battery> GetBatteriesByStatus(int status)
-        {
-            List<Battery> returnList = new List<Battery>();
-            List<Battery> batteryList = _batteryRepository.GetAllBatteries().ToList();
-            foreach (var battery in batteryList)
-            {
-                if(battery.Status == status)
-                {
-                    returnList.Add(battery);
-                }
-            }
-            return returnList;
         }
     }
 }

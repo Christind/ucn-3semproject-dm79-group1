@@ -14,12 +14,13 @@ namespace RestfulAPI.Services.Interfaces
         Battery GetBatteryById(string id);
 
         [OperationContract]
+        List<Battery> GetBatteriesByStatus(string status);
+
+        [OperationContract]
         bool EditBattery(Battery battery);
 
         [OperationContract]
         bool InsertBattery(Battery battery);
 
-        [OperationContract]
-        List<Battery> GetBatteriesByStatus(int status);
     }
 }

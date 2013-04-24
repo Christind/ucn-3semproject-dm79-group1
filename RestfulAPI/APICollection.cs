@@ -174,6 +174,12 @@ namespace RestfulAPI
             return new BatteryService().GetBatteryById(id);
         }
 
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all/status/{status}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public List<Battery> GetBatteriesByStatus(string status)
+        {
+            return new BatteryService().GetBatteriesByStatus(status);
+        }
+
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edit", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool EditBattery(Battery battery)
         {
@@ -184,12 +190,6 @@ namespace RestfulAPI
         public bool InsertBattery(Battery battery)
         {
             return new BatteryService().InsertBattery(battery);
-        }
-
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/{status}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        public List<Battery> GetBatteriesByStatus(int status)
-        {
-            return new BatteryService().GetBatteriesByStatus(status);
         }
 
         #endregion
