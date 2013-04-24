@@ -57,10 +57,12 @@
     <Compile Include="Services\ArchiveStationService.cs" />
     <Compile Include="Services\BatteryService.cs" />
     <Compile Include="Services\BookmarkService.cs" />
+    <Compile Include="Services\GraphService.cs" />
     <Compile Include="Services\Interfaces\IArchiveService.cs" />
     <Compile Include="Services\Interfaces\IArchiveStationService.cs" />
     <Compile Include="Services\Interfaces\IBatteryService.cs" />
     <Compile Include="Services\Interfaces\IBookmarkService.cs" />
+    <Compile Include="Services\Interfaces\IGraphService.cs" />
     <Compile Include="Services\Interfaces\IMaintenanceTypeService.cs" />
     <Compile Include="Services\Interfaces\IStationMaintenanceService.cs" />
     <Compile Include="Services\Interfaces\IStationService.cs" />

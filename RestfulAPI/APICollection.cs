@@ -8,7 +8,7 @@ using RestfulAPI.Services.Interfaces;
 namespace RestfulAPI
 {
     [ServiceContract]
-    public interface IAPICollection : IUserService, IStationService, IBookmarkService, IStationMaintenanceService, IMaintenanceTypeService, IBatteryService, IArchiveService
+    public interface IAPICollection : IUserService, IStationService, IBookmarkService, IStationMaintenanceService, IMaintenanceTypeService, IBatteryService, IArchiveService, IGraphService
     {}
 
     public class APICollection : IAPICollection
@@ -219,6 +219,54 @@ namespace RestfulAPI
         {
             return new ArchiveService().InsertArchive(archive);
         }
+
+        #endregion
+
+        #region graph service
+
+        #region edges
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edge/get/all")]
+        public List<Edge> GetAllEdges()
+        {
+            return new GraphService().GetAllEdges();
+        }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edge/get/id:{value}")]
+        public Edge GetEdgeById(string value)
+        {
+            return new GraphService().GetEdgeById(value);
+        }
+
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edge/create", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public bool CreateEdge(Edge edge)
+        {
+            return new GraphService().CreateEdge(edge);
+        }
+
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edge/update", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public bool UpdateEdge(Edge edge)
+        {
+            return new GraphService().UpdateEdge(edge);
+        }
+
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edge/disable/id:{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public bool DisableEdge(string value)
+        {
+            return new GraphService().DisableEdge(value);
+        }
+
+        #endregion
+
+        #region route calculation
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "calculate/from:{sloc},to:{eloc}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public bool CalculateRoute(string sloc, string eloc)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion
 
         #endregion
     }

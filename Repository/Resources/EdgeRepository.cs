@@ -3,7 +3,7 @@ using Repository.Models;
 
 namespace Repository.Resources
 {
-    class EdgeRepository
+    public class EdgeRepository
     {
         private BPDbContext db;
 
