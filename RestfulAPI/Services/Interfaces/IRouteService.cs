@@ -5,7 +5,7 @@ using Repository.Models;
 namespace RestfulAPI.Services.Interfaces
 {
     [ServiceContract]
-    public interface IGraphService
+    public interface IRouteService
     {
         #region edges
 
@@ -30,6 +30,32 @@ namespace RestfulAPI.Services.Interfaces
 
         [OperationContract]
         bool CalculateRoute(string sloc, string eloc);
+
+        #endregion
+
+        #region archived entries
+
+        [OperationContract]
+        List<Archive> GetAllArchivedEntries();
+
+        [OperationContract]
+        Archive GetArchivedEntryById(string value);
+
+        [OperationContract]
+        bool CreateArchivedEntry(Archive archive);
+
+        #endregion
+
+        #region archived stations
+
+        [OperationContract]
+        List<ArchiveStation> GetAllArchivedStations();
+
+        [OperationContract]
+        ArchiveStation GetArchivedStationById(string value);
+
+        [OperationContract]
+        bool CreateArchivedStation(ArchiveStation archiveStation);
 
         #endregion
 
