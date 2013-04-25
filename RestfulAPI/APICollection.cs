@@ -8,12 +8,14 @@ using RestfulAPI.Services.Interfaces;
 namespace RestfulAPI
 {
     [ServiceContract]
-    public interface IAPICollection : IUserService, IStationService, IBookmarkService, IStationMaintenanceService, IMaintenanceTypeService, IBatteryService, IArchiveService, IGraphService
+    public interface IAPICollection : IUserService, IStationService, IArchiveService, IGraphService
     {}
 
     public class APICollection : IAPICollection
     {
-        #region User services
+        #region UserService
+
+        #region User related methods
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all")]
         public List<User> GetAllUsers()
@@ -21,10 +23,10 @@ namespace RestfulAPI
             return new UserService().GetAllUsers();
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/{id}")]
-        public User GetUserById(string id)
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/id:{value}")]
+        public User GetUserById(string value)
         {
-            return new UserService().GetUserById(id);
+            return new UserService().GetUserById(value);
         }
 
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edit", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
@@ -38,10 +40,63 @@ namespace RestfulAPI
         {
             return new UserService().AuthenticateUser(userName, password);
         }
-
         #endregion
 
-        #region Station services
+        #region Car related methods
+
+        public List<Car> GetAllCars()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Car GetCarById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool AddUserCar(int userId, int carId)
+        {
+            throw new System.NotImplementedException();
+        }
+        #endregion
+
+        #region Bookmark related methods
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/bookmarks/get/id:{value}")]
+        public Bookmark GetBookmarkById(string value)
+        {
+            return new UserService().GetBookmarkById(value);
+        }
+
+        //TODO: Better URI for this one
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/bookmarks/get/all/id:{userId}")]
+        public List<Bookmark> GetBookmarksByUser(string userId)
+        {
+            return new UserService().GetBookmarksByUser(userId);
+        }
+
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/bookmarks/create", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public bool CreateBookmark(Bookmark bookmark)
+        {
+            return new UserService().CreateBookmark(bookmark);
+        }
+
+        [WebInvoke(Method = "DELETE", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/bookmarks/delete/id:{id}")]
+        public bool DeleteBookmark(string id)
+        {
+            return new UserService().DeleteBookmark(id);
+        }
+
+        [WebInvoke(Method = "PUT", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edit", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        public bool EditBookmark(Bookmark bookmark)
+        {
+            return new UserService().EditBookmark(bookmark);
+        }
+
+        #endregion
+        #endregion
+
+        #region StatioService
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all")]
         public List<Station> GetAllStations()
@@ -61,137 +116,95 @@ namespace RestfulAPI
             return new StationService().ReserveBattery(stationId, userId);
         }
 
-        #endregion
+        #region MaintenanceType related methods
 
-        #region Bookmark Services
-
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all")]
-        public List<Bookmark> GetAllBookmarks()
-        {
-            return new BookmarkService().GetAllBookmarks();
-        }
-
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/{id}")]
-        public Bookmark GetBookmarkById(string id)
-        {
-            return new BookmarkService().GetBookmarkById(id);
-        }
-
-        //TODO: Better URI for this one
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/userbookmarks/{userId}")]
-        public List<Bookmark> GetBookmarksByUser(string userId)
-        {
-            return new BookmarkService().GetBookmarksByUser(userId);
-        }
-
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "create", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        public bool CreateBookmark(Bookmark bookmark)
-        {
-            return new BookmarkService().CreateBookmark(bookmark);
-        }
-
-        [WebInvoke(Method = "DELETE", ResponseFormat = WebMessageFormat.Json, UriTemplate = "delete/{id}")]
-        public bool DeleteBookmark(string id)
-        {
-            return new BookmarkService().DeleteBookmark(id);
-        }
-
-        [WebInvoke(Method = "PUT", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edit", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        public bool EditBookmark(Bookmark bookmark)
-        {
-            return new BookmarkService().EditBookmark(bookmark);
-        }
-
-        #endregion
-
-        #region MaintenanceType Services
-        
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all")]
         public List<MaintenanceType> GetAllMaintenanceTypes()
         {
-            return new MaintenanceTypeService().GetAllMaintenanceTypes();
+            return new StationService().GetAllMaintenanceTypes();
         }
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/{id}")]
         public MaintenanceType GetMaintenanceTypeById(string id)
         {
-            return new MaintenanceTypeService().GetMaintenanceTypeById(id);
+            return new StationService().GetMaintenanceTypeById(id);
         }
 
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edit", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool EditMaintenanceType(MaintenanceType maintenanceType)
         {
-            return new MaintenanceTypeService().EditMaintenanceType(maintenanceType);
+            return new StationService().EditMaintenanceType(maintenanceType);
         }
 
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "insert", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool InsertMaintenanceType(MaintenanceType maintenanceType)
         {
-            return new MaintenanceTypeService().InsertMaintenanceType(maintenanceType);
+            return new StationService().InsertMaintenanceType(maintenanceType);
         }
 
         #endregion
 
-        #region StationMaintenance Services
+        #region StationMaintenance related methods
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all")]
         public List<StationMaintenance> GetAllStationMaintenances()
         {
-            return new StationMaintenanceService().GetAllStationMaintenances();
+            return new StationService().GetAllStationMaintenances();
         }
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/{id}")]
         public StationMaintenance GetStationMaintenanceById(string id)
         {
-            return new StationMaintenanceService().GetStationMaintenanceById(id);
+            return new StationService().GetStationMaintenanceById(id);
         }
 
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edit", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool EditStationMaintenance(StationMaintenance stationMaintenance)
         {
-            return new StationMaintenanceService().EditStationMaintenance(stationMaintenance);
+            return new StationService().EditStationMaintenance(stationMaintenance);
         }
 
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "insert", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool InsertStationMaintenance(StationMaintenance stationMaintenance)
         {
-            return new StationMaintenanceService().InsertStationMaintenance(stationMaintenance);
+            return new StationService().InsertStationMaintenance(stationMaintenance);
         }
 
         #endregion
 
-        #region Battery Services
+        #region Battery related methods
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all")]
         public List<Battery> GetAllBatteries()
         {
-            return new BatteryService().GetAllBatteries();
+            return new StationService().GetAllBatteries();
         }
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/{id}")]
         public Battery GetBatteryById(string id)
         {
-            return new BatteryService().GetBatteryById(id);
+            return new StationService().GetBatteryById(id);
         }
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all/status/{status}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public List<Battery> GetBatteriesByStatus(string status)
         {
-            return new BatteryService().GetBatteriesByStatus(status);
+            return new StationService().GetBatteriesByStatus(status);
         }
 
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edit", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool EditBattery(Battery battery)
         {
-            return new BatteryService().EditBattery(battery);
+            return new StationService().EditBattery(battery);
         }
 
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "insert", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool InsertBattery(Battery battery)
         {
-            return new BatteryService().InsertBattery(battery);
+            return new StationService().InsertBattery(battery);
         }
 
+        #endregion
         #endregion
 
         #region Archive Services
