@@ -13,10 +13,16 @@ namespace RestfulAPI.Services.Interfaces
         List<Station> GetAllStations();
 
         [OperationContract]
-        Station GetStationById(string id);
+        Station GetStationById(string value);
 
         [OperationContract]
-        bool ReserveBattery(string stationId, string userId);
+        bool CreateStation(Station station);
+
+        [OperationContract]
+        bool UpdateStation(Station station);
+
+        [OperationContract]
+        bool DisableStation(string value);
 
         #endregion
 
@@ -26,13 +32,16 @@ namespace RestfulAPI.Services.Interfaces
         List<StationMaintenance> GetAllStationMaintenances();
 
         [OperationContract]
-        StationMaintenance GetStationMaintenanceById(string id);
+        StationMaintenance GetStationMaintenanceById(string value);
 
         [OperationContract]
-        bool EditStationMaintenance(StationMaintenance stationMaintenance);
+        bool CreateStationMaintenance(StationMaintenance stationMaintenance);
 
         [OperationContract]
-        bool InsertStationMaintenance(StationMaintenance stationStationMaintenance);
+        bool UpdateStationMaintenance(StationMaintenance stationMaintenance);
+
+        [OperationContract]
+        bool DisableStationMainteneance(string value);
 
         #endregion
 
@@ -42,13 +51,16 @@ namespace RestfulAPI.Services.Interfaces
         List<MaintenanceType> GetAllMaintenanceTypes();
 
         [OperationContract]
-        MaintenanceType GetMaintenanceTypeById(string id);
+        MaintenanceType GetMaintenanceTypeById(string value);
 
         [OperationContract]
-        bool EditMaintenanceType(MaintenanceType maintenanceType);
+        bool CreateMaintenanceType(MaintenanceType maintenanceType);
 
         [OperationContract]
-        bool InsertMaintenanceType(MaintenanceType maintenanceType);
+        bool UpdateMaintenanceType(MaintenanceType maintenanceType);
+
+        [OperationContract]
+        bool DisableMaintenanceType(string value);
 
         #endregion
 
@@ -58,16 +70,22 @@ namespace RestfulAPI.Services.Interfaces
         List<Battery> GetAllBatteries();
 
         [OperationContract]
-        Battery GetBatteryById(string id);
+        Battery GetBatteryById(string value);
 
         [OperationContract]
-        List<Battery> GetBatteriesByStatus(string status);
+        List<Battery> GetBatteriesByStatus(string value);
 
         [OperationContract]
-        bool EditBattery(Battery battery);
+        bool ReserveBattery(string stationValue, string userValue);
 
         [OperationContract]
-        bool InsertBattery(Battery battery);
+        bool CreateBattery(Battery battery);
+
+        [OperationContract]
+        bool UpdateBattery(Battery battery);
+
+        [OperationContract]
+        bool DisableBattery(string value);
 
         #endregion
     }

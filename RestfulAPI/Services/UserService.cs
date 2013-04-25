@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel.Web;
+using System.Text;
+using System.Threading.Tasks;
 using Logging;
 using Repository.Models;
 using Repository.Resources;
@@ -11,10 +13,10 @@ namespace RestfulAPI.Services
 {
     public class UserService : IUserService
     {
-        private UserRepository _userRepo;
-        private BookmarkRepository _bookmarkRepo;
-        private CarRepository _carRepo;
-        private UserCarRepository _userCarRepo;
+        private readonly UserRepository _userRepo;
+        private readonly BookmarkRepository _bookmarkRepo;
+        private readonly CarRepository _carRepo;
+        private readonly UserCarRepository _userCarRepo;
 
         public UserService()
         {
@@ -24,7 +26,7 @@ namespace RestfulAPI.Services
             _userCarRepo = new UserCarRepository();
         }
 
-        #region User related methods
+        #region user
 
         public List<User> GetAllUsers()
         {
@@ -39,35 +41,88 @@ namespace RestfulAPI.Services
             }
         }
 
-        public User GetUserById(string id)
+        public User GetUserById(string value)
         {
             try
             {
-                return _userRepo.GetUserById(Convert.ToInt32(id), true);
+                int userId;
+                if (Int32.TryParse(value, out userId))
+                {
+                    return _userRepo.GetUserById(userId);
+                }
+                throw new FormatException("The supplied id, is not of the datatype integer.");
             }
             catch (Exception ex)
             {
-                HandleLogging.LogMessage(ex, "WCF - GetUserById", 1, WebOperationContext.Current);
+                HandleLogging.LogMessage(ex, "GetUserById", 1, WebOperationContext.Current);
                 return null;
             }
         }
 
-        public bool EditUserData(User editData)
+        public User GetUserByUserName(string value)
         {
             try
             {
-                if (editData == null)
-                    return false;
+                return _userRepo.GetUserByUserName(value);
+            }
+            catch (Exception ex)
+            {
+                HandleLogging.LogMessage(ex, "GetUserByUserName", 1, WebOperationContext.Current);
+                return null;
+            }
+        }
 
-                _userRepo.Update(editData);
+        public bool CreateUser(User user)
+        {
+            try
+            {
+                _userRepo.Insert(user);
                 return true;
             }
             catch (Exception ex)
             {
-                HandleLogging.LogMessage(ex, "WCF - EditUserData", 1, WebOperationContext.Current);
+                HandleLogging.LogMessage(ex, "CreateUser", 1, WebOperationContext.Current);
                 return false;
             }
         }
+
+        public bool UpdateUser(User user)
+        {
+            try
+            {
+                _userRepo.Insert(user);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                HandleLogging.LogMessage(ex, "UpdateUser", 1, WebOperationContext.Current);
+                return false;
+            }
+        }
+
+        public bool DisableUser(string value)
+        {
+            try
+            {
+                int userId;
+                if (Int32.TryParse(value, out userId))
+                {
+                    _userRepo.Disable(userId);
+                    return true;
+                }
+                throw new FormatException("The supplied id, is not of the datatype integer.");
+
+            }
+            catch (Exception ex)
+            {
+                HandleLogging.LogMessage(ex, "DisableUser", 1, WebOperationContext.Current);
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region authentication
 
         public bool AuthenticateUser(string userName, string password)
         {
@@ -88,21 +143,18 @@ namespace RestfulAPI.Services
 
         #endregion
 
-        #region Bookmark related methods
+        #region bookmark
 
-        public Bookmark GetBookmarkById(string id)
+        public Bookmark GetBookmarkById(string value)
         {
             try
             {
                 int bookmarkId;
-                if (Int32.TryParse(id, out bookmarkId))
+                if (Int32.TryParse(value, out bookmarkId))
                 {
                     return _bookmarkRepo.GetBookmarkById(bookmarkId);
                 }
-                else
-                {
-                    throw new FormatException("The supplied id, is not of the datatype integer.");
-                }
+                throw new FormatException("The supplied id, is not of the datatype integer.");
             }
             catch (Exception ex)
             {
@@ -111,23 +163,20 @@ namespace RestfulAPI.Services
             }
         }
 
-        public List<Bookmark> GetBookmarksByUser(string userId)
+        public List<Bookmark> GetBookmarksByUserId(string value)
         {
             try
             {
-                int id;
-                if (Int32.TryParse(userId, out id))
+                int userId;
+                if (Int32.TryParse(value, out userId))
                 {
-                    return _bookmarkRepo.GetBookmarksByUserId(id).ToList();
+                    return _bookmarkRepo.GetBookmarksByUserId(userId).ToList();
                 }
-                else
-                {
-                    throw new FormatException("The supplied id, is not of the datatype integer.");
-                }
+                throw new FormatException("The supplied id, is not of the datatype integer.");
             }
             catch (Exception ex)
             {
-                HandleLogging.LogMessage(ex, "GetBookmarkById", 1, WebOperationContext.Current);
+                HandleLogging.LogMessage(ex, "GetBookmarksByUserId", 1, WebOperationContext.Current);
                 return null;
             }
         }
@@ -141,77 +190,129 @@ namespace RestfulAPI.Services
             }
             catch (Exception ex)
             {
-                HandleLogging.LogMessage(ex, "GetBookmarkById", 1, WebOperationContext.Current);
+                HandleLogging.LogMessage(ex, "CreateBookmark", 1, WebOperationContext.Current);
                 return false;
             }
         }
 
-        public bool DeleteBookmark(string id)
+        public bool UpdateBookmark(Bookmark bookmark)
         {
             try
             {
-                int bookmarkId;
-                if (Int32.TryParse(id, out bookmarkId))
-                {
-                    _bookmarkRepo.Disable(bookmarkId);
-                    return true;
-                }
-                else
-                {
-                    throw new FormatException("The supplied id, is not of the datatype integer.");
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleLogging.LogMessage(ex, "GetBookmarkById", 1, WebOperationContext.Current);
-                return false;
-            }
-        }
-
-        public bool EditBookmark(Bookmark bookmark)
-        {
-            try
-            {
-                _bookmarkRepo.Update(bookmark);
+                _bookmarkRepo.Insert(bookmark);
                 return true;
             }
             catch (Exception ex)
             {
-                HandleLogging.LogMessage(ex, "GetBookmarkById", 1, WebOperationContext.Current);
+                HandleLogging.LogMessage(ex, "UpdateBookmark", 1, WebOperationContext.Current);
+                return false;
+            }
+        }
+
+        public bool DisableBookmark(string value)
+        {
+            try
+            {
+                int bookmarkId;
+                if (Int32.TryParse(value, out bookmarkId))
+                {
+                    _bookmarkRepo.Disable(bookmarkId);
+                    return true;
+                }
+                throw new FormatException("The supplied id, is not of the datatype integer.");
+
+            }
+            catch (Exception ex)
+            {
+                HandleLogging.LogMessage(ex, "DisableBookmark", 1, WebOperationContext.Current);
                 return false;
             }
         }
 
         #endregion
 
-        #region Car related methods
+        #region user cars
 
         public List<Car> GetAllCars()
         {
-            return _carRepo.GetAllCars().ToList();
+            try
+            {
+                return _carRepo.GetAllCars().ToList();
+            }
+            catch (Exception ex)
+            {
+                HandleLogging.LogMessage(ex, "WCF - GetAllCars", 1, WebOperationContext.Current);
+                return null;
+            }
         }
 
-        public Car GetCarById(int id)
+        public Car GetCarById(string value)
         {
-            return _carRepo.GetCarById(id);
+            try
+            {
+                int carId;
+                if (Int32.TryParse(value, out carId))
+                {
+                    return _carRepo.GetCarById(carId);
+                }
+                throw new FormatException("The supplied id, is not of the datatype integer.");
+            }
+            catch (Exception ex)
+            {
+                HandleLogging.LogMessage(ex, "GetCarById", 1, WebOperationContext.Current);
+                return null;
+            }
         }
 
-        public bool AddUserCar(int userId, int carId)
+        public bool CreateCar(Car car)
         {
-            User user = _userRepo.GetUserById(userId);
-            Car car = _carRepo.GetCarById(carId);
-            if (user == null || car == null)
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateCar(Car car)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DisableCar(string userCar)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CreateUserCar(string userValue, string carValue)
+        {
+            try
+            {
+                var user = _userRepo.GetUserById(Convert.ToInt32(userValue));
+                var car = _carRepo.GetCarById(Convert.ToInt32(carValue));
+                if (user == null || car == null)
+                    return false;
+
+                var userCar = new UserCar
+                    {
+                    CarId = car.ID,
+                    UserId = user.ID,
+                    IsActive = true
+                };
+                _userCarRepo.Insert(userCar);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                HandleLogging.LogMessage(ex, "WCF - CreateUserCar", 1, WebOperationContext.Current);
                 return false;
+            }
+        }
 
-            var userCar = new UserCar()
-                                  {
-                                      CarId = car.ID,
-                                      UserId = user.ID,
-                                      IsActive = true
-                                  };
-            _userCarRepo.Insert(userCar);
+        public bool UpdateUserCar(UserCar userCar)
+        {
+            throw new NotImplementedException();
+        }
 
-            return true;
+        public bool DisableUserCar(string value)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

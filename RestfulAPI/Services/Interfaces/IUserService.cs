@@ -7,51 +7,79 @@ namespace RestfulAPI.Services.Interfaces
     [ServiceContract]
     public interface IUserService
     {
-        #region User related methods
+        #region user
 
         [OperationContract]
         List<User> GetAllUsers();
 
         [OperationContract]
-        User GetUserById(string id);
+        User GetUserById(string value);
 
         [OperationContract]
-        bool EditUserData(User editData);
+        User GetUserByUserName(string value);
+
+        [OperationContract]
+        bool CreateUser(User user);
+
+        [OperationContract]
+        bool UpdateUser(User user);
+
+        [OperationContract]
+        bool DisableUser(string value);
+
+        #endregion
+
+        #region authentication
 
         [OperationContract]
         bool AuthenticateUser(string userName, string password);
 
         #endregion
 
-        #region Bookmark related methods
+        #region bookmark
 
         [OperationContract]
-        Bookmark GetBookmarkById(string id);
+        Bookmark GetBookmarkById(string value);
 
         [OperationContract]
-        List<Bookmark> GetBookmarksByUser(string userId);
+        List<Bookmark> GetBookmarksByUserId(string value);
 
         [OperationContract]
         bool CreateBookmark(Bookmark bookmark);
 
         [OperationContract]
-        bool DeleteBookmark(string id);
+        bool UpdateBookmark(Bookmark bookmark);
 
         [OperationContract]
-        bool EditBookmark(Bookmark bookmark);
+        bool DisableBookmark(string value);
 
         #endregion
 
-        #region Car related methods
+        #region car
 
         [OperationContract]
         List<Car> GetAllCars();
 
         [OperationContract]
-        Car GetCarById(int id);
+        Car GetCarById(string value);
 
         [OperationContract]
-        bool AddUserCar(int userId, int carId);
+        bool CreateCar(Car car);
+
+        [OperationContract]
+        bool UpdateCar(Car car);
+
+        [OperationContract]
+        bool DisableCar(string value);
+
+        [OperationContract]
+        bool CreateUserCar(string userValue, string carValue);
+
+        [OperationContract]
+        bool UpdateUserCar(UserCar userCar);
+
+        [OperationContract]
+        bool DisableUserCar(string value);
 
         #endregion
     }
