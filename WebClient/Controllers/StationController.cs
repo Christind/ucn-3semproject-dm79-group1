@@ -28,7 +28,7 @@ namespace WebClient.Controllers
             //                     Title = "Vildste station",
             //                     ID = 1
             //                 });
-            var stations = JsonHelper.DeserializeJson<JsonCollectionWrapper<Station>>("http://localhost:8732/get/all/stations");
+            var stations = JsonHelper.DeserializeJson<List<Station>>("http://localhost:8732/get/all/stations");
             return View(stations);
         }
 

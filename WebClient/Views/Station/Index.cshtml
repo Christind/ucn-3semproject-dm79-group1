@@ -6,39 +6,60 @@
 }
 
 <h2>Alle betterplace stationer i landet</h2>
-
-@foreach (var station in Model)
-{
-    <p>@station.ID - @station.Title</p>
-}
-
 <div id="map-canvas" style="height: 500px;" />
 
 @section libaries
 {
     <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?&sensor=false">
+            src="https://maps.googleapis.com/maps/api/js?&sensor=false">
     </script>
+    <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markermanager/src/markermanager.js"></script>
 }
 
 @section scripts
 {
-    <script type="text/javascript">
+    <script language="javascript" type="text/javascript">
+        var map;
+        var mgr;
+    
         function initialize() {
-            var mapOptions = {
-                center: new google.maps.LatLng(57.0333, 9.9167),
-                zoom: 11,
+        
+            var myOptions = {
+                zoom: 7,
+                center: new google.maps.LatLng(56.303100, 10.533142),
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
-            var map = new google.maps.Map(document.getElementById("map-canvas"),
-                mapOptions);
+        
+            map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+            mgr = new MarkerManager(map);
+        
+            var infoWindow = new google.maps.InfoWindow({ content: "Cargando..." });
+        
+            google.maps.event.addListener(mgr, 'loaded', function () {
             
-            var marker = new google.maps.Marker({
-                position: map.getCenter(),
-                map: map,
-                title: 'Click to zoom'
+            @foreach (var item in Model)
+            {
+                <text>          
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(@item.StationLat.ToString().Replace(",", "."), @item.StationLong.ToString().Replace(",", ".")),
+                    title: '@Html.DisplayTextFor(modelItem => item.Title)'
+                });
+                
+                google.maps.event.addListener(marker, "click", function () {
+                    infoWindow.setContent(this.html);
+                    infoWindow.open(map, this);
+                });
+                
+                mgr.addMarker(marker, 0);
+                </text>
+            }     
+            mgr.refresh();
             });
         }
         google.maps.event.addDomListener(window, 'load', initialize);
+        //$(document).ready(function () {
+        //    initialize();
+        //});
+       
     </script>
 }

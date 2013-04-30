@@ -19,7 +19,7 @@ namespace Utils.Helpers
                 }
             }
 
-            var jsonObj = (T)JsonConvert.DeserializeObject(text);
+            var jsonObj = JsonConvert.DeserializeObject<T>(text);
             return jsonObj;
         }
     }
