@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Repository.Models
 {
@@ -14,8 +15,10 @@ namespace Repository.Models
         }
 
         [DataMember]
+        [JsonConverter(typeof(Int32))] 
         public int ID { get; set; }
         [DataMember]
+        [JsonConverter(typeof(Int32))] 
         public int TypeId { get; set; }
         [DataMember]
         public string Title { get; set; }

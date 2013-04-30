@@ -155,7 +155,7 @@ namespace RestfulAPI
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all/stations")]
         public List<Station> GetAllStations()
         {
-            throw new NotImplementedException();
+            return new StationService().GetAllStations();
         }
 
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/id:{value}")]

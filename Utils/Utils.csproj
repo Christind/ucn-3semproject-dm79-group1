@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\JSON.NET\Net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
@@ -45,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Helpers\EncryptionHelper.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
+    <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Helpers\NullableTypesHelper.cs" />
     <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Helpers\WebControlsHelper.cs" />
