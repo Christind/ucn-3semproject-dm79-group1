@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Repository.Models;
 using Utils.Helpers;
+using WebClient.Models;
 
 namespace WebClient.Controllers
 {
@@ -27,7 +28,7 @@ namespace WebClient.Controllers
             //                     Title = "Vildste station",
             //                     ID = 1
             //                 });
-            var stations = JsonHelper.DeserializeJson<List<Station>>("http://localhost:8732/get/all/stations").ToList();
+            var stations = JsonHelper.DeserializeJson<JsonCollectionWrapper<Station>>("http://localhost:8732/get/all/stations");
             return View(stations);
         }
 
