@@ -16,13 +16,13 @@ namespace RestfulAPI
     {
         #region user
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all/users")]
         public List<User> GetAllUsers()
         {
             return new UserService().GetAllUsers();
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/id:{value}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/user/id:{value}")]
         public User GetUserById(string value)
         {
             return new UserService().GetUserById(value);
@@ -34,19 +34,19 @@ namespace RestfulAPI
             return new UserService().GetUserByUserName(value);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "create", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "create/user", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool CreateUser(User user)
         {
             return new UserService().CreateUser(user);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "update", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "update/user", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool UpdateUser(User user)
         {
             return new UserService().UpdateUser(user);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/id:{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/user/id:{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool DisableUser(string value)
         {
             return new UserService().DisableUser(value);
@@ -152,7 +152,7 @@ namespace RestfulAPI
 
         #region station
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all/stations")]
         public List<Station> GetAllStations()
         {
             throw new NotImplementedException();
@@ -164,19 +164,19 @@ namespace RestfulAPI
             throw new NotImplementedException();
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "create", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "create/station", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool CreateStation(Station station)
         {
             throw new NotImplementedException();
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "update", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "update/station", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool UpdateStation(Station station)
         {
             throw new NotImplementedException();
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/id:{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/station/id:{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool DisableStation(string value)
         {
             throw new NotImplementedException();
