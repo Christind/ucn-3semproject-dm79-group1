@@ -22,13 +22,13 @@ namespace RestfulAPI
             return new UserService().GetAllUsers();
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/user/id:{value}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/user/id/{value}")]
         public User GetUserById(string value)
         {
             return new UserService().GetUserById(value);
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/uname:{value}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/user/name/{value}")]
         public User GetUserByUserName(string value)
         {
             return new UserService().GetUserByUserName(value);
@@ -46,7 +46,7 @@ namespace RestfulAPI
             return new UserService().UpdateUser(user);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/user/id:{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/user/id/{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool DisableUser(string value)
         {
             return new UserService().DisableUser(value);
@@ -56,7 +56,7 @@ namespace RestfulAPI
 
         #region authentication
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "auth/uname:{userName},passw:{password}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "auth/{userName}@{password}")]
         public bool AuthenticateUser(string userName, string password)
         {
             return new UserService().AuthenticateUser(userName, password);
@@ -66,13 +66,13 @@ namespace RestfulAPI
 
         #region bookmark
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/bookmark/id:{value}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/bookmark/id/{value}")]
         public Bookmark GetBookmarkById(string value)
         {
             return new UserService().GetBookmarkById(value);
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/bookmark/userid:{value}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/bookmark/userid/{value}")]
         public List<Bookmark> GetBookmarksByUserId(string value)
         {
             return new UserService().GetBookmarksByUserId(value);
@@ -90,7 +90,7 @@ namespace RestfulAPI
             return new UserService().UpdateBookmark(bookmark);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/bookmark/id:{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/bookmark/id/{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool DisableBookmark(string value)
         {
             return new UserService().DisableBookmark(value);
@@ -106,7 +106,7 @@ namespace RestfulAPI
             return new UserService().GetAllCars();
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/car/id:{value}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/car/id/{value}")]
         public Car GetCarById(string value)
         {
             return new UserService().GetCarById(value);
@@ -124,7 +124,7 @@ namespace RestfulAPI
             return new UserService().UpdateCar(car);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/car/id:{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/car/id/{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool DisableCar(string value)
         {
             return new UserService().DisableCar(value);
@@ -142,7 +142,7 @@ namespace RestfulAPI
             return new UserService().UpdateUserCar(userCar);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/usercar/id:{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/usercar/id/{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool DisableUserCar(string value)
         {
             return new UserService().DisableUserCar(value);
@@ -158,7 +158,7 @@ namespace RestfulAPI
             return new StationService().GetAllStations();
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/id:{value}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/station/id/{value}")]
         public Station GetStationById(string value)
         {
             throw new NotImplementedException();
@@ -176,7 +176,7 @@ namespace RestfulAPI
             throw new NotImplementedException();
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/station/id:{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/station/id/{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool DisableStation(string value)
         {
             throw new NotImplementedException();
@@ -192,7 +192,7 @@ namespace RestfulAPI
             return new StationService().GetAllStationMaintenances();
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/mainteneance/id:{value}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/mainteneance/id/{value}")]
         public StationMaintenance GetStationMaintenanceById(string value)
         {
             return new StationService().GetStationMaintenanceById(value);
@@ -210,7 +210,7 @@ namespace RestfulAPI
             return new StationService().UpdateStationMaintenance(stationMaintenance);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/mainteneance/id:{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/mainteneance/id/{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool DisableStationMainteneance(string value)
         {
             return new StationService().DisableStationMainteneance(value);
@@ -226,7 +226,7 @@ namespace RestfulAPI
             return new StationService().GetAllMaintenanceTypes();
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/mainteneance/type/id:{value}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/mainteneance/type/id/{value}")]
         public MaintenanceType GetMaintenanceTypeById(string value)
         {
             return new StationService().GetMaintenanceTypeById(value);
@@ -244,7 +244,7 @@ namespace RestfulAPI
             return new StationService().UpdateMaintenanceType(maintenanceType);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/mainteneance/type/id:{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/mainteneance/type/id/{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool DisableMaintenanceType(string value)
         {
             return new StationService().DisableMaintenanceType(value);
@@ -260,19 +260,19 @@ namespace RestfulAPI
             return new StationService().GetAllBatteries();
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/battery/id:{value}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/battery/id/{value}")]
         public Battery GetBatteryById(string value)
         {
             return new StationService().GetBatteryById(value);
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all/battery/status:{value}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all/battery/status/{value}")]
         public List<Battery> GetBatteriesByStatus(string value)
         {
             return new StationService().GetBatteriesByStatus(value);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "reserve/battery/staion:{stationValue},user:{userValue}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "reserve/battery/{stationValue},{userValue}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool ReserveBattery(string stationValue, string userValue)
         {
             return new StationService().ReserveBattery(stationValue, userValue);
@@ -290,7 +290,7 @@ namespace RestfulAPI
             return new StationService().UpdateBattery(battery);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/battery/id:{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/battery/id/{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool DisableBattery(string value)
         {
             return new StationService().DisableBattery(value);
@@ -306,7 +306,7 @@ namespace RestfulAPI
             return new RouteService().GetAllEdges();
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/edge/id:{value}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/edge/id/{value}")]
         public Edge GetEdgeById(string value)
         {
             return new RouteService().GetEdgeById(value);
@@ -324,7 +324,7 @@ namespace RestfulAPI
             return new RouteService().UpdateEdge(edge);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/edge/id:{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/edge/id/{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool DisableEdge(string value)
         {
             return new RouteService().DisableEdge(value);
@@ -334,6 +334,7 @@ namespace RestfulAPI
 
         #region route calculation
 
+        // Needs to be reevaluated...
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "calculate/from:{sloc},to:{eloc}")]
         public bool CalculateRoute(string sloc, string eloc)
         {
@@ -350,7 +351,7 @@ namespace RestfulAPI
             return new RouteService().GetAllArchivedEntries();
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/archivedentry/id:{value}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/archivedentry/id/{value}")]
         public Archive GetArchivedEntryById(string value)
         {
             return new RouteService().GetArchivedEntryById(value);
@@ -368,7 +369,7 @@ namespace RestfulAPI
             return new RouteService().GetAllArchivedStations();
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all/archivedstation/id:{value}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all/archivedstation/id/{value}")]
         public ArchiveStation GetArchivedStationById(string value)
         {
             return new RouteService().GetArchivedStationById(value);
