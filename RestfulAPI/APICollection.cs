@@ -186,31 +186,31 @@ namespace RestfulAPI
 
         #region station maintenances
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all/mainteneance")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all/maintenances")]
         public List<StationMaintenance> GetAllStationMaintenances()
         {
             return new StationService().GetAllStationMaintenances();
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/mainteneance/id/{value}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/maintenance/id/{value}")]
         public StationMaintenance GetStationMaintenanceById(string value)
         {
             return new StationService().GetStationMaintenanceById(value);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "create/mainteneance", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "create/maintenance", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool CreateStationMaintenance(StationMaintenance stationMaintenance)
         {
             return new StationService().CreateStationMaintenance(stationMaintenance);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "update/mainteneance", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "update/maintenance", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool UpdateStationMaintenance(StationMaintenance stationMaintenance)
         {
             return new StationService().UpdateStationMaintenance(stationMaintenance);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/mainteneance/id/{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/maintenance/id/{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool DisableStationMainteneance(string value)
         {
             return new StationService().DisableStationMainteneance(value);
@@ -218,33 +218,33 @@ namespace RestfulAPI
 
         #endregion
 
-        #region mainteneance types
+        #region maintenance types
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all/mainteneance/types")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/all/maintenance/types")]
         public List<MaintenanceType> GetAllMaintenanceTypes()
         {
             return new StationService().GetAllMaintenanceTypes();
         }
 
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/mainteneance/type/id/{value}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/maintenance/type/id/{value}")]
         public MaintenanceType GetMaintenanceTypeById(string value)
         {
             return new StationService().GetMaintenanceTypeById(value);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "create/mainteneance/type", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "create/maintenance/type", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool CreateMaintenanceType(MaintenanceType maintenanceType)
         {
             return new StationService().CreateMaintenanceType(maintenanceType);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "update/mainteneance/type", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "update/maintenance/type", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool UpdateMaintenanceType(MaintenanceType maintenanceType)
         {
             return new StationService().UpdateMaintenanceType(maintenanceType);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/mainteneance/type/id/{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/maintenance/type/id/{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool DisableMaintenanceType(string value)
         {
             return new StationService().DisableMaintenanceType(value);
@@ -338,7 +338,7 @@ namespace RestfulAPI
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "calculate/from:{sloc},to:{eloc}")]
         public bool CalculateRoute(string sloc, string eloc)
         {
-            throw new NotImplementedException();
+            return new RouteService().CalculateRoute(sloc, eloc);
         }
 
         #endregion

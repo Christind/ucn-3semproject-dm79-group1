@@ -17,7 +17,7 @@ namespace WebClient.Controllers
 
         public ActionResult Index()
         {
-            var stationMaintenances = JsonHelper.DeserializeJson<List<StationMaintenance>>("http://localhost:8732/get/all/mainteneance");
+            var stationMaintenances = JsonHelper.DeserializeJson<List<StationMaintenance>>("http://localhost:8732/get/all/maintenances");
             return View(stationMaintenances);
         }
 
