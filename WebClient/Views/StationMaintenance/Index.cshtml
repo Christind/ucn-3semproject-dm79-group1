@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Repository.Models.StationMaintenance>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StationId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedOperationalDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StationId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedOperationalDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Details", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

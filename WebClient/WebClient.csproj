@@ -105,6 +105,7 @@
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StationController.cs" />
+    <Compile Include="Controllers\StationMaintenanceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -147,6 +148,9 @@
       <Project>{2B3F2DCC-F2DB-41D8-A452-6C9BBD60ED5B}</Project>
       <Name>Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\StationMaintenance\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
