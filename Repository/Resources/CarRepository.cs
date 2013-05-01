@@ -5,7 +5,7 @@ namespace Repository.Resources
 {
     public class CarRepository
     {
-        private readonly BPDbContext db;
+        private BPDbContext db;
 
         public CarRepository()
         {

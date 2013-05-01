@@ -109,6 +109,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GeoCoding.cs" />
     <Compile Include="Models\JsonCollectionWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -118,7 +119,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="App_Data\empty_file.txt" />
     <Content Include="Global.asax" />
-    <Content Include="Models\empty_file.txt" />
     <Content Include="Properties\DataSources\Repository.Models.User.datasource" />
     <Content Include="Properties\DataSources\Repository.Models.Station.datasource" />
     <Content Include="Web.config" />

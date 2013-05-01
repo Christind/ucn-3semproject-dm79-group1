@@ -15,13 +15,14 @@ namespace RestfulAPI.Services
         private readonly StationMaintenanceRepository _stationMaintenanceRepository;
         private readonly MaintenanceTypeRepository _maintenanceTypeRepository;
         private readonly BatteryRepository _batteryRepository;
-
+        private readonly CityRepository _cityRepository;
         public StationService()
         {
             _stationRepository = new StationRepository();
             _stationMaintenanceRepository = new StationMaintenanceRepository();
             _maintenanceTypeRepository = new MaintenanceTypeRepository();
             _batteryRepository = new BatteryRepository();
+            _cityRepository = new CityRepository();
         }
 
         #region station
@@ -404,6 +405,41 @@ namespace RestfulAPI.Services
             {
                 HandleLogging.LogMessage(ex, "DisableBattery", 1, WebOperationContext.Current);
                 return false;
+            }
+        }
+
+        #endregion
+
+        #region city
+
+        public City GetCityByZipCode(string value)
+        {
+            try
+            {
+                int zipCode;
+                if (Int32.TryParse(value, out zipCode))
+                {
+                    return _cityRepository.GetCityByZipCode(zipCode);
+                }
+                throw new FormatException("The supplied zipcode, is not of the datatype integer.");
+            }
+            catch (Exception ex)
+            {
+                HandleLogging.LogMessage(ex, "GetCityByZipCode", 1, WebOperationContext.Current);
+                return null;
+            }
+        }
+
+        public City GetCityByName(string value)
+        {
+            try
+            {
+                return _cityRepository.GetCityByName(value);
+            }
+            catch (Exception ex)
+            {
+                HandleLogging.LogMessage(ex, "GetCityByCityName", 1, WebOperationContext.Current);
+                return null;
             }
         }
 

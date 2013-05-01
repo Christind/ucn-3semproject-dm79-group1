@@ -60,7 +60,6 @@
     <Compile Include="Services\StationService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Logging\Logging.csproj">
       <Project>{c5d5251c-c808-4665-bb15-b709dddfc27e}</Project>

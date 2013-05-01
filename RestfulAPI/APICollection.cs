@@ -161,25 +161,25 @@ namespace RestfulAPI
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/station/id/{value}")]
         public Station GetStationById(string value)
         {
-            throw new NotImplementedException();
+            return new StationService().GetStationById(value);
         }
 
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "create/station", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool CreateStation(Station station)
         {
-            throw new NotImplementedException();
+            return new StationService().CreateStation(station);
         }
 
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "update/station", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool UpdateStation(Station station)
         {
-            throw new NotImplementedException();
+            return new StationService().UpdateStation(station);
         }
 
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "disable/station/id/{value}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool DisableStation(string value)
         {
-            throw new NotImplementedException();
+            return new StationService().DisableStation(value);
         }
 
         #endregion
@@ -379,6 +379,22 @@ namespace RestfulAPI
         public bool CreateArchivedStation(ArchiveStation archiveStation)
         {
             return new RouteService().CreateArchivedStation(archiveStation);
+        }
+
+        #endregion
+
+        #region city
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/city/zipcode/{value}")]
+        public City GetCityByZipCode(string value)
+        {
+            return new StationService().GetCityByZipCode(value);
+        }
+
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/city/name/{value}")]
+        public City GetCityByName(string value)
+        {
+            return new StationService().GetCityByName(value);
         }
 
         #endregion

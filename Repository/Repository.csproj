@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +53,7 @@
     <Compile Include="Models\BPDbContext.cs" />
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\CarModel.cs" />
+    <Compile Include="Models\City.cs" />
     <Compile Include="Models\ClientApplication.cs" />
     <Compile Include="Models\Edge.cs" />
     <Compile Include="Models\Log.cs" />
@@ -66,6 +68,7 @@
     <Compile Include="Models\Mapping\BookmarkMap.cs" />
     <Compile Include="Models\Mapping\CarMap.cs" />
     <Compile Include="Models\Mapping\CarModelMap.cs" />
+    <Compile Include="Models\Mapping\CityMap.cs" />
     <Compile Include="Models\Mapping\ClientApplicationMap.cs" />
     <Compile Include="Models\Mapping\EdgeMap.cs" />
     <Compile Include="Models\Mapping\LogMap.cs" />
@@ -93,6 +96,7 @@
     <Compile Include="Resources\BatteryCollectionRepository.cs" />
     <Compile Include="Resources\BatteryRepository.cs" />
     <Compile Include="Resources\BatteryStorageRepository.cs" />
+    <Compile Include="Resources\CityRepository.cs" />
     <Compile Include="Resources\ClientApplicationRepository.cs" />
     <Compile Include="Resources\EdgeRepository.cs" />
     <Compile Include="Resources\LogRepository.cs" />

@@ -8,15 +8,30 @@
 <h2>Alle betterplace stationer i landet</h2>
 
 <style>
-    #map-canvas img { max-width: none; }
+    #map-canvas img
+    {
+        max-width: none;
+    }
 </style>
-
+@ViewBag.CityName
+@using (Html.BeginForm("LocateNearestStation", "Station", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Find nærmeste station</legend>
+        <p>
+        By eller postnummer:     
+        @Html.TextBox("searchValue", null, new { style = "margin: 0px;"}) 
+        <input class="btn" type="submit" value="Find" />
+        </p>
+    </fieldset>
+}
 <div id="map-canvas" style="height: 500px;" />
 
 @section libaries
 {
     <script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?&sensor=false">
+        src="https://maps.googleapis.com/maps/api/js?&sensor=false">
     </script>
     <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markermanager/src/markermanager.js"></script>
 }
@@ -24,8 +39,7 @@
 @section scripts
 {
     <script language="javascript" type="text/javascript">
-        var map;
-        var mgr;
+        var map, mgr;
     
         function initialize() {
         
@@ -37,34 +51,33 @@
         
             map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
             mgr = new MarkerManager(map);
-        
-            var infoWindow = new google.maps.InfoWindow({ content: "Cargando..." });
-        
+            var infoWindow = new google.maps.InfoWindow();
             google.maps.event.addListener(mgr, 'loaded', function () {
-            
-            @foreach (var item in Model)
-            {
-                <text>          
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(@item.StationLat.ToString().Replace(",", "."), @item.StationLong.ToString().Replace(",", ".")),
-                    title: '@Html.DisplayTextFor(modelItem => item.Title)'
-                });
                 
-                google.maps.event.addListener(marker, "click", function () {
-                    infoWindow.setContent(this.html);
+                @foreach (var item in Model)
+                {
+                <text>
+                var markLatLong = new google.maps.LatLng(@item.StationLat.ToString().Replace(",", "."), @item.StationLong.ToString().Replace(",", "."));          
+                var marker = new google.maps.Marker({
+                    position: markLatLong,
+                    title: '@Html.DisplayTextFor(modelItem => item.Title)',
+                    animation : google.maps.Animation.DROP,
+                    infoWindowContent : '@item.Description'
+                });
+
+                google.maps.event.addListener(marker, 'click', function(event) {
+                    map.panTo(event.latLng);
+                    map.setZoom(9);
+                    infoWindow.setContent(this.infoWindowContent);
                     infoWindow.open(map, this);
                 });
                 
                 mgr.addMarker(marker, 0);
                 </text>
-            }     
-            mgr.refresh();
+                }     
+                mgr.refresh();
             });
         }
         google.maps.event.addDomListener(window, 'load', initialize);
-        //$(document).ready(function () {
-        //    initialize();
-        //});
-       
     </script>
 }

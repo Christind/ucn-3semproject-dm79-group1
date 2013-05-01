@@ -88,5 +88,15 @@ namespace RestfulAPI.Services.Interfaces
         bool DisableBattery(string value);
 
         #endregion
+
+        #region city
+
+        [OperationContract]
+        City GetCityByZipCode(string value);
+
+        [OperationContract]
+        City GetCityByName(string value);
+
+        #endregion
     }
 }

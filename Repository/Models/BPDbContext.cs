@@ -25,6 +25,7 @@ namespace Repository.Models
         public DbSet<CarModel> CarModels { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<ClientApplication> ClientApplications { get; set; }
+        public DbSet<City> Cities { get; set; }
         public DbSet<Edge> Edges { get; set; }
         public DbSet<Log> Logs { get; set; }
         public DbSet<MaintenanceType> MaintenanceTypes { get; set; }
@@ -48,6 +49,7 @@ namespace Repository.Models
             modelBuilder.Configurations.Add(new CarModelMap());
             modelBuilder.Configurations.Add(new CarMap());
             modelBuilder.Configurations.Add(new ClientApplicationMap());
+            modelBuilder.Configurations.Add(new CityMap());
             modelBuilder.Configurations.Add(new EdgeMap());
             modelBuilder.Configurations.Add(new LogMap());
             modelBuilder.Configurations.Add(new MaintenanceTypeMap());
