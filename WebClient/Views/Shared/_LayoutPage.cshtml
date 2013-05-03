@@ -1,5 +1,4 @@
-﻿@model global::WebClient.Models.LogOnModel
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -66,8 +65,8 @@
                         {
                             using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "navbar-form pull-right" }))
                             {
-                            @Html.TextBoxFor(model => model.UserName, null, new { @class = "span2", placeholder = "Username" })
-                            @Html.PasswordFor(model => model.Password, new { @class = "span2", placeholder = "Password", style = "margin-left: 6px;" })
+                            @Html.TextBox("UserName", null, new { @class = "span2", placeholder = "Username" })
+                            @Html.Password("Password", null, new { @class = "span2", placeholder = "Password", style = "margin-left: 6px;" })
                             <input class="btn" type="submit" value="Sign in" />
                             }
                         }
