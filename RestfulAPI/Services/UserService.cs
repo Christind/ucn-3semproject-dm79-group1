@@ -8,6 +8,7 @@ using Logging;
 using Repository.Models;
 using Repository.Resources;
 using RestfulAPI.Services.Interfaces;
+using Utils.Helpers;
 
 namespace RestfulAPI.Services
 {
@@ -132,7 +133,8 @@ namespace RestfulAPI.Services
                 if (user == null)
                     return false;
 
-                return user.Password.Equals(password);
+                var hashedPassword = EncryptionHelper.GetSha512Hash(password + user.Salt);
+                return user.Password.Equals(hashedPassword);
             }
             catch (Exception ex)
             {

@@ -1,0 +1,16 @@
+﻿@model global::WebClient.Models.LogOnModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h2>Index</h2>
+@if (Request.IsAuthenticated)
+{
+    <strong>@Html.Encode(User.Identity.Name)</strong>
+    @Html.ActionLink("Sign Out", "Logout", "Account")
+}
+else
+{
+    <p>Not authenticated</p>
+}

@@ -1,0 +1,21 @@
+﻿@model global::WebClient.Models.LogOnModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h2>Login</h2>
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    @Html.ValidationSummary(true, "Login failed. Check your login details.");
+    <ul>
+        <li style="color: red;">@Html.ValidationMessageFor(model => model.UserName)</li>
+        <li style="color: red;">@Html.ValidationMessageFor(model => model.Password)</li>
+    </ul>
+    <fieldset>
+        @Html.TextBoxFor(model => model.UserName, null, new { style = "margin: 0px;" })
+        @Html.PasswordFor(model => model.Password, new { style = "margin: 0px;" })
+        <input class="btn" type="submit" value="Login" />
+    </fieldset>
+}
