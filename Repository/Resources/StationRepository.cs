@@ -7,10 +7,12 @@ namespace Repository.Resources
     {
         private BPDbContext db;
         private BatteryStorageRepository _batteryStorageRepo;
+        private EdgeRepository _edgeRepository;
         public StationRepository()
         {
             db = new BPDbContext();
             _batteryStorageRepo = new BatteryStorageRepository();
+            _edgeRepository = new EdgeRepository();
         }
 
         public IQueryable<Station> GetAllStations()
@@ -27,6 +29,7 @@ namespace Repository.Resources
             if (getAssociations)
             {
                 station.BatteryStorages = _batteryStorageRepo.GetBatteryStorageByStationId(station.ID, true);
+                station.Edges = _edgeRepository.GetEdgesByStation(station).ToList();
                 //station.StationType = _stationTypeRepo.GetStationTypeById(station.TypeId);
                 //station.Reservations = _reservationRepo.GetReservationsByStationId(station.ID).ToList();
                 //station.StationMaintenances = _maintenanceRepo.GetStationMaintenancesByStationId(station.ID).ToList();

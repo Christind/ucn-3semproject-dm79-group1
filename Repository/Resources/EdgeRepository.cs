@@ -48,5 +48,10 @@ namespace Repository.Resources
             rEdge.IsActive = false;
             db.SaveChanges();
         }
+
+        public IQueryable<Edge> GetEdgesByStation(Station station)
+        {
+            return db.Edges.Where(x => x.StartStation.Equals(station.ID) || x.EndStation.Equals(station.ID));
+        }
     }
 }

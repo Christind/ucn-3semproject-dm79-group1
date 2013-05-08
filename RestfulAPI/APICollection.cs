@@ -182,6 +182,12 @@ namespace RestfulAPI
             return new StationService().DisableStation(value);
         }
 
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "get/station/nearest/{lat}@{lng}")]
+        public Station LocateNearestStation(string lat, string lng)
+        {
+            return new StationService().LocateNearestStation(lat, lng);
+        }
+
         #endregion
 
         #region station maintenances

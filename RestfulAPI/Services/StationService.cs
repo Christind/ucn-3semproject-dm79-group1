@@ -6,6 +6,7 @@ using Logging;
 using Repository.Models;
 using Repository.Resources;
 using RestfulAPI.Services.Interfaces;
+using System.Device.Location;
 
 namespace RestfulAPI.Services
 {
@@ -103,6 +104,34 @@ namespace RestfulAPI.Services
                 HandleLogging.LogMessage(ex, "DisableStation", 1, WebOperationContext.Current);
                 return false;
             }
+        }
+
+        public Station LocateNearestStation(string _lat, string _lng)
+        {
+            double lat, lng;
+            if (Double.TryParse(_lat, out lat) && Double.TryParse(_lng, out lng))
+            {
+                GeoCoordinate geoCoordinate = new GeoCoordinate(lat, lng);
+                var stations = _stationRepository.GetAllStations();
+                Station bestFound = null;
+                double bestDistance = Double.MaxValue;
+                foreach (var station in stations)
+                {
+                    double distance =
+                        geoCoordinate.GetDistanceTo(new GeoCoordinate(Convert.ToDouble(station.StationLat),
+                                                                      Convert.ToDouble(station.StationLong)));
+
+                    if (bestDistance > distance)
+                    {
+                        bestDistance = distance;
+                        bestFound = station;
+                    }
+                }
+
+                return bestFound;
+            }
+
+            return null;
         }
 
         #endregion

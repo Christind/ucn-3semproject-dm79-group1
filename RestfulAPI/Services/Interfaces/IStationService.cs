@@ -24,6 +24,9 @@ namespace RestfulAPI.Services.Interfaces
         [OperationContract]
         bool DisableStation(string value);
 
+        [OperationContract]
+        Station LocateNearestStation(string lat, string lng);
+
         #endregion
 
         #region StationMaintenance

@@ -14,12 +14,13 @@ namespace RestfulAPI.Services
         private readonly EdgeRepository _edgeRepository;
         private readonly ArchiveRepository _archiveRepository;
         private readonly ArchiveStationRepository _archiveStationRepository;
-
+        private readonly StationRepository _stationRepository;
         public RouteService()
         {
             _edgeRepository = new EdgeRepository();
             _archiveRepository = new ArchiveRepository();
             _archiveStationRepository = new ArchiveStationRepository();
+            _stationRepository = new StationRepository();
         }
 
         #region edges
@@ -107,17 +108,48 @@ namespace RestfulAPI.Services
 
         #region route calculation
 
-        public bool CalculateRoute(string sloc, string eloc)
+        public bool CalculateRoute(string sLat, string sLng, string eLat, string eLng)
         {
             try
             {
-                return false;
+                Station firstStation = new StationService().LocateNearestStation(sLat, sLng);
+                firstStation.Edges = _edgeRepository.GetEdgesByStation(firstStation).ToList();
+
+                //Collections
+                List<Station> closedSet = new List<Station>();
+                List<Station> openSet = new List<Station>() {firstStation};
+                List<Station> cameFrom = new List<Station>();
+
+                while (openSet.Count > 0)
+                {
+                    
+
+                }
+
+                
+
+
+                Station endStation = new StationService().LocateNearestStation(eLat, eLng);
             }
             catch (Exception ex)
             {
                 HandleLogging.LogMessage(ex, "CalculateRoute", 1, WebOperationContext.Current);
                 return false;
             }
+        }
+
+        private double Heuristic(Station start, Station end)
+        {
+            double distance = 0;
+            Station current = start;
+            while(current.ID != end.ID)
+            {
+                Edge edge = current.Edges.OrderBy(x => x.Distance).FirstOrDefault();
+                distance += Convert.ToDouble(edge.Distance);
+                current = _stationRepository.GetStationById(edge.EndStation);
+            }
+
+            return distance;
         }
 
         #endregion

@@ -50,7 +50,12 @@ namespace WebClient.Controllers
                                 city.CityName));
                     
                     //replace
-                    stations = JsonHelper.DeserializeJson<List<Station>>("http://localhost:8732/get/all/stations").Where(x => x.Title.Equals(city.CityName)).ToList();
+                    var station =
+                        JsonHelper.DeserializeJson<Station>(
+                            String.Format("http://localhost:8732/get/station/nearest/{0}@{1}",
+                                          geoLocation.results.First().geometry.location.lat,
+                                          geoLocation.results.First().geometry.location.lng));
+                    stations.Add(station);
                 }
                 else
                 {
@@ -58,7 +63,12 @@ namespace WebClient.Controllers
                         JsonHelper.DeserializeJson<GeoCoding>(String.Format(
                                 "http://maps.googleapis.com/maps/api/geocode/json?address={0},+Denmark&sensor=false",
                                 searchValue));
-                    stations = JsonHelper.DeserializeJson<List<Station>>("http://localhost:8732/get/all/stations").Where(x => x.Title.Equals(searchValue)).ToList();
+                    var station =
+                        JsonHelper.DeserializeJson<Station>(
+                            String.Format("http://localhost:8732/get/station/nearest/{0}@{1}",
+                                          geoLocation.results.First().geometry.location.lat,
+                                          geoLocation.results.First().geometry.location.lng));
+                    stations.Add(station);
                 }
                
                 return View("Index", stations);

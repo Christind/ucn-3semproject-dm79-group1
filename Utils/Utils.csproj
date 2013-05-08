@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Helpers\EncryptionHelper.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
+    <Compile Include="Helpers\GeoLocationHelper.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Helpers\NullableTypesHelper.cs" />
     <Compile Include="Helpers\TextHelper.cs" />

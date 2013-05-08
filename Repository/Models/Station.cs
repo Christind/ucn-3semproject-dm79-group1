@@ -41,6 +41,8 @@ namespace Repository.Models
         [DataMember]
         public virtual List<StationMaintenance> StationMaintenances { get; set; }
         [DataMember]
+        public virtual List<Edge> Edges { get; set; }
+        [DataMember]
         public virtual StationType StationType { get; set; }
     }
 }
