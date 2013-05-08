@@ -341,10 +341,10 @@ namespace RestfulAPI
         #region route calculation
 
         // Needs to be reevaluated...
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "calculate/from:{sloc},to:{eloc}")]
-        public bool CalculateRoute(string sloc, string eloc)
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "calculate/from/{sLat}@{sLng}/to/{eLat}@{eLng}")]
+        public bool CalculateRoute(string sLat, string sLng, string eLat, string eLng)
         {
-            return new RouteService().CalculateRoute(sloc, eloc);
+            return new RouteService().CalculateRoute(sLat, sLng, eLat, eLng);
         }
 
         #endregion

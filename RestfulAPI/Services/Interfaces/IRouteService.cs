@@ -29,7 +29,7 @@ namespace RestfulAPI.Services.Interfaces
         #region route calculation
 
         [OperationContract]
-        bool CalculateRoute(string sloc, string eloc);
+        bool CalculateRoute(string sLat, string sLng, string eLat, string eLng);
 
         #endregion
 
