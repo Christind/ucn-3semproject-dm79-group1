@@ -5,6 +5,7 @@ using System.ServiceModel.Web;
 using Logging;
 using Repository.Models;
 using Repository.Resources;
+using RestfulAPI.Resources;
 using RestfulAPI.Services.Interfaces;
 
 namespace RestfulAPI.Services
@@ -108,48 +109,17 @@ namespace RestfulAPI.Services
 
         #region route calculation
 
-        public bool CalculateRoute(string sLat, string sLng, string eLat, string eLng)
+        public List<Station> CalculateRoute(string sLat, string sLng, string eLat, string eLng)
         {
             try
             {
-                Station firstStation = new StationService().LocateNearestStation(sLat, sLng);
-                firstStation.Edges = _edgeRepository.GetEdgesByStation(firstStation).ToList();
-
-                //Collections
-                List<Station> closedSet = new List<Station>();
-                List<Station> openSet = new List<Station>() {firstStation};
-                List<Station> cameFrom = new List<Station>();
-
-                while (openSet.Count > 0)
-                {
-                    
-
-                }
-
-                
-
-
-                Station endStation = new StationService().LocateNearestStation(eLat, eLng);
+                return new AStar().CalculateRoute(sLat, sLng, eLat, eLng);
             }
             catch (Exception ex)
             {
                 HandleLogging.LogMessage(ex, "CalculateRoute", 1, WebOperationContext.Current);
-                return false;
+                return null;
             }
-        }
-
-        private double Heuristic(Station start, Station end)
-        {
-            double distance = 0;
-            Station current = start;
-            while(current.ID != end.ID)
-            {
-                Edge edge = current.Edges.OrderBy(x => x.Distance).FirstOrDefault();
-                distance += Convert.ToDouble(edge.Distance);
-                current = _stationRepository.GetStationById(edge.EndStation);
-            }
-
-            return distance;
         }
 
         #endregion
