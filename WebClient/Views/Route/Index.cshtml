@@ -1,0 +1,121 @@
+﻿@using System.Globalization
+@model List<Repository.Models.Station>
+
+@{
+    ViewBag.Title = "Ruteplanlægning";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h2>Ruteplanlægning</h2>
+
+<style>
+    #map-canvas img {
+        max-width: none;
+    }
+    #directions-panel {
+        height: 380px;
+        width: 380px;
+        float: left;
+        overflow: auto;
+        overflow-x:hidden;
+    }
+</style>
+<fieldset>
+    <legend>Udregn rute mellem adresse, by eller postnummer</legend>
+</fieldset>
+<div id="map-container">
+    <div id="map-description" style="height: 500px; width: 400px; float: left;">
+        @using (Html.BeginForm("CalculateRoute", "Route", FormMethod.Post))
+        {
+            @Html.ValidationSummary(true)
+            <table>
+                <tr>
+                    <td style="padding-bottom: 5px;">
+                        <span>Fra lokation:</span>
+                    </td>
+                    <td style="padding-bottom: 5px;">
+                        @Html.TextBox("fromValue", null, new { style = "margin: 0px;  width: 283px;" })
+                    </td>
+                </tr>
+                <tr style="border-bottom: 5px;">
+                    <td style="padding-bottom: 5px;">
+                        <span>Til lokation:</span>
+                    </td>
+                    <td style="padding-bottom: 5px;">
+                        @Html.TextBox("toValue", null, new { style = "margin: 0px; width: 283px;" })
+                    </td>
+                </tr>
+                <tr>
+                    <td />
+                    <td style="text-align: right;">
+                        <input class="btn" type="submit" value="Udregn" />
+                    </td>
+                </tr>
+            </table>
+            <span id="direction-header" style="font-weight: bold;"></span>
+               <div id="directions-panel"></div>
+        }
+    </div>
+    <div id="map-canvas" style="height: 500px; width: 770px;" />
+</div>
+
+@section libaries
+{
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?&sensor=false"></script>
+    <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markermanager/src/markermanager.js"></script>
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        var directionsDisplay;
+        var directionsService = new google.maps.DirectionsService();
+        var map;
+
+        function initialize() {
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            var mapOptions = {
+                zoom: 6,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                center: new google.maps.LatLng(56.303100, 10.533142)
+            }
+            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            directionsDisplay.setMap(map);
+            directionsDisplay.setPanel(document.getElementById("directions-panel"));
+
+            if (document.getElementById('fromValue').value) {
+                calcRoute();
+            }
+        }
+
+        function calcRoute() {
+            var start = document.getElementById('fromValue').value + ", denmark";
+            var end = document.getElementById('toValue').value + ", denmark";
+            var waypnts = [@if (Model != null)
+                           {
+                               foreach (var item in Model)
+                               {
+                                   <text>
+                                       { location: "@item.StationLat.ToString(CultureInfo.InvariantCulture).Replace(",", ".") @item.StationLong.ToString(CultureInfo.InvariantCulture).Replace(",", ".")", stopover: true },
+                                   </text>
+                               }
+                           }];
+            
+            var request = {
+                origin: start,
+                waypoints: waypnts,
+                destination: end,
+                optimizeWaypoints: true,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+            directionsService.route(request, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                    document.getElementById("direction-header").innerHTML = "Kørselsvejledning";
+                }
+            });
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+}
