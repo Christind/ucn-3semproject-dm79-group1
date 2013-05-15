@@ -13,11 +13,15 @@ namespace Repository.Models.Mapping
             // Table & Column Mappings
             this.ToTable("Edges");
             this.Property(t => t.ID).HasColumnName("ID");
-            this.Property(t => t.StartStation).HasColumnName("StartStation");
-            this.Property(t => t.EndStation).HasColumnName("EndStation");
+            this.Property(t => t.StartStationId).HasColumnName("StartStationId");
+            this.Property(t => t.EndStationId).HasColumnName("EndStationId");
             this.Property(t => t.Distance).HasColumnName("Distance");
             this.Property(t => t.Time).HasColumnName("Time");
             this.Property(t => t.IsActive).HasColumnName("IsActive");
+
+            // Relationships
+            this.HasRequired(t => t.StartStation).WithMany(t => t.Edges).HasForeignKey(x => x.StartStation);
+            this.HasRequired(t => t.EndStation).WithMany(t => t.Edges).HasForeignKey(x => x.EndStation);
         }
     }
 }

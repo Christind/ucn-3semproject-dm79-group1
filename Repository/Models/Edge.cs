@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
 namespace Repository.Models
@@ -7,13 +8,13 @@ namespace Repository.Models
         [DataMember]
         public int ID { get; set; }
         [DataMember]
-        public int StartStation { get; set; }
+        public int StartStationId { get; set; }
         [DataMember]
-        public Station StartStationObj { get; set; }
+        public virtual Station StartStation { get; set; }
         [DataMember]
-        public int EndStation { get; set; }
+        public int EndStationId { get; set; }
         [DataMember]
-        public Station EndStationObj { get; set; }
+        public virtual Station EndStation { get; set; }
         [DataMember]
         public decimal Distance { get; set; }
         [DataMember]

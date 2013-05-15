@@ -51,7 +51,14 @@ namespace Repository.Resources
 
         public IQueryable<Edge> GetEdgesByStation(Station station)
         {
-            return db.Edges.Where(x => x.StartStation.Equals(station.ID) || x.EndStation.Equals(station.ID));
+            var edges = db.Edges.Where(x => x.StartStation.Equals(station.ID) || x.EndStation.Equals(station.ID));
+            foreach (var edge in edges)
+            {
+                edge.StartStationObj = db.Stations.FirstOrDefault(x => x.ID.Equals(edge.StartStation));
+                edge.EndStationObj = db.Stations.FirstOrDefault(x => x.ID.Equals(edge.EndStation));
+            }
+
+            return edges;
         }
     }
 }

@@ -108,6 +108,8 @@ namespace RestfulAPI.Services
 
         public Station LocateNearestStation(string _lat, string _lng)
         {
+            _lat = _lat.Replace(".", ",");
+            _lng = _lng.Replace(".", ",");
             double lat, lng;
             if (Double.TryParse(_lat, out lat) && Double.TryParse(_lng, out lng))
             {
