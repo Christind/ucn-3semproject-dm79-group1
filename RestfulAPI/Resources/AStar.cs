@@ -63,17 +63,17 @@ namespace RestfulAPI.Resources
                 foreach (var edge in current.Element.Edges)
                 {
                     double tentativeGScore = gScore + Convert.ToDouble(edge.Distance);
-                    if(_closedSet.Contains(edge.EndStationObj))
+                    if(_closedSet.Contains(edge.EndStation))
                         if(tentativeGScore >= Convert.ToDouble(edge.Distance))
                             continue;
 
-                    if(!_openSet.Contains(edge.EndStationObj) || tentativeGScore < Convert.ToDouble(edge.Distance))
+                    if(!_openSet.Contains(edge.EndStation) || tentativeGScore < Convert.ToDouble(edge.Distance))
                     {
-                        _cameFrom[edge.EndStationObj] = current.Element;
-                        _gScores[edge.EndStationObj] = tentativeGScore;
-                        _fScores[edge.EndStationObj] = gScore + Heuristic(current.Element, edge.EndStationObj);
-                        if(!_openSet.Contains(edge.EndStationObj))
-                            _openSet.Insert(edge.EndStationObj, Heuristic(edge.EndStationObj, endStation));
+                        _cameFrom[edge.EndStation] = current.Element;
+                        _gScores[edge.EndStation] = tentativeGScore;
+                        _fScores[edge.EndStation] = gScore + Heuristic(current.Element, edge.EndStation);
+                        if(!_openSet.Contains(edge.EndStation))
+                            _openSet.Insert(edge.EndStation, Heuristic(edge.EndStation, endStation));
                     }
                 }
             }
@@ -101,7 +101,7 @@ namespace RestfulAPI.Resources
             {
                 Edge edge = current.Edges.OrderBy(x => x.Distance).FirstOrDefault();
                 distance += Convert.ToDouble(edge.Distance);
-                current = _stationRepository.GetStationById(edge.EndStation);
+                current = _stationRepository.GetStationById(edge.EndStationId);
             }
 
             return distance;

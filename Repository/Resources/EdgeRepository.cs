@@ -54,8 +54,8 @@ namespace Repository.Resources
             var edges = db.Edges.Where(x => x.StartStation.Equals(station.ID) || x.EndStation.Equals(station.ID));
             foreach (var edge in edges)
             {
-                edge.StartStationObj = db.Stations.FirstOrDefault(x => x.ID.Equals(edge.StartStation));
-                edge.EndStationObj = db.Stations.FirstOrDefault(x => x.ID.Equals(edge.EndStation));
+                edge.StartStation = db.Stations.FirstOrDefault(x => x.ID.Equals(edge.StartStation));
+                edge.EndStation = db.Stations.FirstOrDefault(x => x.ID.Equals(edge.EndStation));
             }
 
             return edges;
