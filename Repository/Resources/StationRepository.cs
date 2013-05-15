@@ -15,9 +15,19 @@ namespace Repository.Resources
             _edgeRepository = new EdgeRepository();
         }
 
-        public IQueryable<Station> GetAllStations()
+        public IQueryable<Station> GetAllStations(bool getAssociations = false)
         {
-            return db.Stations;
+            var stations = db.Stations;
+            if(getAssociations)
+            {
+                foreach (var station in stations)
+                {
+                    station.BatteryStorages = _batteryStorageRepo.GetBatteryStorageByStationId(station.ID, true);
+                    station.Edges = _edgeRepository.GetEdgesByStation(station).ToList();
+                }
+            }
+
+            return stations;
         }
 
         public Station GetStationById(int value, bool getAssociations = false)
