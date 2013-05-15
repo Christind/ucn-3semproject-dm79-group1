@@ -105,6 +105,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RouteController.cs" />
     <Compile Include="Controllers\StationController.cs" />
     <Compile Include="Controllers\StationMaintenanceController.cs" />
     <Compile Include="Global.asax.cs">
