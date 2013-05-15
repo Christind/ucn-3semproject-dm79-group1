@@ -10,8 +10,6 @@ namespace Repository.Models
         [DataMember]
         public int StartStationId { get; set; }
         [DataMember]
-        public virtual Station StartStation { get; set; }
-        [DataMember]
         public int EndStationId { get; set; }
         [DataMember]
         public virtual Station EndStation { get; set; }

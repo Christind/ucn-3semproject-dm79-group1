@@ -41,8 +41,9 @@ namespace RestfulAPI.Resources
 
         public List<Station> CalculateRoute(string sLat, string sLng, string eLat, string eLng)
         {
-            Station firstStation = new StationService().LocateNearestStation(sLat, sLng);
-            Station endStation = new StationService().LocateNearestStation(eLat, eLng);
+            var stationService = new StationService();
+            Station firstStation = stationService.LocateNearestStation(sLat, sLng);
+            Station endStation = stationService.LocateNearestStation(eLat, eLng);
             firstStation.Edges = _edgeRepository.GetEdgesByStation(firstStation).ToList();
 
             double gScore = 0;
@@ -67,12 +68,13 @@ namespace RestfulAPI.Resources
                         if(tentativeGScore >= Convert.ToDouble(edge.Distance))
                             continue;
 
-                    if(!_openSet.Contains(edge.EndStation) || tentativeGScore < Convert.ToDouble(edge.Distance))
+                    bool isStationInOpenset = _openSet.Contains(edge.EndStation);
+                    if(!isStationInOpenset || tentativeGScore < Convert.ToDouble(edge.Distance))
                     {
                         _cameFrom[edge.EndStation] = current.Element;
                         _gScores[edge.EndStation] = tentativeGScore;
                         _fScores[edge.EndStation] = gScore + Heuristic(current.Element, edge.EndStation);
-                        if(!_openSet.Contains(edge.EndStation))
+                        if (!isStationInOpenset)
                             _openSet.Insert(edge.EndStation, Heuristic(edge.EndStation, endStation));
                     }
                 }
@@ -95,16 +97,14 @@ namespace RestfulAPI.Resources
 
         private double Heuristic(Station start, Station end)
         {
-            double distance = 0;
-            Station current = start;
-            while (current.ID != end.ID)
+            var endEdge = start.Edges.FirstOrDefault(x => x.EndStationId.Equals(end.ID));
+            if (endEdge != null)
             {
-                Edge edge = current.Edges.OrderBy(x => x.Distance).FirstOrDefault();
-                distance += Convert.ToDouble(edge.Distance);
-                current = _stationRepository.GetStationById(edge.EndStationId);
+                var distance = endEdge.Distance;
+                return Convert.ToDouble(distance);
             }
 
-            return distance;
+            return -1;
         }
     }
 }

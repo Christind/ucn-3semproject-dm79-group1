@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Utils.Helpers
 {
-    public struct HeapElement<T>
+    public class HeapElement<T>
     {
         public double Fscore { get; set; }
         public T Element { get; set; }
@@ -20,7 +20,7 @@ namespace Utils.Helpers
             _collection = new HeapElement<T>[size];
         }
 
-        public HeapElement<T>? GetParent(int i, out int index)
+        public HeapElement<T> GetParent(int i, out int index)
         {
             double element = i;
             index = (int)Math.Floor((element - 1) / 2);
@@ -33,13 +33,13 @@ namespace Utils.Helpers
             return _collection[index];
         }
 
-        public HeapElement<T>? GetLeftChild(int i, out int index)
+        public HeapElement<T> GetLeftChild(int i, out int index)
         {
             index = (2 * i) + 1;
             return _collection[index];
         }
 
-        public HeapElement<T>? GetRightChild(int i, out int index)
+        public HeapElement<T> GetRightChild(int i, out int index)
         {
             index = (2 * i) + 2;
             return _collection[index];
@@ -66,10 +66,10 @@ namespace Utils.Helpers
         private void HeapifyUp(int element)
         {
             int parentIndex;
-            HeapElement<T>? parent = GetParent(element, out parentIndex);
+            HeapElement<T> parent = GetParent(element, out parentIndex);
             if (parent != null)
             {
-                if (_collection[element].Fscore < parent.Value.Fscore)
+                if (_collection[element].Fscore < parent.Fscore)
                 {
                     Swap(ref _collection[parentIndex], ref _collection[element]);
                 }
@@ -80,7 +80,8 @@ namespace Utils.Helpers
             }
 
             // Swapped, current element is at parentIndex now, and _index is the parent of the element
-            HeapifyUp(parentIndex);
+            if(parentIndex > 0)
+                HeapifyUp(parentIndex);
         }
 
         public void Swap(ref HeapElement<T> a, ref HeapElement<T> b)
@@ -92,7 +93,7 @@ namespace Utils.Helpers
 
         public int Count
         {
-            get { return _index - 1; }
+            get { return _index; }
         }
 
         public HeapElement<T> Minimum
@@ -118,7 +119,7 @@ namespace Utils.Helpers
 
         public bool Contains(T i)
         {
-            return _collection.Any(x => x.Element.Equals(i));
+            return _collection.Where(x => x != null && x.Element != null).Any(x => x.Element.Equals(i));
         }
 
         public void Heapify()
@@ -132,26 +133,26 @@ namespace Utils.Helpers
             int leftChildIndex;
             int rightChildIndex;
 
-            HeapElement<T>? leftChild = GetLeftChild(index, out leftChildIndex);
-            HeapElement<T>? rightChild = GetRightChild(index, out rightChildIndex);
+            HeapElement<T> leftChild = GetLeftChild(index, out leftChildIndex);
+            HeapElement<T> rightChild = GetRightChild(index, out rightChildIndex);
 
-            if (leftChild == null || rightChild == null)
+            if (leftChild == null|| rightChild == null)
             {
                 return;
             }
 
             int replacingElement = 0;
 
-            if (leftChild.Value.Fscore < rightChild.Value.Fscore)
+            if (leftChild.Fscore < rightChild.Fscore)
             {
                 replacingElement = leftChildIndex;
             }
-            if (leftChild.Value.Fscore > rightChild.Value.Fscore)
+            if (leftChild.Fscore > rightChild.Fscore)
             {
                 replacingElement = rightChildIndex;
             }
 
-            if (leftChild.Value.Fscore.Equals(rightChild.Value.Fscore))
+            if (leftChild.Fscore.Equals(rightChild.Fscore))
             {
                 replacingElement = leftChildIndex;
             }

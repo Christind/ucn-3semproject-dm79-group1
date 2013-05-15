@@ -20,8 +20,12 @@ namespace Repository.Models.Mapping
             this.Property(t => t.IsActive).HasColumnName("IsActive");
 
             // Relationships
-            this.HasRequired(t => t.StartStation).WithMany(t => t.Edges).HasForeignKey(x => x.StartStation);
-            this.HasRequired(t => t.EndStation).WithMany(t => t.Edges).HasForeignKey(x => x.EndStation);
+            this.HasRequired(t => t.EndStation)
+                .WithMany(t => t.Edges)
+                .HasForeignKey(d => d.EndStationId);
+
+            //this.HasOptional(t => t.StartStation).WithMany(x => x.Edges)
+            //.HasForeignKey(t => t.StartStationId);
         }
     }
 }

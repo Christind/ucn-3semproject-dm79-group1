@@ -51,11 +51,11 @@ namespace Repository.Resources
 
         public IQueryable<Edge> GetEdgesByStation(Station station)
         {
-            var edges = db.Edges.Where(x => x.StartStation.Equals(station.ID) || x.EndStation.Equals(station.ID));
+            var edges = db.Edges.Where(x => x.StartStationId.Equals(station.ID) || x.EndStationId.Equals(station.ID));
             foreach (var edge in edges)
             {
-                edge.StartStation = db.Stations.FirstOrDefault(x => x.ID.Equals(edge.StartStation));
-                edge.EndStation = db.Stations.FirstOrDefault(x => x.ID.Equals(edge.EndStation));
+                //edge.StartStation = db.Stations.FirstOrDefault(x => x.ID.Equals(edge.StartStation));
+                edge.EndStation = db.Stations.FirstOrDefault(x => x.ID.Equals(edge.EndStationId));
             }
 
             return edges;
