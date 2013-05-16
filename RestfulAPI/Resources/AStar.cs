@@ -44,16 +44,16 @@ namespace RestfulAPI.Resources
             var stationService = new StationService();
             Station firstStation = stationService.LocateNearestStation(sLat, sLng);
             Station endStation = stationService.LocateNearestStation(eLat, eLng);
-            firstStation.Edges = _edgeRepository.GetEdgesByStation(firstStation).ToList();
+            firstStation.Edges = _edgeRepository.GetEdgesByStartStation(firstStation).ToList();
 
-            double gScore = 0;
-            double fScore = gScore + Heuristic(firstStation, endStation);
+            double fScore = Heuristic(firstStation, endStation);
+            _gScores[firstStation] = 0;
             _openSet.Insert(firstStation, fScore);
             
             while (_openSet.Count > 0)
             {
                 var current = _openSet.Minimum;
-                if (current.Element == endStation)
+                if (current.Element.ID == endStation.ID)
                 {
                     ReconstructPath(current.Element);
                     return _path;
@@ -61,9 +61,9 @@ namespace RestfulAPI.Resources
 
                 _openSet.RemoveMinimum();
                 _closedSet.Add(current.Element);
-                foreach (var edge in current.Element.Edges)
+                foreach (var edge in current.Element.Edges.Where(x => x.Distance < 250000)) //Replace with car range
                 {
-                    double tentativeGScore = gScore + Convert.ToDouble(edge.Distance);
+                    double tentativeGScore = _gScores[current.Element] + Convert.ToDouble(edge.Distance);
                     if(_closedSet.Contains(edge.EndStation))
                         if(tentativeGScore >= Convert.ToDouble(edge.Distance))
                             continue;
@@ -71,13 +71,15 @@ namespace RestfulAPI.Resources
                     bool isStationInOpenset = _openSet.Contains(edge.EndStation);
                     if(!isStationInOpenset || tentativeGScore < Convert.ToDouble(edge.Distance))
                     {
-                        _cameFrom[edge.EndStation] = current.Element;
+                        //_cameFrom[edge.EndStation] = current.Element;
                         _gScores[edge.EndStation] = tentativeGScore;
-                        _fScores[edge.EndStation] = gScore + Heuristic(current.Element, edge.EndStation);
+                        _fScores[edge.EndStation] = _gScores[edge.EndStation] + Heuristic(edge.EndStation, endStation);
                         if (!isStationInOpenset)
-                            _openSet.Insert(edge.EndStation, Heuristic(edge.EndStation, endStation));
+                            _openSet.Insert(edge.EndStation, _fScores[edge.EndStation]);
                     }
                 }
+
+                _cameFrom[_openSet.Minimum.Element] = current.Element;
             }
 
             return null;
@@ -89,7 +91,7 @@ namespace RestfulAPI.Resources
             if (_cameFrom.TryGetValue(current, out temp))
             {
                 ReconstructPath(temp);
-                _path.Add(temp);
+                _path.Add(current);
             }
             else
                 _path.Add(current);
@@ -97,7 +99,9 @@ namespace RestfulAPI.Resources
 
         private double Heuristic(Station start, Station end)
         {
-            var endEdge = start.Edges.FirstOrDefault(x => x.EndStationId.Equals(end.ID));
+            var edgeRepo = new EdgeRepository();
+            var endEdge = edgeRepo.GetEdgeByStartEndStation(start, end);
+            //var endEdge = start.Edges.FirstOrDefault(x => x.EndStationId.Equals(end.ID));
             if (endEdge != null)
             {
                 var distance = endEdge.Distance;

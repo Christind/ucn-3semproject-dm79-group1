@@ -104,7 +104,8 @@ namespace Utils.Helpers
         public HeapElement<T> RemoveMinimum()
         {
             HeapElement<T> minimum = _collection[0];
-            _collection[0] = _collection[--_index];
+            _collection[0] = null;
+            _index--;
             //_collection[_index] = ;
 
             Heapify();
