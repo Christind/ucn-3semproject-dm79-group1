@@ -115,7 +115,7 @@ namespace RestfulAPI.Resources
 
         private void InsertVertex(Station vert, double fScore)
         {
-            //x.Edges = _edgeRepository.GetEdgesByStartStation(vert).ToList();
+            vert.Edges = _edgeRepository.GetEdgesByStartStation(vert).ToList();
             _openSet.Insert(vert, fScore);
         }
     }

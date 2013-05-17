@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Repository.Models;
 
 namespace Repository.Resources
@@ -66,8 +67,7 @@ namespace Repository.Resources
             var edges = db.Edges.Where(x => x.StartStationId.Equals(station.ID));
             foreach (var edge in edges)
             {
-                //edge.StartStation = db.Stations.FirstOrDefault(x => x.ID.Equals(edge.StartStation));
-                edge.EndStation = db.Stations.FirstOrDefault(x => x.ID.Equals(edge.EndStationId));
+                edge.EndStation = db.Stations.AsNoTracking().FirstOrDefault(x => x.ID.Equals(edge.EndStationId));
             }
 
             return edges;

@@ -12,6 +12,7 @@ namespace Repository.Models
         {
             this.Reservations = new List<Reservation>();
             this.StationMaintenances = new List<StationMaintenance>();
+            this.Edges = new List<Edge>();
         }
 
         [DataMember]
