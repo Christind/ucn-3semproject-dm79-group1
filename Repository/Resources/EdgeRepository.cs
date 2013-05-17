@@ -75,7 +75,7 @@ namespace Repository.Resources
 
         public Edge GetEdgeByStartEndStation(Station start, Station end)
         {
-            return db.Edges.FirstOrDefault(x => x.StartStationId.Equals(start.ID) && x.EndStationId.Equals(end.ID));
+            return db.Edges.AsNoTracking().FirstOrDefault(x => x.StartStationId.Equals(start.ID) && x.EndStationId.Equals(end.ID));
         }
     }
 }
