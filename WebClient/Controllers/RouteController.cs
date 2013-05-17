@@ -32,14 +32,14 @@ namespace WebClient.Controllers
                     "http://maps.googleapis.com/maps/api/geocode/json?address={0},+Denmark&sensor=false",
                     toValue));
 
-                var vertex = JsonHelper.DeserializeJson<List<Station>>(String.Format(
+                var vertices = JsonHelper.DeserializeJson<List<Station>>(String.Format(
                     "http://localhost:8732/calculate/from/{0}@{1}/to/{2}@{3}",
                     fromLocation.results.First().geometry.location.lat,
                     fromLocation.results.First().geometry.location.lng,
                     endLocation.results.First().geometry.location.lat,
                     endLocation.results.First().geometry.location.lng));
 
-                return View("Index", vertex);
+                return View("Index", vertices);
             }
             catch
             {
