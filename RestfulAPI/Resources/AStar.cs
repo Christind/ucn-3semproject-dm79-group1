@@ -93,11 +93,16 @@ namespace RestfulAPI.Resources
             Station temp;
             if (_cameFrom.TryGetValue(current, out temp))
             {
+                Edge e = _edgeRepository.GetEdgeByStartEndStation(temp, current);
+                current.Edges = new List<Edge> { e };
                 ReconstructPath(temp);
                 _path.Add(current);
             }
             else
+            {
+                current.Edges = new List<Edge>();
                 _path.Add(current);
+            }
         }
 
         private double Heuristic(Station start, Station end)
