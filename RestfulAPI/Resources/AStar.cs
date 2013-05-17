@@ -61,7 +61,8 @@ namespace RestfulAPI.Resources
 
                 _openSet.RemoveMinimum();
                 _closedSet.Add(current.Element);
-                foreach (var edge in current.Element.Edges.Where(x => x.Distance < 250000)) //Replace with car range
+                var edges = current.Element.Edges.Where(x => x.Distance < 250000);
+                foreach (var edge in edges) //Replace with car range
                 {
                     double tentativeGScore = _gScores[current.Element] + Convert.ToDouble(edge.Distance);
                     if(_closedSet.Contains(edge.EndStation))
@@ -75,7 +76,9 @@ namespace RestfulAPI.Resources
                         _gScores[edge.EndStation] = tentativeGScore;
                         _fScores[edge.EndStation] = _gScores[edge.EndStation] + Heuristic(edge.EndStation, endStation);
                         if (!isStationInOpenset)
-                            _openSet.Insert(edge.EndStation, _fScores[edge.EndStation]);
+                        {
+                            InsertVertex(edge.EndStation, _fScores[edge.EndStation]);
+                        }
                     }
                 }
 
@@ -99,8 +102,7 @@ namespace RestfulAPI.Resources
 
         private double Heuristic(Station start, Station end)
         {
-            var edgeRepo = new EdgeRepository();
-            var endEdge = edgeRepo.GetEdgeByStartEndStation(start, end);
+            var endEdge = _edgeRepository.GetEdgeByStartEndStation(start, end);
             //var endEdge = start.Edges.FirstOrDefault(x => x.EndStationId.Equals(end.ID));
             if (endEdge != null)
             {
@@ -109,6 +111,12 @@ namespace RestfulAPI.Resources
             }
 
             return -1;
+        }
+
+        private void InsertVertex(Station vert, double fScore)
+        {
+            //x.Edges = _edgeRepository.GetEdgesByStartStation(vert).ToList();
+            _openSet.Insert(vert, fScore);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Utils.Helpers
 
             if (index < 0)
             {
-                return null;
+                return _collection[0];
             }
 
             return _collection[index];
@@ -80,7 +80,7 @@ namespace Utils.Helpers
             }
 
             // Swapped, current element is at parentIndex now, and _index is the parent of the element
-            if(parentIndex > 0)
+            //if(parentIndex >= 0)
                 HeapifyUp(parentIndex);
         }
 
@@ -104,8 +104,9 @@ namespace Utils.Helpers
         public HeapElement<T> RemoveMinimum()
         {
             HeapElement<T> minimum = _collection[0];
-            _collection[0] = null;
             _index--;
+            _collection[0] = _collection[_index];
+            _collection[_index] = null;
             //_collection[_index] = ;
 
             Heapify();
@@ -131,34 +132,41 @@ namespace Utils.Helpers
 
         public void Heapify(int index)
         {
-            int leftChildIndex;
-            int rightChildIndex;
+            //do
+            //{
+                int leftChildIndex;
+                int rightChildIndex;
 
-            HeapElement<T> leftChild = GetLeftChild(index, out leftChildIndex);
-            HeapElement<T> rightChild = GetRightChild(index, out rightChildIndex);
+                HeapElement<T> leftChild = GetLeftChild(index, out leftChildIndex);
+                HeapElement<T> rightChild = GetRightChild(index, out rightChildIndex);
 
-            if (leftChild == null|| rightChild == null)
-            {
-                return;
-            }
+                if (leftChild == null || rightChild == null)
+                {
+                    return;
+                }
 
-            int replacingElement = 0;
+                int replacingElement = 0;
 
-            if (leftChild.Fscore < rightChild.Fscore)
-            {
-                replacingElement = leftChildIndex;
-            }
-            if (leftChild.Fscore > rightChild.Fscore)
-            {
-                replacingElement = rightChildIndex;
-            }
+                if (leftChild.Fscore < rightChild.Fscore)
+                {
+                    replacingElement = leftChildIndex;
+                }
+                if (leftChild.Fscore > rightChild.Fscore)
+                {
+                    replacingElement = rightChildIndex;
+                }
 
-            if (leftChild.Fscore.Equals(rightChild.Fscore))
-            {
-                replacingElement = leftChildIndex;
-            }
+                if (leftChild.Fscore.Equals(rightChild.Fscore))
+                {
+                    replacingElement = leftChildIndex;
+                }
 
-            Swap(ref _collection[index], ref _collection[replacingElement]);
+                Swap(ref _collection[index], ref _collection[replacingElement]);
+
+            //    index = replacingElement;
+            //} while (index < _index);
+
+            
 
             Heapify(replacingElement);
         }
