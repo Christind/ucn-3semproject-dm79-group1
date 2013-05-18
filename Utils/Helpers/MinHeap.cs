@@ -6,7 +6,7 @@ namespace Utils.Helpers
 {
     public class HeapElement<T>
     {
-        public double Fscore { get; set; }
+        public decimal Fscore { get; set; }
         public T Element { get; set; }
     }
 
@@ -53,9 +53,9 @@ namespace Utils.Helpers
             _index++;
         }
 
-        public void Insert(T i, double fScore)
+        public void Insert(T i, decimal fScore)
         {
-            var e = new HeapElement<T> {Element = i, Fscore = fScore};
+            var e = new HeapElement<T> { Element = i, Fscore = fScore };
             _collection[_index] = e;
 
             HeapifyUp(_index);
@@ -80,8 +80,7 @@ namespace Utils.Helpers
             }
 
             // Swapped, current element is at parentIndex now, and _index is the parent of the element
-            //if(parentIndex >= 0)
-                HeapifyUp(parentIndex);
+            HeapifyUp(parentIndex);
         }
 
         public void Swap(ref HeapElement<T> a, ref HeapElement<T> b)
@@ -107,7 +106,6 @@ namespace Utils.Helpers
             _index--;
             _collection[0] = _collection[_index];
             _collection[_index] = null;
-            //_collection[_index] = ;
 
             Heapify();
 
@@ -132,41 +130,36 @@ namespace Utils.Helpers
 
         public void Heapify(int index)
         {
-            //do
-            //{
-                int leftChildIndex;
-                int rightChildIndex;
 
-                HeapElement<T> leftChild = GetLeftChild(index, out leftChildIndex);
-                HeapElement<T> rightChild = GetRightChild(index, out rightChildIndex);
+            int leftChildIndex;
+            int rightChildIndex;
 
-                if (leftChild == null || rightChild == null)
-                {
-                    return;
-                }
+            HeapElement<T> leftChild = GetLeftChild(index, out leftChildIndex);
+            HeapElement<T> rightChild = GetRightChild(index, out rightChildIndex);
 
-                int replacingElement = 0;
+            if (leftChild == null || rightChild == null)
+            {
+                return;
+            }
 
-                if (leftChild.Fscore < rightChild.Fscore)
-                {
-                    replacingElement = leftChildIndex;
-                }
-                if (leftChild.Fscore > rightChild.Fscore)
-                {
-                    replacingElement = rightChildIndex;
-                }
+            int replacingElement = 0;
 
-                if (leftChild.Fscore.Equals(rightChild.Fscore))
-                {
-                    replacingElement = leftChildIndex;
-                }
+            if (leftChild.Fscore < rightChild.Fscore)
+            {
+                replacingElement = leftChildIndex;
+            }
+            if (leftChild.Fscore > rightChild.Fscore)
+            {
+                replacingElement = rightChildIndex;
+            }
 
-                Swap(ref _collection[index], ref _collection[replacingElement]);
+            if (leftChild.Fscore.Equals(rightChild.Fscore))
+            {
+                replacingElement = leftChildIndex;
+            }
 
-            //    index = replacingElement;
-            //} while (index < _index);
+            Swap(ref _collection[index], ref _collection[replacingElement]);
 
-            
 
             Heapify(replacingElement);
         }

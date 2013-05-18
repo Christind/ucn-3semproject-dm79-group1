@@ -113,7 +113,7 @@ namespace RestfulAPI.Services
         {
             try
             {
-                return new AStar().CalculateRoute(sLat, sLng, eLat, eLng);
+                return new AStar().CalculateRoute(sLat, sLng, eLat, eLng, 250000);
             }
             catch (Exception ex)
             {

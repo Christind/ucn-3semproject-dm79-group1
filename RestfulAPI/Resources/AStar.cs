@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel.Web;
-using System.Text;
-using System.Threading.Tasks;
-using Logging;
 using Repository.Models;
 using Repository.Resources;
 using RestfulAPI.Services;
@@ -16,37 +11,39 @@ namespace RestfulAPI.Resources
     {
         //Repositories
         private readonly EdgeRepository _edgeRepository;
-        private readonly StationRepository _stationRepository;
+        private readonly StationService _stationService;
 
         //Collections
         private readonly List<Station> _closedSet;
         private readonly MinHeap<Station> _openSet;
         private readonly Dictionary<Station, Station> _cameFrom;
-        private readonly Dictionary<Station, double> _gScores;
-        private readonly Dictionary<Station, double> _fScores; 
+        private readonly Dictionary<Station, decimal> _gScores;
+        private readonly Dictionary<Station, decimal> _fScores; 
         private readonly List<Station> _path;
 
         public AStar()
         {
             _edgeRepository = new EdgeRepository();
-            _stationRepository = new StationRepository();
+            _stationService = new StationService();
 
             _closedSet = new List<Station>();
             _openSet = new MinHeap<Station>(1064);
             _cameFrom = new Dictionary<Station, Station>();
-            _gScores = new Dictionary<Station, double>();
-            _fScores = new Dictionary<Station, double>();
+            _gScores = new Dictionary<Station, decimal>();
+            _fScores = new Dictionary<Station, decimal>();
             _path = new List<Station>();
         }
 
-        public List<Station> CalculateRoute(string sLat, string sLng, string eLat, string eLng)
+        public List<Station> CalculateRoute(string sLat, string sLng, string eLat, string eLng, decimal maxRange)
         {
-            var stationService = new StationService();
-            Station firstStation = stationService.LocateNearestStation(sLat, sLng);
-            Station endStation = stationService.LocateNearestStation(eLat, eLng);
+            if (maxRange < 1)
+                return null;
+
+            Station firstStation = _stationService.LocateNearestStation(sLat, sLng);
+            Station endStation = _stationService.LocateNearestStation(eLat, eLng);
             firstStation.Edges = _edgeRepository.GetEdgesByStartStation(firstStation).ToList();
 
-            double fScore = Heuristic(firstStation, endStation);
+            decimal fScore = Heuristic(firstStation, endStation);
             _gScores[firstStation] = 0;
             _openSet.Insert(firstStation, fScore);
             
@@ -61,24 +58,23 @@ namespace RestfulAPI.Resources
 
                 _openSet.RemoveMinimum();
                 _closedSet.Add(current.Element);
-                var edges = current.Element.Edges.Where(x => x.Distance < 250000);
-                foreach (var edge in edges) //Replace with car range
+                var edges = current.Element.Edges.Where(x => x.Distance < maxRange);
+                foreach (var edge in edges)
                 {
-                    double tentativeGScore = _gScores[current.Element] + Convert.ToDouble(edge.Distance);
+                    decimal distance = edge.Distance;
+                    decimal tentativeGScore = _gScores[current.Element] + distance;
                     if(_closedSet.Contains(edge.EndStation))
-                        if(tentativeGScore >= Convert.ToDouble(edge.Distance))
+                        if(tentativeGScore >= distance)
                             continue;
 
                     bool isStationInOpenset = _openSet.Contains(edge.EndStation);
-                    if(!isStationInOpenset || tentativeGScore < Convert.ToDouble(edge.Distance))
+                    if(!isStationInOpenset || tentativeGScore < distance)
                     {
-                        //_cameFrom[edge.EndStation] = current.Element;
                         _gScores[edge.EndStation] = tentativeGScore;
                         _fScores[edge.EndStation] = _gScores[edge.EndStation] + Heuristic(edge.EndStation, endStation);
+
                         if (!isStationInOpenset)
-                        {
                             InsertVertex(edge.EndStation, _fScores[edge.EndStation]);
-                        }
                     }
                 }
 
@@ -105,20 +101,13 @@ namespace RestfulAPI.Resources
             }
         }
 
-        private double Heuristic(Station start, Station end)
+        private decimal Heuristic(Station start, Station end)
         {
             var endEdge = _edgeRepository.GetEdgeByStartEndStation(start, end);
-            //var endEdge = start.Edges.FirstOrDefault(x => x.EndStationId.Equals(end.ID));
-            if (endEdge != null)
-            {
-                var distance = endEdge.Distance;
-                return Convert.ToDouble(distance);
-            }
-
-            return -1;
+            return endEdge != null ? endEdge.Distance : -1;
         }
 
-        private void InsertVertex(Station vert, double fScore)
+        private void InsertVertex(Station vert, decimal fScore)
         {
             vert.Edges = _edgeRepository.GetEdgesByStartStation(vert).ToList();
             _openSet.Insert(vert, fScore);
