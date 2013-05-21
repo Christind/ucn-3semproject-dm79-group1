@@ -340,11 +340,10 @@ namespace RestfulAPI
 
         #region route calculation
 
-        // Needs to be reevaluated...
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "calculate/from/{sLat}@{sLng}/to/{eLat}@{eLng}")]
-        public List<Station> CalculateRoute(string sLat, string sLng, string eLat, string eLng)
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "calculate/from/{sLat}@{sLng}/to/{eLat}@{eLng}/maxRange/{maxRange}")]
+        public List<Station> CalculateRoute(string sLat, string sLng, string eLat, string eLng, string maxRange)
         {
-            List<Station> returnList = new RouteService().CalculateRoute(sLat, sLng, eLat, eLng);
+            List<Station> returnList = new RouteService().CalculateRoute(sLat, sLng, eLat, eLng, maxRange);
             return returnList;
         }
 

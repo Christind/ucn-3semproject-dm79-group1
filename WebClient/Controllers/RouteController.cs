@@ -20,7 +20,7 @@ namespace WebClient.Controllers
         }
 
         [HttpPost]
-        public ViewResult CalculateRoute(string fromValue, string toValue)
+        public ViewResult CalculateRoute(string fromValue, string toValue, string maxRange)
         {
             try
             {
@@ -33,11 +33,12 @@ namespace WebClient.Controllers
                     toValue));
 
                 var vertices = JsonHelper.DeserializeJson<List<Station>>(String.Format(
-                    "http://localhost:8732/calculate/from/{0}@{1}/to/{2}@{3}",
+                    "http://localhost:8732/calculate/from/{0}@{1}/to/{2}@{3}/maxRange/{4}",
                     fromLocation.results.First().geometry.location.lat,
                     fromLocation.results.First().geometry.location.lng,
                     endLocation.results.First().geometry.location.lat,
-                    endLocation.results.First().geometry.location.lng));
+                    endLocation.results.First().geometry.location.lng, 
+                    maxRange));
 
                 return View("Index", vertices);
             }

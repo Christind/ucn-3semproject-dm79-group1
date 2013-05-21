@@ -109,11 +109,15 @@ namespace RestfulAPI.Services
 
         #region route calculation
 
-        public List<Station> CalculateRoute(string sLat, string sLng, string eLat, string eLng)
+        public List<Station> CalculateRoute(string sLat, string sLng, string eLat, string eLng, string maxRange)
         {
             try
             {
-                return new AStar().CalculateRoute(sLat, sLng, eLat, eLng, 250000);
+                decimal mRange;
+                if (decimal.TryParse(maxRange, out mRange))
+                    return new AStar().CalculateRoute(sLat, sLng, eLat, eLng, mRange);
+
+                throw new FormatException("The supplied maxRange, is not of the datatype decimal.");
             }
             catch (Exception ex)
             {

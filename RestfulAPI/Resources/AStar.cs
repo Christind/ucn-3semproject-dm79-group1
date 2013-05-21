@@ -39,6 +39,7 @@ namespace RestfulAPI.Resources
             if (maxRange < 1)
                 return null;
 
+            maxRange = maxRange*1000;
             Station firstStation = _stationService.LocateNearestStation(sLat, sLng);
             Station endStation = _stationService.LocateNearestStation(eLat, eLng);
             firstStation.Edges = _edgeRepository.GetEdgesByStartStation(firstStation).ToList();
@@ -59,11 +60,15 @@ namespace RestfulAPI.Resources
                 _openSet.RemoveMinimum();
                 _closedSet.Add(current.Element);
                 var edges = current.Element.Edges.Where(x => x.Distance < maxRange);
+                if (!edges.Any())
+                    return null;
+
                 foreach (var edge in edges)
                 {
                     decimal distance = edge.Distance;
                     decimal tentativeGScore = _gScores[current.Element] + distance;
-                    if(_closedSet.Contains(edge.EndStation))
+                    bool isStationInClosedSet = _closedSet.Contains(edge.EndStation);
+                    if(isStationInClosedSet)
                         if(tentativeGScore >= distance)
                             continue;
 
@@ -73,7 +78,7 @@ namespace RestfulAPI.Resources
                         _gScores[edge.EndStation] = tentativeGScore;
                         _fScores[edge.EndStation] = _gScores[edge.EndStation] + Heuristic(edge.EndStation, endStation);
 
-                        if (!isStationInOpenset)
+                        if (!isStationInOpenset && !isStationInClosedSet)
                             InsertVertex(edge.EndStation, _fScores[edge.EndStation]);
                     }
                 }
