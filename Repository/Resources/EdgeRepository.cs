@@ -66,7 +66,7 @@ namespace Repository.Resources
 
         public IQueryable<Edge> GetEdgesByStartStation(Station station)
         {
-            var edges = db.Edges.Where(x => x.StartStationId.Equals(station.ID));
+            var edges = db.Edges.Where(x => x.StartStationId.Equals(station.ID) && x.EndStation.BatteryStorages.Available > 0);
             foreach (var edge in edges)
             {
                 edge.EndStation = db.Stations.AsNoTracking().FirstOrDefault(x => x.ID.Equals(edge.EndStationId));
