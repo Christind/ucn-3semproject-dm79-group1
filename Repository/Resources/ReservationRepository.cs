@@ -34,6 +34,8 @@ namespace Repository.Resources
 
         public void Insert(Reservation reservation)
         {
+            reservation.Station = null;
+            reservation.User = null;
             db.Reservations.Add(reservation);
             db.SaveChanges();
         }

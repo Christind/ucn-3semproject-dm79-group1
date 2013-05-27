@@ -55,6 +55,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="APICollection.cs" />
     <Compile Include="Resources\AStar.cs" />
+    <Compile Include="Resources\ReserveBatteries.cs" />
+    <Compile Include="Resources\ReserveModel.cs" />
     <Compile Include="Services\RouteService.cs" />
     <Compile Include="Services\Interfaces\IRouteService.cs" />
     <Compile Include="Services\Interfaces\IStationService.cs" />

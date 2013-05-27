@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
+using System.Net;
+using System.Text;
 using System.Web.Mvc;
 using Repository.Models;
 using Utils.Helpers;
@@ -40,10 +42,57 @@ namespace WebClient.Controllers
                     endLocation.results.First().geometry.location.lng, 
                     maxRange));
 
+                if (vertices == null)
+                {
+                    ViewBag.ErrorMessage = "Vi kunne desværre ikke planlægge en rute med den angivede rækkevidde. Dette kan enten skyldes der ikke er nok ledige batterier på de enkelte stationer, eller det ikke er muligt at finde stationer indenfor den angivet rækkevidde";
+                    return View("Index");
+                }
+
+                TempData["Stations"] = vertices;
+
                 return View("Index", vertices);
             }
             catch
             {
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public ViewResult Reserve()
+        {
+            try
+            {
+                var stations = TempData["Stations"] as List<Station>;
+                string jsonStations = JsonHelper.SerializeJson<List<Station>>(stations);
+
+                HttpWebRequest httpWReq = (HttpWebRequest)WebRequest.Create("http://localhost:49288/reserve/batteries");
+
+                UTF8Encoding encoding = new UTF8Encoding();
+                //string postData = "{\"Stations\": " + jsonStations;
+                //postData += ", \"User\": \"" + User.Identity.Name + "\" }";
+                string postData = "{ \"Stations\": \"[ { BatteryStorages:null, CreatedDate:\"2013-06-06T00:00:00+02:00\", Description:\"Aalborg City\", Edges:[], ID:\"3\", IsActive:\"true\", IsOperational:\"true\", Reservations:[], StationLat:\"57.02881\", StationLong:\"9.91777\", StationMaintenances:[], StationType:null, Title:\"Aalborg\", TypeId:\"1\" } ]\", \"User\": \"user1\" }";
+                byte[] data = encoding.GetBytes(postData);
+
+                httpWReq.Method = "POST";
+                httpWReq.ContentType = "application/json; charset=utf-8";
+                httpWReq.ContentLength = data.Length;
+
+                using (Stream stream = httpWReq.GetRequestStream())
+                {
+                    stream.Write(data, 0, data.Length);
+                }
+
+                HttpWebResponse response = (HttpWebResponse)httpWReq.GetResponse();
+
+                string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+
+                return View("Index", stations);
+            }
+            catch (Exception)
+            {
+                
                 throw;
             }
         }

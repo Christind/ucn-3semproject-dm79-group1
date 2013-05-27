@@ -126,6 +126,20 @@ namespace RestfulAPI.Services
             }
         }
 
+        public bool ReserveBatteries(ReserveModel values)
+        {
+            
+            try
+            {
+                return new ReserveBatteries(values).Reserve();
+            }
+            catch (Exception ex)
+            {
+                HandleLogging.LogMessage(ex, "CalculateRoute", 1, WebOperationContext.Current);
+                return false;
+            }
+        }
+
         #endregion
 
         #region archived entries

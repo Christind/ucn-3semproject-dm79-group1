@@ -16,10 +16,8 @@ namespace Repository.Models
         }
 
         [DataMember]
-        //[JsonConverter(typeof(Int32))] 
         public int ID { get; set; }
         [DataMember]
-        //[JsonConverter(typeof(Int32))] 
         public int TypeId { get; set; }
         [DataMember]
         public string Title { get; set; }
@@ -45,5 +43,18 @@ namespace Repository.Models
         public virtual List<Edge> Edges { get; set; }
         [DataMember]
         public virtual StationType StationType { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Station) obj);
+        }
+
+        protected bool Equals(Station other)
+        {
+            return ID == other.ID;
+        }
     }
 }

@@ -86,11 +86,13 @@ namespace Repository.Resources
             _lng = _lng.Replace(".", ",");
             double lat;
             decimal lat2 = Convert.ToDecimal(_lat);
-            int lng;
-            if (Double.TryParse(_lat.Substring(0, _lat.IndexOf(',') + 1), out lat) && Int32.TryParse(_lng, out lng))
+            int lng = Convert.ToInt32(_lng.Substring(0, _lng.IndexOf(',')));
+
+            if (Double.TryParse(_lat.Substring(0, _lat.IndexOf(',') + 1), out lat))
             {
                 GeoCoordinate geoCoordinate = new GeoCoordinate(lat, lng);
-                var stations = db.Stations.Where(x => (Int32)x.StationLong == lng && Math.Round(x.StationLat,1) == lat2);
+                decimal dec = Math.Round(lat2, 1);
+                var stations = db.Stations.Where(x => (Int32)x.StationLong == lng && Decimal.Round(x.StationLat,1) == dec);
                 List<Edge> edges = new List<Edge>();
                 foreach (var station in stations)
                 {
@@ -98,7 +100,7 @@ namespace Repository.Resources
                         geoCoordinate.GetDistanceTo(new GeoCoordinate(Convert.ToDouble(station.StationLat),
                                                                       Convert.ToDouble(station.StationLong)));
 
-                    Edge edge = new Edge{Distance = Convert.ToDecimal(distance), EndStationId = station.ID, IsActive = true};
+                    Edge edge = new Edge{Distance = Convert.ToDecimal(distance), EndStationId = station.ID, EndStation = station, IsActive = true};
                     edges.Add(edge);
                 }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using Repository.Models;
+using RestfulAPI.Resources;
 
 namespace RestfulAPI.Services.Interfaces
 {
@@ -30,6 +31,9 @@ namespace RestfulAPI.Services.Interfaces
 
         [OperationContract]
         List<Station> CalculateRoute(string sLat, string sLng, string eLat, string eLng, string maxRange);
+
+        [OperationContract]
+        bool ReserveBatteries(ReserveModel model);
 
         #endregion
 

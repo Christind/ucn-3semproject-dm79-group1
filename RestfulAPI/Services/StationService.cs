@@ -386,6 +386,8 @@ namespace RestfulAPI.Services
 
                     reservationRepo.Insert(reservation);
                     batteryRepo.Update(battery);
+
+                    return true;
                 }
             }
 

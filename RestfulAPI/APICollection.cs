@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using Repository.Models;
+using RestfulAPI.Resources;
 using RestfulAPI.Services;
 using RestfulAPI.Services.Interfaces;
 
@@ -278,10 +279,16 @@ namespace RestfulAPI
             return new StationService().GetBatteriesByStatus(value);
         }
 
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "reserve/battery/{stationValue},{userValue}", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "reserve/battery", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         public bool ReserveBattery(string stationValue, string userValue)
         {
             return new StationService().ReserveBattery(stationValue, userValue);
+        }
+
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "reserve/batteries", BodyStyle = WebMessageBodyStyle.Bare)]
+        public bool ReserveBatteries(ReserveModel values)
+        {
+            return new RouteService().ReserveBatteries(values);
         }
 
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "create/battery", BodyStyle = WebMessageBodyStyle.WrappedRequest)]

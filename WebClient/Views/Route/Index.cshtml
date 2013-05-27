@@ -25,6 +25,7 @@
 </fieldset>
 <div id="map-container">
     <div id="map-description" style="height: 500px; width: 400px; float: left;">
+        @ViewBag.ErrorMessage <br /><br />
         @using (Html.BeginForm("CalculateRoute", "Route", FormMethod.Post))
         {
             @Html.ValidationSummary(true)
@@ -60,9 +61,19 @@
                     </td>
                 </tr>
             </table>
-            <span id="direction-header" style="font-weight: bold;"></span>
-               <div id="directions-panel"></div>
+           
         }
+        @using (Html.BeginForm("Reserve", "Route", FormMethod.Post))
+        {
+            <tr>
+                <td />
+                <td style="text-align: left;">
+                    <input class="btn" type="submit" value="Reserver" />
+                </td>
+            </tr>
+        }
+              <span id="direction-header" style="font-weight: bold;"></span>
+            <div id="directions-panel"></div>  
     </div>
     <div id="map-canvas" style="height: 500px; width: 770px;" />
 </div>
@@ -91,7 +102,10 @@
             directionsDisplay.setPanel(document.getElementById("directions-panel"));
 
             if (document.getElementById('fromValue').value) {
-                calcRoute();
+                 @if(Model != null)
+                 {
+                     <text>calcRoute();</text>
+                 }
             }
         }
 
