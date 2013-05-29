@@ -1,4 +1,6 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Repository.Models;
 
 namespace RestfulAPI.Resources
 {
@@ -6,7 +8,7 @@ namespace RestfulAPI.Resources
     public class ReserveModel
     {
         [DataMember]
-        public string Stations { get; set; }
+        public List<Station> Stations { get; set; }
         [DataMember]
         public string User { get; set; }
     }

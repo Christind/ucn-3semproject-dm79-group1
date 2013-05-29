@@ -66,12 +66,11 @@ namespace WebClient.Controllers
                 var stations = TempData["Stations"] as List<Station>;
                 string jsonStations = JsonHelper.SerializeJson<List<Station>>(stations);
 
-                HttpWebRequest httpWReq = (HttpWebRequest)WebRequest.Create("http://localhost:49288/reserve/batteries");
+                HttpWebRequest httpWReq = (HttpWebRequest)WebRequest.Create("http://localhost:8732/reserve/batteries");
 
                 UTF8Encoding encoding = new UTF8Encoding();
-                //string postData = "{\"Stations\": " + jsonStations;
-                //postData += ", \"User\": \"" + User.Identity.Name + "\" }";
-                string postData = "{ \"Stations\": \"[ { BatteryStorages:null, CreatedDate:\"2013-06-06T00:00:00+02:00\", Description:\"Aalborg City\", Edges:[], ID:\"3\", IsActive:\"true\", IsOperational:\"true\", Reservations:[], StationLat:\"57.02881\", StationLong:\"9.91777\", StationMaintenances:[], StationType:null, Title:\"Aalborg\", TypeId:\"1\" } ]\", \"User\": \"user1\" }";
+                string postData = "{\"Stations\": " + jsonStations;
+                postData += ", \"User\": \"" + User.Identity.Name + "\" }";
                 byte[] data = encoding.GetBytes(postData);
 
                 httpWReq.Method = "POST";
@@ -92,7 +91,6 @@ namespace WebClient.Controllers
             }
             catch (Exception)
             {
-                
                 throw;
             }
         }

@@ -4,23 +4,24 @@ using System.Linq;
 
 namespace Utils.Helpers
 {
-    public class HeapElement<T>
+    public class HeapElement<T,Y> 
     {
         public decimal Fscore { get; set; }
         public T Element { get; set; }
+        public Y Path { get; set; }
     }
 
-    public class MinHeap<T> : IEnumerable
+    public class MinHeap<T, Y> : IEnumerable
     {
-        private readonly HeapElement<T>[] _collection;
+        private readonly HeapElement<T, Y>[] _collection;
         private int _index;
 
         public MinHeap(long size)
         {
-            _collection = new HeapElement<T>[size];
+            _collection = new HeapElement<T, Y>[size];
         }
 
-        public HeapElement<T> GetParent(int i, out int index)
+        public HeapElement<T, Y> GetParent(int i, out int index)
         {
             double element = i;
             index = (int)Math.Floor((element - 1) / 2);
@@ -33,19 +34,19 @@ namespace Utils.Helpers
             return _collection[index];
         }
 
-        public HeapElement<T> GetLeftChild(int i, out int index)
+        public HeapElement<T, Y> GetLeftChild(int i, out int index)
         {
             index = (2 * i) + 1;
             return _collection[index];
         }
 
-        public HeapElement<T> GetRightChild(int i, out int index)
+        public HeapElement<T, Y> GetRightChild(int i, out int index)
         {
             index = (2 * i) + 2;
             return _collection[index];
         }
 
-        public void Insert(HeapElement<T> e)
+        public void Insert(HeapElement<T, Y> e)
         {
             _collection[_index] = e;
 
@@ -53,9 +54,9 @@ namespace Utils.Helpers
             _index++;
         }
 
-        public void Insert(T i, decimal fScore)
+        public void Insert(T i, Y x, decimal fScore)
         {
-            var e = new HeapElement<T> { Element = i, Fscore = fScore };
+            var e = new HeapElement<T, Y> { Element = i, Fscore = fScore, Path = x};
             _collection[_index] = e;
 
             HeapifyUp(_index);
@@ -66,7 +67,7 @@ namespace Utils.Helpers
         private void HeapifyUp(int element)
         {
             int parentIndex;
-            HeapElement<T> parent = GetParent(element, out parentIndex);
+            HeapElement<T, Y> parent = GetParent(element, out parentIndex);
             if (parent != null)
             {
                 if (_collection[element].Fscore < parent.Fscore)
@@ -83,9 +84,9 @@ namespace Utils.Helpers
             HeapifyUp(parentIndex);
         }
 
-        public void Swap(ref HeapElement<T> a, ref HeapElement<T> b)
+        public void Swap(ref HeapElement<T,Y> a, ref HeapElement<T,Y> b)
         {
-            HeapElement<T> temp = a;
+            HeapElement<T,Y> temp = a;
             a = b;
             b = temp;
         }
@@ -95,14 +96,14 @@ namespace Utils.Helpers
             get { return _index; }
         }
 
-        public HeapElement<T> Minimum
+        public HeapElement<T,Y> Minimum
         {
             get { return _collection[0]; }
         }
 
-        public HeapElement<T> RemoveMinimum()
+        public HeapElement<T,Y> RemoveMinimum()
         {
-            HeapElement<T> minimum = _collection[0];
+            HeapElement<T,Y> minimum = _collection[0];
             _index--;
             _collection[0] = _collection[_index];
             _collection[_index] = null;
@@ -112,7 +113,7 @@ namespace Utils.Helpers
             return minimum;
         }
 
-        public bool Contains(HeapElement<T> i)
+        public bool Contains(HeapElement<T,Y> i)
         {
             return _collection.Contains(i);
         }
@@ -134,8 +135,8 @@ namespace Utils.Helpers
             int leftChildIndex;
             int rightChildIndex;
 
-            HeapElement<T> leftChild = GetLeftChild(index, out leftChildIndex);
-            HeapElement<T> rightChild = GetRightChild(index, out rightChildIndex);
+            HeapElement<T,Y> leftChild = GetLeftChild(index, out leftChildIndex);
+            HeapElement<T,Y> rightChild = GetRightChild(index, out rightChildIndex);
 
             if (leftChild == null || rightChild == null)
             {

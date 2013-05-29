@@ -33,7 +33,8 @@ namespace Utils.Helpers
 
         public static string SerializeJson<T>(T obj)
         {
-            return JsonConvert.SerializeObject(obj);
+            var settings = new JsonSerializerSettings() {DateFormatHandling= DateFormatHandling.MicrosoftDateFormat};
+            return JsonConvert.SerializeObject(obj, settings);
         }
     }
 }

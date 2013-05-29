@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Repository.Models;
 using Repository.Resources;
-using Utils.Helpers;
+
 
 namespace RestfulAPI.Resources
 {
@@ -16,10 +14,9 @@ namespace RestfulAPI.Resources
         
         public ReserveBatteries(ReserveModel model)
         {
-            List<Station> stations = JsonHelper.DeserializeJson<List<Station>>(model.Stations, true);
             UserRepository userRepository = new UserRepository();
             _user = userRepository.GetUserByUserName(model.User);
-            _stations = stations;
+            _stations = model.Stations;
         }
 
         public bool Reserve()
@@ -31,7 +28,7 @@ namespace RestfulAPI.Resources
             foreach (var station in _stations)
             {
                 station.BatteryStorages = batteryStorageRepo.GetBatteryStorageByStationId(station.ID, true);
-                if (station.BatteryStorages != null && station.BatteryStorages.Available > 0)
+                if (station.BatteryStorages != null && (station.BatteryStorages.Available - station.BatteryStorages.Reserved) > 0)
                 {
                     var batteryCollection =
                         station.BatteryStorages.BatteryCollections.FirstOrDefault(x => x.Battery.Status.Equals(1));
@@ -65,8 +62,19 @@ namespace RestfulAPI.Resources
 
             UpdateBatteries(batteries);
             InsertReservations(reservations);
+            UpdateStations(_stations);
 
             return true;
+        }
+
+        private void UpdateStations(IEnumerable<Station> stations)
+        {
+            var batteryStorageRepo = new BatteryStorageRepository();
+            foreach (Station station in stations)
+            {
+                station.BatteryStorages.Reserved++;
+                batteryStorageRepo.Update(station.BatteryStorages);
+            }
         }
 
         private void UpdateBatteries(IEnumerable<Battery> batteries)

@@ -114,7 +114,7 @@ namespace RestfulAPI.Services
             if (Double.TryParse(_lat, out lat) && Double.TryParse(_lng, out lng))
             {
                 GeoCoordinate geoCoordinate = new GeoCoordinate(lat, lng);
-                var stations = _stationRepository.GetAllStations();
+                var stations = _stationRepository.GetAllStations(true);
                 Station bestFound = null;
                 double bestDistance = Double.MaxValue;
                 foreach (var station in stations)
@@ -123,7 +123,7 @@ namespace RestfulAPI.Services
                         geoCoordinate.GetDistanceTo(new GeoCoordinate(Convert.ToDouble(station.StationLat),
                                                                       Convert.ToDouble(station.StationLong)));
 
-                    if (bestDistance > distance)
+                    if (bestDistance > distance && (station.BatteryStorages.Available - station.BatteryStorages.Reserved - station.BatteryStorages.Charging) > 0)
                     {
                         bestDistance = distance;
                         bestFound = station;

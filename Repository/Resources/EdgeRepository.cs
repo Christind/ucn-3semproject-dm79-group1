@@ -57,22 +57,31 @@ namespace Repository.Resources
             var edges = db.Edges.Where(x => x.StartStationId.Equals(station.ID) || x.EndStationId.Equals(station.ID));
             foreach (var edge in edges)
             {
-                //edge.StartStation = db.Stations.FirstOrDefault(x => x.ID.Equals(edge.StartStation));
                 edge.EndStation = db.Stations.FirstOrDefault(x => x.ID.Equals(edge.EndStationId));
             }
 
             return edges;
         }
 
-        public IQueryable<Edge> GetEdgesByStartStation(Station station)
+        public List<Edge> GetEdgesByStartStation(Station station)
         {
-            var edges = db.Edges.Where(x => x.StartStationId.Equals(station.ID) && x.EndStation.BatteryStorages.Available > 0);
+            var edges = db.Edges.Where(x => x.StartStationId.Equals(station.ID));
+            var returnList = new List<Edge>();
             foreach (var edge in edges)
             {
                 edge.EndStation = db.Stations.AsNoTracking().FirstOrDefault(x => x.ID.Equals(edge.EndStationId));
+                if (edge.EndStation != null)
+                {
+                    var batteryStorage =
+                        db.BatteryStorages.AsNoTracking().FirstOrDefault(
+                            x => x.StationId.Equals(edge.EndStationId) && x.IsActive);
+                    if(batteryStorage != null)
+                        if((batteryStorage.Available - batteryStorage.Reserved - batteryStorage.Charging) > 0)
+                            returnList.Add(edge);
+                }
             }
 
-            return edges;
+            return returnList;
         }
 
         public Edge GetEdgeByStartEndStation(Station start, Station end)
