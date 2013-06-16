@@ -130,6 +130,12 @@ namespace RestfulAPI.Services
                     }
                 }
 
+                if (bestFound != null)
+                {
+                    bestFound.Edges = null;
+                    bestFound.BatteryStorages = null;
+                }
+
                 return bestFound;
             }
 

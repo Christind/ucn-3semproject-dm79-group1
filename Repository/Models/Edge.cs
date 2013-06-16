@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Repository.Models
 {
+    [DataContract(IsReference = false)]
     public partial class Edge
     {
         [DataMember]
